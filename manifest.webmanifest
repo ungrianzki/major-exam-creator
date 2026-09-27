@@ -1,0 +1,28 @@
+{
+  "name": "Major Exam Creator",
+  "short_name": "Exam Creator",
+  "description": "Build the Table of Specification, the major exam (Set A and B), answer keys, and Bubble Tsek answer sheets from your question bank.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F3F5F7",
+  "theme_color": "#1E6B4B",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
