@@ -13,10 +13,10 @@ Builds the Table of Specification, the major exam (Set A and B), answer keys, an
 
 ## Install it on your computer
 - Open the link in **Chrome** or **Edge**.
-- Click the **Install app** button at the top right of the page (or the install icon at the right end of the address bar).
+- Click the **Install app** button at the bottom of the dark sidebar (or the install icon at the right end of the address bar).
 - It gets its own window and a desktop / Start menu icon, and works offline.
 
 ## Updating
-Upload the changed files to the same repository. In `sw.js`, change `majorexam-v1` to `majorexam-v2` (then v3, and so on) so installed copies pick up the new version. Close and reopen the app once after an update.
+Upload the changed files to the same repository (drag in everything again; GitHub replaces files with the same name). Each update package already has a new `VERSION` in `sw.js` (this one is `majorexam-v4`); if you edit files yourself, bump it (v3, v4, and so on) so installed copies pick up the change. Close and reopen the app once after an update.
 
 Your inputs and question bank stay in the browser on the computer where you use the site. Nothing is sent to any server.

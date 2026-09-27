@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Major Exam Creator</title>
 <meta name="description" content="Build the Table of Specification, the major exam (Set A and B), answer keys, and Bubble Tsek answer sheets from your question bank.">
-<meta name="theme-color" content="#1E6B4B">
+<meta name="theme-color" content="#14203A">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Major Exam Creator">
@@ -17,123 +17,192 @@
 <body>
 <style>
 :root{
-  --bg:#F3F5F7; --surface:#FFFFFF; --surface-2:#E9EDF1; --line:#D3D9E0; --line-strong:#AEB8C4;
-  --ink:#16202B; --ink-2:#4A5865; --ink-3:#7B8794;
-  --accent:#1E6B4B; --accent-ink:#FFFFFF; --accent-soft:#DDEFE5;
-  --lots:#D9F2FA; --lots-ink:#0B5A73; --hots:#FDF0C4; --hots-ink:#6E5200;
-  --ok:#1E6B4B; --warn:#9A5B00; --warn-soft:#FFF4DC; --bad:#A93226; --bad-soft:#FBE4E1;
-  --shadow:0 1px 2px rgba(22,32,43,.06),0 6px 20px rgba(22,32,43,.06);
-  --font-display:"Source Serif 4",Georgia,"Times New Roman",serif;
-  --font-body:"Source Sans 3","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --font-mono:"JetBrains Mono",Menlo,Consolas,monospace;
-  --radius:6px;
+  /* ground + surfaces: cool paper with a slight blue bias */
+  --bg:#EEF1F6; --surface:#FFFFFF; --surface-2:#F4F6FA; --sunken:#E6EAF1;
+  --line:#D6DCE6; --line-strong:#AEB8C8;
+  --ink:#15203A; --ink-2:#465370; --ink-3:#7A869E;
+  /* La Concepcion royal blue */
+  --accent:#2446C4; --accent-hover:#1C39A6; --accent-ink:#FFFFFF; --accent-soft:#E3E9FB;
+  /* sidebar */
+  --rail:#14203A; --rail-2:#1C2B4A; --rail-ink:#E9EEF8; --rail-dim:#9AA8C4; --rail-hi:#8EA6FF;
+  /* TOS skill colours (from the school TOS: cyan LOTS, gold HOTS) */
+  --lots:#DAF3FB; --lots-ink:#0B5A73; --hots:#FDF1C7; --hots-ink:#6B5000;
+  --ok:#1D7A4F; --ok-soft:#DDF1E6; --warn:#9A5B00; --warn-soft:#FDF1DA; --bad:#B3261E; --bad-soft:#FBE3E0;
+  --shadow:0 1px 2px rgba(21,32,58,.06),0 8px 28px rgba(21,32,58,.07);
+  --font-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --font-body:"Atkinson Hyperlegible","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-mono:"IBM Plex Mono",Consolas,Menlo,monospace;
+  --r:10px; --r-sm:6px;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#131A21; --surface:#1B242E; --surface-2:#232E3A; --line:#33404D; --line-strong:#4A5A6A;
-    --ink:#EAF0F5; --ink-2:#B4C0CC; --ink-3:#8593A1;
-    --accent:#4CB27F; --accent-ink:#0E1A14; --accent-soft:#1F3A2D;
-    --lots:#123B4A; --lots-ink:#9EDCF2; --hots:#4A3A08; --hots-ink:#FFDD7A;
-    --ok:#4CB27F; --warn:#F0B54A; --warn-soft:#3A2E10; --bad:#F08A7E; --bad-soft:#4A1F1A;
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+    --bg:#0F1524; --surface:#172035; --surface-2:#1B2640; --sunken:#121A2C;
+    --line:#2A3656; --line-strong:#43527A;
+    --ink:#E8EDF7; --ink-2:#B1BCD4; --ink-3:#8290AE;
+    --accent:#8EA6FF; --accent-hover:#A9BBFF; --accent-ink:#0F1524; --accent-soft:#1F2C55;
+    --rail:#0A0F1C; --rail-2:#141C31; --rail-ink:#E9EEF8; --rail-dim:#8390AC; --rail-hi:#8EA6FF;
+    --lots:#123B4A; --lots-ink:#9EDCF2; --hots:#453708; --hots-ink:#FFDD7A;
+    --ok:#5BC98E; --ok-soft:#15342A; --warn:#F0B54A; --warn-soft:#3A2E10; --bad:#F08A7E; --bad-soft:#4A1F1A;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 28px rgba(0,0,0,.3);
   }
 }
 :root[data-theme="dark"]{
-  --bg:#131A21; --surface:#1B242E; --surface-2:#232E3A; --line:#33404D; --line-strong:#4A5A6A;
-  --ink:#EAF0F5; --ink-2:#B4C0CC; --ink-3:#8593A1;
-  --accent:#4CB27F; --accent-ink:#0E1A14; --accent-soft:#1F3A2D;
-  --lots:#123B4A; --lots-ink:#9EDCF2; --hots:#4A3A08; --hots-ink:#FFDD7A;
-  --ok:#4CB27F; --warn:#F0B54A; --warn-soft:#3A2E10; --bad:#F08A7E; --bad-soft:#4A1F1A;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+  --bg:#0F1524; --surface:#172035; --surface-2:#1B2640; --sunken:#121A2C;
+  --line:#2A3656; --line-strong:#43527A;
+  --ink:#E8EDF7; --ink-2:#B1BCD4; --ink-3:#8290AE;
+  --accent:#8EA6FF; --accent-hover:#A9BBFF; --accent-ink:#0F1524; --accent-soft:#1F2C55;
+  --rail:#0A0F1C; --rail-2:#141C31; --rail-ink:#E9EEF8; --rail-dim:#8390AC; --rail-hi:#8EA6FF;
+  --lots:#123B4A; --lots-ink:#9EDCF2; --hots:#453708; --hots-ink:#FFDD7A;
+  --ok:#5BC98E; --ok-soft:#15342A; --warn:#F0B54A; --warn-soft:#3A2E10; --bad:#F08A7E; --bad-soft:#4A1F1A;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 28px rgba(0,0,0,.3);
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.45}
-.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:20px 80px}
-header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
-header.top h1{font-family:var(--font-display);font-weight:600;font-size:30px;line-height:1.1;margin:0;letter-spacing:-.01em;text-wrap:balance}
-header.top .sub{color:var(--ink-2);margin:4px 0 0}
-.hdr-right{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.status{display:flex;flex-wrap:wrap;gap:8px;font-variant-numeric:tabular-nums}
-.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);font-size:13px;font-weight:500}
-.chip b{color:var(--ink);font-weight:600}
-.chip.ok{background:var(--accent-soft);color:var(--accent)}
-.chip.warn{background:var(--warn-soft);color:var(--warn)}
-.chip.bad{background:var(--bad-soft);color:var(--bad)}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
 
-section.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:18px;box-shadow:var(--shadow)}
-.step-head{display:flex;align-items:baseline;gap:14px;padding:14px 20px;border-bottom:1px solid var(--line)}
-.step-head .n{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);letter-spacing:.08em}
-.step-head h2{font-family:var(--font-display);font-size:20px;font-weight:600;margin:0}
-.step-head .hint{margin-left:auto;color:var(--ink-3);font-size:13px}
-.step-body{padding:18px 20px}
+/* ---------- app shell ---------- */
+.app{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
+.rail{background:var(--rail);color:var(--rail-ink);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding-block:22px 18px;padding-inline:18px;gap:22px;overflow-y:auto}
+.brand{display:flex;align-items:center;gap:11px}
+.brand svg{flex:none}
+.brand b{display:block;font-family:var(--font-display);font-weight:700;font-size:19px;line-height:1.1;letter-spacing:-.01em}
+.brand span{display:block;font-size:12px;color:var(--rail-dim);margin-top:2px}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;position:relative}
+.steps::before{content:"";position:absolute;left:16px;top:18px;bottom:18px;width:2px;background:var(--rail-2)}
+.steps li{position:relative}
+.stepbtn{all:unset;box-sizing:border-box;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:center;width:100%;padding:9px 8px 9px 0;border-radius:8px;cursor:pointer;color:var(--rail-dim)}
+.stepbtn:hover{color:var(--rail-ink)}
+.stepbtn:focus-visible{outline:2px solid var(--rail-hi);outline-offset:2px}
+.bub{width:34px;height:34px;border-radius:50%;border:2px solid #4A5A7E;background:var(--rail);display:grid;place-items:center;font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--rail-dim);position:relative;z-index:1;transition:background .2s,border-color .2s,color .2s}
+.stepbtn .t{display:block;font-weight:700;font-size:14.5px;line-height:1.25}
+.stepbtn .s{display:block;font-size:12.5px;color:var(--rail-dim);margin-top:1px;font-variant-numeric:tabular-nums}
+.stepbtn.done .bub{background:var(--rail-ink);border-color:var(--rail-ink);color:var(--rail)}
+.stepbtn.cur{color:var(--rail-ink)}
+.stepbtn.cur .bub{border-color:var(--rail-hi);box-shadow:0 0 0 4px rgba(142,166,255,.18);color:var(--rail-ink)}
+.stepbtn.cur.done .bub{color:var(--rail)}
+.stepbtn.attn .bub::after{content:"";position:absolute;top:-2px;right:-2px;width:10px;height:10px;border-radius:50%;background:#F0B54A;border:2px solid var(--rail)}
+.rail-foot{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+.tplcard{display:flex;gap:10px;align-items:center;padding:10px;border-radius:8px;background:var(--rail-2)}
+.tplcard img{width:34px;height:34px;object-fit:contain;border-radius:50%;background:#fff;flex:none}
+.tplcard small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rail-dim)}
+.tplcard b{display:block;font-size:13px;line-height:1.25}
+.rail .privacy{font-size:12px;color:var(--rail-dim);margin:0;line-height:1.45}
+.rail button.primary{width:100%}
 
-.grid{display:grid;gap:12px 16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.field{display:flex;flex-direction:column;gap:4px;min-width:0}
-.field label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
-.field .note{font-size:12px;color:var(--ink-3)}
+.main{min-width:0;padding-inline:clamp(16px,3.4vw,44px);padding-block:22px 64px}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;margin-bottom:18px}
+.topbar .where{font-size:13px;color:var(--ink-3);font-family:var(--font-mono);letter-spacing:.04em}
+.status{display:flex;flex-wrap:wrap;gap:6px;font-variant-numeric:tabular-nums}
+.topright{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.themeseg{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--sunken);border:1px solid var(--line)}
+.themeseg button{display:inline-flex;align-items:center;gap:5px;border:none;border-radius:999px;background:transparent;color:var(--ink-2);padding:4px 10px;font-size:12.5px}
+.themeseg button:hover{background:var(--surface-2);color:var(--ink)}
+.themeseg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(21,32,58,.14)}
+@media (max-width:560px){.themeseg button span{display:none}.themeseg button{padding:5px 8px}}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2);font-size:13px}
+.chip b{color:var(--ink);font-weight:700}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--line-strong)}
+.chip.ok::before{background:var(--ok)} .chip.warn::before{background:var(--warn)} .chip.bad::before{background:var(--bad)}
+
+/* ---------- steps (one visible at a time) ---------- */
+section.step{display:none;max-width:1120px}
+section.step.active{display:block}
+@media (prefers-reduced-motion:no-preference){ section.step.active{animation:rise .22s ease-out} @keyframes rise{from{opacity:.001;transform:translateY(6px)}to{opacity:1;transform:none}} }
+.step-head{display:flex;flex-wrap:wrap;align-items:flex-end;gap:6px 18px;margin-bottom:16px}
+.step-head .n{display:none}
+.step-head h2{font-family:var(--font-display);font-weight:700;font-size:clamp(24px,2.6vw,30px);line-height:1.1;letter-spacing:-.015em;margin:0;text-wrap:balance}
+.step-head .hint{color:var(--ink-3);font-size:14px;padding-bottom:3px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:20px}
+.card + .card{margin-top:14px}
+.card h3{font-family:var(--font-display);font-size:17px;font-weight:700;margin:0 0 12px;letter-spacing:-.005em}
+.step-body{padding:0}
+.stepnav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+
+/* ---------- form ---------- */
+.grid{display:grid;gap:14px 18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.field label{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}
+.field .note,.note{font-size:12.5px;color:var(--ink-3)}
 input[type=text],input[type=number],input[type=date],select,textarea{
-  font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:4px;padding:7px 9px;width:100%;min-width:0}
-textarea{resize:vertical;min-height:38px}
-input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-sm);padding:8px 10px;width:100%;min-width:0}
+input::placeholder,textarea::placeholder{color:var(--ink-3)}
+textarea{resize:vertical;min-height:40px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px}
 .span2{grid-column:span 2}
 @media (max-width:560px){.span2{grid-column:span 1}}
+.tplpick{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.tplopt{display:flex;gap:12px;align-items:center;padding:12px 14px;border:1.5px solid var(--line);border-radius:var(--r);cursor:pointer;background:var(--surface)}
+.tplopt:hover{border-color:var(--line-strong)}
+.tplopt input{position:absolute;opacity:0;pointer-events:none}
+.tplopt img{width:40px;height:40px;object-fit:contain;flex:none}
+.tplopt b{display:block;font-size:14.5px;line-height:1.25}
+.tplopt small{display:block;font-size:12.5px;color:var(--ink-3)}
+.tplopt.on{border-color:var(--accent);background:var(--accent-soft)}
+.tplopt:focus-within{outline:2px solid var(--accent);outline-offset:2px}
 
-button{font:inherit;cursor:pointer;border-radius:4px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);padding:7px 14px;font-weight:600}
-button:hover{background:var(--surface-2)}
+/* ---------- buttons ---------- */
+button{font:inherit;font-weight:700;cursor:pointer;border-radius:var(--r-sm);border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);padding:8px 15px;line-height:1.3}
+button:hover{background:var(--surface-2);border-color:var(--ink-3)}
 button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-button.primary:hover{filter:brightness(1.07)}
+button.primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
 button.ghost{border-color:transparent;background:transparent;color:var(--accent)}
 button.ghost:hover{background:var(--accent-soft)}
-button.small{padding:4px 10px;font-size:13px}
-button:disabled{opacity:.5;cursor:not-allowed}
+button.small{padding:5px 11px;font-size:13.5px}
+button:disabled{opacity:.45;cursor:not-allowed}
 .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
 .toolbar .spacer{flex:1}
+details > summary{cursor:pointer;font-weight:700;color:var(--ink-2)}
+details > summary:hover{color:var(--ink)}
 
-.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:4px}
-table.edit{border-collapse:collapse;width:100%;min-width:860px;font-size:14px;font-variant-numeric:tabular-nums}
-table.edit th,table.edit td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
-table.edit th{background:var(--surface-2);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);font-weight:600;white-space:nowrap}
+/* ---------- contents table ---------- */
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-sm)}
+table.edit{border-collapse:collapse;width:100%;min-width:900px;font-size:14px;font-variant-numeric:tabular-nums}
+table.edit th,table.edit td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+table.edit th{background:var(--surface-2);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);font-weight:700;white-space:nowrap}
 table.edit th.lots,table.edit td.lots{background:var(--lots);color:var(--lots-ink)}
 table.edit th.hots,table.edit td.hots{background:var(--hots);color:var(--hots-ink)}
-table.edit td.lots input,table.edit td.hots input{background:transparent;border-color:transparent;text-align:center;padding:4px;color:inherit;font-weight:600}
+table.edit td.lots input,table.edit td.hots input{background:transparent;border-color:transparent;text-align:center;padding:5px;color:inherit;font-weight:700;font-family:var(--font-mono)}
 table.edit td.lots input:hover,table.edit td.hots input:hover{border-color:var(--line-strong)}
-table.edit td.num{text-align:center;white-space:nowrap}
-table.edit td input[type=number]{width:62px;text-align:center}
-table.edit td textarea{min-height:34px;width:100%}
+table.edit td.num{text-align:center;white-space:nowrap;font-family:var(--font-mono);font-size:13.5px}
+table.edit td input[type=number]{width:64px;text-align:center}
+table.edit td textarea{min-height:36px;width:100%}
 table.edit td.rowtools{white-space:nowrap}
 table.edit tr.total td{font-weight:700;background:var(--surface-2);border-top:2px solid var(--line-strong)}
 table.edit tr.mismatch td.itemsum{color:var(--bad);font-weight:700}
-.iconbtn{border:none;background:transparent;color:var(--ink-3);padding:2px 6px;font-size:16px;line-height:1}
-.iconbtn:hover{color:var(--bad);background:transparent}
-
+.iconbtn{border:none;background:transparent;color:var(--ink-3);padding:4px 7px;font-size:17px;line-height:1}
+.iconbtn:hover{color:var(--bad);background:var(--bad-soft)}
 .profile{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:12px}
-.profile .p{border-radius:4px;padding:8px 10px;display:flex;flex-direction:column;gap:4px}
+.profile .p{border-radius:var(--r-sm);padding:8px 10px;display:flex;flex-direction:column;gap:4px}
 .profile .p.lots{background:var(--lots);color:var(--lots-ink)}
 .profile .p.hots{background:var(--hots);color:var(--hots-ink)}
-.profile .p label{font-size:12px;font-weight:600}
-.profile .p input{width:100%;text-align:center;background:rgba(255,255,255,.55);color:var(--ink);border-color:transparent}
-:root[data-theme="dark"] .profile .p input{background:rgba(0,0,0,.25)}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .profile .p input{background:rgba(0,0,0,.25)}}
+.profile .p label{font-size:12px;font-weight:700}
+.profile .p input{width:100%;text-align:center;background:var(--surface);color:var(--ink);border-color:transparent;font-family:var(--font-mono)}
 
-.needs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:6px}
-.need{border:1px solid var(--line);border-radius:4px;padding:10px 12px}
-.need h4{margin:0 0 6px;font-size:14px;font-weight:700}
-.need .lv{display:flex;flex-wrap:wrap;gap:4px}
-.need .lv span{font-size:12px;padding:2px 7px;border-radius:3px;font-variant-numeric:tabular-nums}
+/* ---------- needs ---------- */
+.needs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.need{border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;background:var(--surface)}
+.need h4{margin:0 0 6px;font-size:15px;font-weight:700;font-family:var(--font-display)}
+.need .lv{display:flex;flex-wrap:wrap;gap:5px}
+.need .lv span{font-size:12.5px;padding:2px 8px;border-radius:4px;font-variant-numeric:tabular-nums}
 .need .lv span.l{background:var(--lots);color:var(--lots-ink)}
 .need .lv span.h{background:var(--hots);color:var(--hots-ink)}
-.need .lv span.have{opacity:.85}
-.need .lv span.short{outline:2px solid var(--bad)}
+.need .lv span.short{outline:2px solid var(--bad);outline-offset:-1px}
 
-.drop{display:block;border:2px dashed var(--line-strong);border-radius:6px;padding:22px;text-align:center;color:var(--ink-2);cursor:pointer}
+/* ---------- upload + messages ---------- */
+.drop{display:flex;flex-direction:column;align-items:center;gap:6px;border:2px dashed var(--line-strong);border-radius:var(--r);padding:28px 20px;text-align:center;color:var(--ink-2);cursor:pointer;background:var(--surface)}
+.drop b{font-family:var(--font-display);font-size:17px;color:var(--ink)}
+.drop:hover{border-color:var(--accent)}
 .drop.over{border-color:var(--accent);background:var(--accent-soft)}
 .drop input{display:none}
 code,.mono{font-family:var(--font-mono);font-size:.9em}
-pre.spec{background:var(--surface-2);padding:10px 12px;border-radius:4px;overflow-x:auto;font-family:var(--font-mono);font-size:12.5px;margin:10px 0 0}
+pre.spec{background:var(--surface-2);border:1px solid var(--line);padding:10px 12px;border-radius:var(--r-sm);overflow-x:auto;font-family:var(--font-mono);font-size:12.5px;margin:10px 0 0}
 .msgs{display:flex;flex-direction:column;gap:6px;margin-top:12px}
-.msg{padding:8px 12px;border-radius:4px;font-size:14px;border-left:4px solid}
-.msg.ok{background:var(--accent-soft);border-color:var(--ok)}
+.msgs:empty{display:none}
+.msg{padding:9px 13px;border-radius:var(--r-sm);font-size:14px;border-left:4px solid}
+.msg.ok{background:var(--ok-soft);border-color:var(--ok)}
 .msg.warn{background:var(--warn-soft);border-color:var(--warn)}
 .msg.bad{background:var(--bad-soft);border-color:var(--bad)}
 .mapgrid{display:grid;grid-template-columns:1fr auto 1fr;gap:6px 10px;align-items:center;margin-top:10px;max-width:760px}
@@ -142,12 +211,76 @@ pre.spec{background:var(--surface-2);padding:10px 12px;border-radius:4px;overflo
 .mapgrid .lbl small{color:var(--ink-3)}
 @media (max-width:560px){.mapgrid{grid-template-columns:1fr}.mapgrid .arrow{display:none}}
 
-.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);padding:0 20px;overflow-x:auto}
-.tabs button{border:none;border-bottom:3px solid transparent;border-radius:0;background:transparent;padding:10px 12px;color:var(--ink-2);font-weight:600;white-space:nowrap}
-.tabs button.active{color:var(--ink);border-bottom-color:var(--accent)}
+/* ---------- step 5 ---------- */
+.genbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.genbar .opts{display:flex;flex-wrap:wrap;gap:14px;margin-left:auto}
+.genbar label{font-size:14px;display:flex;gap:7px;align-items:center}
+.tabs{display:flex;gap:2px;overflow-x:auto;padding:4px;background:var(--sunken);border-radius:var(--r);margin-top:18px;width:max-content;max-width:100%}
+.tabs button{border:none;border-radius:7px;background:transparent;padding:7px 14px;color:var(--ink-2);white-space:nowrap}
+.tabs button:hover{background:var(--surface-2)}
+.tabs button.active{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(21,32,58,.12)}
 .pane{display:none}
 .pane.active{display:block}
-.sheet{background:#fff;color:#000;margin:16px auto;box-shadow:var(--shadow);border:1px solid var(--line);overflow-x:auto}
+.sheet{background:#fff;color:#000;margin:14px 0;box-shadow:var(--shadow);border:1px solid var(--line);border-radius:4px;overflow-x:auto}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:16px}
+.summary .s{padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.summary .s .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-2);font-weight:700}
+.summary .s .v{font-family:var(--font-display);font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.empty{color:var(--ink-3);text-align:center;padding:48px 20px;border:1px dashed var(--line-strong);border-radius:var(--r);margin-top:14px}
+.btbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px 14px;align-items:end}
+.btbar .note{grid-column:1/-1;margin:0}
+.setswitch{display:flex;gap:6px;align-items:center;margin-top:12px}
+.setswitch button{padding:4px 12px;font-size:13.5px}
+.setswitch button.on{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.btwrap{display:grid;gap:16px;margin-top:14px}
+.btinfo{font-size:14.5px;max-width:78ch}
+.howto{margin:0;padding-left:20px;display:grid;gap:4px}
+.btsheets{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.btsheets figure{margin:0}
+.btsheets figcaption{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px}
+.btsheets svg{width:100%;height:auto;border:1px solid var(--line);border-radius:4px;background:#fff;display:block}
+#exportTools{margin-top:16px;padding:14px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+
+/* ---------- quality check ---------- */
+.qchead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:20px 0 10px}
+.qchead h3{margin:0;font-family:var(--font-display);font-size:18px;font-weight:700}
+.qchead span{font-size:13px;color:var(--ink-3)}
+.qcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.qc{border:1px solid var(--line);border-top:4px solid var(--ok);border-radius:var(--r-sm);padding:11px 13px;font-size:13.5px;min-width:0;background:var(--surface)}
+.qc.warn{border-top-color:var(--warn)}
+.qc.info{border-top-color:var(--line-strong)}
+.qc p{margin:4px 0 6px;color:var(--ink-2)}
+.qch{display:flex;gap:8px;align-items:baseline}
+.qcn{font-family:var(--font-display);font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.qc.warn .qcn{color:var(--warn)}
+.qc summary{font-size:13px;color:var(--accent);margin-top:4px}
+.qclist{margin:6px 0 0;padding-left:18px;max-height:220px;overflow:auto;display:grid;gap:4px;overflow-wrap:anywhere}
+.qcpref{display:flex;gap:8px;align-items:flex-start;margin-top:12px;font-size:14px}
+
+/* ---------- narrow screens: rail becomes a top bar ---------- */
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  .rail{position:sticky;top:0;height:auto;z-index:5;padding-block:12px;padding-inline:16px;gap:10px;flex-direction:row;align-items:center;overflow-x:auto}
+  .brand span,.rail-foot{display:none}
+  .brand b{font-size:16px}
+  .steps{flex-direction:row;gap:4px}
+  .steps::before{display:none}
+  .stepbtn{grid-template-columns:34px;padding:0 2px}
+  .stepbtn .lbl{display:none}
+}
+@media (prefers-reduced-motion:no-preference){button{transition:background .12s,border-color .12s}}
+@media print{
+  body{background:#fff}
+  .rail,.topbar,.themeseg,.stepnav,section.step:not(#step5){display:none!important}
+  .app{display:block}
+  .main{padding:0}
+  #step5{display:block!important}
+  #step5 .step-head,#step5 .card,#step5 .tabs,#step5 .summary,#step5 .msgs,#exportTools,#setSwitch,.btinfo{display:none!important}
+  .sheet{box-shadow:none;border:none;margin:0}
+  .pane{display:none}.pane.active{display:block}
+  .exam .cols{column-count:2}
+  .btsheets{grid-template-columns:1fr} .btsheets figcaption{display:none}
+}
 
 /* Printed-document previews always render on white paper regardless of theme */
 .tos{font-family:Calibri,Carlito,"Segoe UI",Arial,sans-serif;font-size:12px;padding:28px 32px;min-width:900px}
@@ -201,50 +334,6 @@ pre.spec{background:var(--surface-2);padding:10px 12px;border-radius:4px;overflo
 .key td.c{text-align:center;font-weight:700}
 .key .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 
-.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
-.summary .s{padding:10px 12px;border:1px solid var(--line);border-radius:4px}
-.summary .s .k{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
-.summary .s .v{font-family:var(--font-display);font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
-.empty{color:var(--ink-3);text-align:center;padding:30px}
-footer.foot{color:var(--ink-3);font-size:13px;margin-top:30px}
-@media print{
-  body{background:#fff}
-  .wrap>*:not(#step5){display:none!important}
-  #step5 .step-head,#step5 .tabs,#step5 .toolbar,#step5 .summary,#step5 .msgs{display:none!important}
-  section.step{border:none;box-shadow:none}
-  .sheet{box-shadow:none;border:none;margin:0}
-  .pane{display:none}.pane.active{display:block}
-  .exam .cols{column-count:2}
-}
-
-.btbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 14px;align-items:end;margin:0 0 14px;padding:12px 14px;background:var(--surface-2);border-radius:4px}
-.btbar .note{grid-column:1/-1;margin:0;font-size:12.5px;color:var(--ink-3)}
-.setswitch{display:flex;gap:6px;align-items:center;padding:10px 20px 0}
-.setswitch button{padding:4px 12px;font-size:13px}
-.setswitch button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.btwrap{display:grid;gap:16px}
-.btinfo{font-size:14px;max-width:76ch}
-.howto{margin:0;padding-left:20px;display:grid;gap:4px}
-.btsheets{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.btsheets figure{margin:0}
-.btsheets figcaption{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px}
-.btsheets svg{width:100%;height:auto;border:1px solid var(--line);background:#fff;display:block}
-.qchead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:18px 0 8px}
-.qchead h3{margin:0;font-family:var(--font-display);font-size:17px}
-.qchead span{font-size:13px;color:var(--ink-3)}
-.qcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
-.qc{border:1px solid var(--line);border-left:4px solid var(--ok);border-radius:4px;padding:10px 12px;font-size:13.5px;min-width:0}
-.qc.warn{border-left-color:var(--warn)}
-.qc.info{border-left-color:var(--line-strong)}
-.qc p{margin:4px 0 6px;color:var(--ink-2)}
-.qch{display:flex;gap:8px;align-items:baseline}
-.qcn{font-family:var(--font-display);font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
-.qc.warn .qcn{color:var(--warn)}
-.qc summary{cursor:pointer;font-size:13px;color:var(--accent);margin-top:4px}
-.qclist{margin:6px 0 0;padding-left:18px;max-height:220px;overflow:auto;display:grid;gap:4px;overflow-wrap:anywhere}
-.qcpref{display:flex;gap:8px;align-items:flex-start;margin-top:10px;font-size:13.5px}
-@media print{ #setSwitch,.btinfo{display:none!important} .btsheets{grid-template-columns:1fr} .btsheets figcaption{display:none} }
-
 /* Template 2 preview (La Concepcion College) */
 .exam2{font-family:Arial,sans-serif;font-size:10pt;padding:28px 34px;min-width:720px;color:#000}
 .exam2 .h2grid{display:grid;grid-template-columns:86px 1fr 118px;gap:12px;align-items:center}
@@ -264,51 +353,79 @@ footer.foot{color:var(--ink-3);font-size:13px;margin-top:30px}
 .exam2 .st span:first-child{min-width:22px}
 .exam2 .op{padding-left:28px}
 .exam2 .end{text-align:center;border-top:1px solid #000;border-bottom:1px solid #000;padding:3px 0;margin-top:18px}
-@media (prefers-reduced-motion:no-preference){button{transition:background .12s,filter .12s}}
 </style>
+<script>try{var t=localStorage.getItem("tosb.theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 
-<div class="wrap">
-<header class="top">
-  <div>
-    <h1>Major Exam Creator</h1>
-    <p class="sub">Type your contents and hours, upload a question bank, and get a Table of Specification plus a major exam in the CCSJDM format.</p>
+<div class="app">
+<aside class="rail" aria-label="Steps">
+  <div class="brand">
+    <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true"><rect x=".5" y=".5" width="63" height="63" rx="14" fill="#1C2B4A" stroke="#33466F"/><rect x="16" y="11" width="32" height="42" rx="3" fill="#fff"/><rect x="20" y="15" width="24" height="3.5" rx="1.75" fill="#2446C4"/><rect x="20" y="25.5" width="7" height="3" rx="1.5" fill="#D6DEF0"/><circle cx="33" cy="27" r="2.6" fill="none" stroke="#2446C4" stroke-width="1.3"/><circle cx="39.5" cy="27" r="2.6" fill="#2446C4"/><rect x="20" y="34.5" width="7" height="3" rx="1.5" fill="#D6DEF0"/><circle cx="33" cy="36" r="2.6" fill="#2446C4"/><circle cx="39.5" cy="36" r="2.6" fill="none" stroke="#2446C4" stroke-width="1.3"/><rect x="20" y="43.5" width="7" height="3" rx="1.5" fill="#D6DEF0"/><circle cx="33" cy="45" r="2.6" fill="none" stroke="#2446C4" stroke-width="1.3"/><circle cx="39.5" cy="45" r="2.6" fill="#2446C4"/></svg>
+    <div><b>Major Exam Creator</b><span>TOS · exam · answer sheets</span></div>
   </div>
-  <div class="hdr-right"><div class="status" id="statusChips"></div><button class="primary small" id="installBtn" hidden>Install app</button></div>
-</header>
+  <ol class="steps" id="railSteps">
+    <li><button class="stepbtn" data-go="1"><span class="bub">1</span><span class="lbl"><span class="t">Exam details</span><span class="s" id="rs1"></span></span></button></li>
+    <li><button class="stepbtn" data-go="2"><span class="bub">2</span><span class="lbl"><span class="t">Contents &amp; hours</span><span class="s" id="rs2"></span></span></button></li>
+    <li><button class="stepbtn" data-go="3"><span class="bub">3</span><span class="lbl"><span class="t">Questions needed</span><span class="s" id="rs3"></span></span></button></li>
+    <li><button class="stepbtn" data-go="4"><span class="bub">4</span><span class="lbl"><span class="t">Question bank</span><span class="s" id="rs4"></span></span></button></li>
+    <li><button class="stepbtn" data-go="5"><span class="bub">5</span><span class="lbl"><span class="t">TOS &amp; exam</span><span class="s" id="rs5"></span></span></button></li>
+  </ol>
+  <div class="rail-foot">
+    <div class="tplcard"><div><small>Exam template</small><b id="railTpl"></b></div></div>
+    <button class="primary small" id="installBtn" hidden>Install app</button>
+    <p class="privacy">Runs in your browser. Nothing is uploaded; your work is saved on this computer only.</p>
+  </div>
+</aside>
+
+<main class="main">
+<div class="topbar"><span class="where" id="whereLbl">STEP 1 OF 5</span><div class="topright"><div class="status" id="statusChips"></div>
+  <div class="themeseg" role="group" aria-label="Colour theme">
+    <button type="button" data-theme-set="light" title="Light mode" aria-pressed="false"><svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="currentColor"/><g stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M10 1.8v2.3M10 15.9v2.3M1.8 10h2.3M15.9 10h2.3M4.2 4.2l1.6 1.6M14.2 14.2l1.6 1.6M4.2 15.8l1.6-1.6M14.2 5.8l1.6-1.6"/></g></svg><span>Light</span></button>
+    <button type="button" data-theme-set="dark" title="Dark mode" aria-pressed="false"><svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><path d="M16.5 12.6A7 7 0 0 1 7.4 3.5a7 7 0 1 0 9.1 9.1z" fill="currentColor"/></svg><span>Dark</span></button>
+    <button type="button" data-theme-set="auto" title="Follow my computer's setting" aria-pressed="false"><svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10 3a7 7 0 0 1 0 14z" fill="currentColor"/></svg><span>Auto</span></button>
+  </div></div></div>
 
 <!-- STEP 1 -->
 <section class="step" id="step1">
-  <div class="step-head"><span class="n">STEP 1</span><h2>Exam details</h2><span class="hint">Saved automatically in this browser</span></div>
-  <div class="step-body">
+  <div class="step-head"><h2>Exam details</h2><span class="hint">Saved automatically</span></div>
+  <div class="card">
+    <div class="field" style="max-width:520px"><label for="template">Exam template</label><select id="template"><option value="t2">La Concepcion College (IT Division)</option><option value="t1">City College of San Jose del Monte (BSEMC)</option></select></div>
+    <p class="note" style="margin:8px 0 0">Each school keeps its own department, signatories and instructions.</p>
+  </div>
+  <div class="card">
+    <h3>Subject &amp; exam</h3>
     <div class="grid">
-      <div class="field span2"><label for="template">Exam template</label><select id="template"><option value="t1">Template 1 · City College of San Jose del Monte (BSEMC)</option><option value="t2">Template 2 · La Concepcion College (IT Division)</option></select><span class="note">Each template remembers its own department, signatories and instructions.</span></div>
       <div class="field span2" data-tpl="t2"><label for="examSchool">School line on the exam</label><input type="text" id="examSchool"></div>
-      <div class="field span2"><label for="subject">Subject / course description</label><input type="text" id="subject" placeholder="e.g. DATABASE MANAGEMENT SYSTEM"></div>
-      <div class="field"><label for="courseCode">Course code</label><input type="text" id="courseCode" placeholder="e.g. ITEC 106"></div>
+      <div class="field span2"><label for="subject">Subject / course description</label><input type="text" id="subject" placeholder="e.g. Living in the IT Era"></div>
+      <div class="field"><label for="courseCode">Course code</label><input type="text" id="courseCode" placeholder="e.g. ELECT-MST"></div>
       <div class="field"><label for="semester">Semester</label><select id="semester"><option>1ST SEMESTER</option><option>2ND SEMESTER</option><option>SUMMER</option></select></div>
       <div class="field"><label for="term">Term</label><select id="term"><option value="PRELIMINARIES">Preliminaries</option><option value="MIDTERM">Midterm</option><option value="FINALS">Finals</option></select></div>
       <div class="field"><label for="ay">Academic year</label><input type="text" id="ay" placeholder="2026 – 2027"></div>
       <div class="field"><label for="totalItems">Total number of items</label><input type="number" id="totalItems" min="1" max="500" step="1"></div>
-      <div class="field"><label for="preparedBy">Prepared by</label><input type="text" id="preparedBy" placeholder="Faculty name"></div>
-      <div class="field"><label for="dateSubmitted">Date submitted</label><input type="date" id="dateSubmitted"></div>
-      <div class="field"><label for="department">School / department</label><input type="text" id="department" placeholder="e.g. SCHOOL OF COMPUTING"></div>
-      <div class="field"><label for="checkedBy">TOS checked by</label><input type="text" id="checkedBy"><input type="text" id="checkedByTitle" placeholder="Title, e.g. Program Chair, BSEMC"></div>
-      <div class="field"><label for="notedBy">TOS noted by</label><input type="text" id="notedBy"><input type="text" id="notedByTitle" placeholder="Title, e.g. Dean, School of Computing"></div>
-      <div class="field" data-tpl="t1"><label for="reviewedBy">Exam reviewed by</label><input type="text" id="reviewedBy"><input type="text" id="reviewedByTitle" placeholder="Title"></div>
       <div class="field span2"><label for="instructions">Exam instructions</label><textarea id="instructions"></textarea></div>
       <div class="field" data-tpl="t2"><label for="closing">Closing line</label><input type="text" id="closing"></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>People &amp; dates</h3>
+    <div class="grid">
+      <div class="field"><label for="preparedBy">Prepared by</label><input type="text" id="preparedBy" placeholder="Faculty name"></div>
+      <div class="field"><label for="dateSubmitted">Date submitted</label><input type="date" id="dateSubmitted"></div>
+      <div class="field"><label for="department">School / department</label><input type="text" id="department" placeholder="e.g. IT DIVISION"></div>
+      <div class="field"><label for="checkedBy">TOS checked by</label><input type="text" id="checkedBy"><input type="text" id="checkedByTitle" placeholder="Title, e.g. Program Head"></div>
+      <div class="field"><label for="notedBy">TOS noted by</label><input type="text" id="notedBy"><input type="text" id="notedByTitle" placeholder="Title, e.g. Dean"></div>
+      <div class="field" data-tpl="t1"><label for="reviewedBy">Exam reviewed by</label><input type="text" id="reviewedBy"><input type="text" id="reviewedByTitle" placeholder="Title"></div>
     </div>
   </div>
 </section>
 
 <!-- STEP 2 -->
 <section class="step" id="step2">
-  <div class="step-head"><span class="n">STEP 2</span><h2>Contents, objectives &amp; hours</h2><span class="hint">One objective per line · % and items follow the hours · skill columns are editable</span></div>
-  <div class="step-body">
+  <div class="step-head"><h2>Contents, objectives &amp; hours</h2><span class="hint">One objective per line · % and items follow the hours · skill columns are editable</span></div>
+  <div class="card">
     <div class="tblwrap">
       <table class="edit" id="contentTable">
         <thead><tr>
-          <th style="width:28px">#</th><th style="min-width:170px">Content</th><th style="min-width:200px">Objectives</th><th>Hours taught</th><th>%</th><th>Items</th>
+          <th style="width:28px">#</th><th style="min-width:170px">Content</th><th style="min-width:200px">Objectives</th><th>Hours</th><th>%</th><th>Items</th>
           <th class="lots">Remembering</th><th class="lots">Understanding</th><th class="lots">Applying</th>
           <th class="hots">Analyzing</th><th class="hots">Evaluating</th><th class="hots">Creating</th><th></th>
         </tr></thead>
@@ -320,33 +437,36 @@ footer.foot{color:var(--ink-3);font-size:13px;margin-top:30px}
       <button id="addRow">+ Add content</button>
       <button id="autoSkills" title="Redistribute every row's items across the six skills using the target mix below">Auto-fill skills</button>
       <span class="spacer"></span>
-      <span id="skillNote" style="font-size:13px;color:var(--ink-2)"></span>
+      <span id="skillNote" style="font-size:13.5px;color:var(--ink-2);font-family:var(--font-mono)"></span>
     </div>
-    <details style="margin-top:14px">
-      <summary style="cursor:pointer;font-weight:600">Target skill mix (used by Auto-fill)</summary>
+  </div>
+  <div class="card">
+    <details>
+      <summary>Target skill mix (used by Auto-fill)</summary>
       <div class="profile" id="profile"></div>
-      <p class="note" style="font-size:13px;color:var(--ink-3);margin:8px 0 0">LOTS = Remembering + Understanding + Applying. HOTS = Analyzing + Evaluating + Creating. Percentages should add up to 100.</p>
+      <p class="note" style="margin:8px 0 0">LOTS = Remembering + Understanding + Applying. HOTS = Analyzing + Evaluating + Creating. Percentages should add up to 100.</p>
     </details>
   </div>
 </section>
 
 <!-- STEP 3 -->
 <section class="step" id="step3">
-  <div class="step-head"><span class="n">STEP 3</span><h2>Questions you need</h2><span class="hint">Prepare at least this many per content and skill; extras are fine</span></div>
-  <div class="step-body">
-    <div class="needs" id="needs"></div>
-    <div class="toolbar" style="margin-top:14px">
+  <div class="step-head"><h2>Questions you need</h2><span class="hint">Prepare at least this many per content and skill; extras are fine</span></div>
+  <div class="needs" id="needs"></div>
+  <div class="card" style="margin-top:14px">
+    <h3>Ask for the question bank</h3>
+    <div class="toolbar" style="margin-top:0">
       <button class="primary" id="copyBrief">Copy question request</button>
       <button id="dlBrief">Download as .txt</button>
-      <label style="font-size:13px;display:flex;gap:6px;align-items:center">Extra per cell <input type="number" id="briefExtra" min="0" max="10" step="1" value="2" style="width:56px"></label>
-      <span id="briefNote" style="font-size:13px;color:var(--ink-2)"></span>
+      <label style="font-size:14px;display:flex;gap:7px;align-items:center">Extra per cell <input type="number" id="briefExtra" min="0" max="10" step="1" value="2" style="width:62px"></label>
+      <span id="briefNote" style="font-size:13.5px;color:var(--ok);font-weight:700"></span>
     </div>
-    <p style="margin:8px 0 0;font-size:13px;color:var(--ink-3)">Paste the request into a chat with Claude (or any AI) together with your lesson materials. It lists every content, its objectives, and exactly how many questions you need per skill, and asks for the CSV in the format this app reads. "Extra per cell" asks for spare questions so Remake has variety.</p>
+    <p class="note" style="margin:10px 0 0;font-size:13.5px">Paste the request into your question-builder chat together with your lesson materials. It lists every content, its objectives and exactly how many questions you need per skill, and asks for the CSV in the format this app reads. "Extra per cell" asks for spare questions so Remake has variety.</p>
     <details style="margin-top:14px">
-      <summary style="cursor:pointer;font-weight:600">Question bank file format</summary>
+      <summary>Question bank file format</summary>
       <p style="margin:8px 0 0;font-size:14px">A CSV, TSV or Excel file with these column headers (order and capitalization don't matter). Option E may be blank for 4-option items.</p>
       <pre class="spec">Question | Option A | Option B | Option C | Option D | Option E | CORRECT ANSWER | DIFFICULTY | BLOOMS | CONTENT | OBJECTIVES</pre>
-      <p style="margin:8px 0 0;font-size:14px"><b>CORRECT ANSWER</b> is the letter (A–E). <b>BLOOMS</b> is Remembering / Understanding / Applying / Analyzing / Evaluating / Creating (any casing). <b>CONTENT</b> should match a content name from Step 2. <b>OBJECTIVES</b> should match one of the objectives you typed for that content (same wording, or close to it) — the app spreads the chosen questions across the objectives. DIFFICULTY is kept for the answer key.</p>
+      <p style="margin:8px 0 0;font-size:14px"><b>CORRECT ANSWER</b> is the letter (A–E). <b>BLOOMS</b> is Remembering / Understanding / Applying / Analyzing / Evaluating / Creating (any casing). <b>CONTENT</b> should match a content name from Step 2. <b>OBJECTIVES</b> should match one of the objectives you typed for that content (same wording, or close to it); the app spreads the chosen questions across the objectives. DIFFICULTY is kept for the answer key.</p>
       <div class="toolbar"><button class="small" id="dlTemplate">Download blank template (.csv)</button></div>
     </details>
   </div>
@@ -354,38 +474,40 @@ footer.foot{color:var(--ink-3);font-size:13px;margin-top:30px}
 
 <!-- STEP 4 -->
 <section class="step" id="step4">
-  <div class="step-head"><span class="n">STEP 4</span><h2>Upload question bank</h2><span class="hint" id="bankHint">No file loaded</span></div>
-  <div class="step-body">
-    <label class="drop" id="drop">Drop your CSV / TSV / XLSX here, or click to choose a file<input type="file" id="fileInput" accept=".csv,.tsv,.txt,.xlsx,.xls"></label>
-    <div id="mapping"></div>
-    <div id="qcPanel"></div>
-    <div class="msgs" id="bankMsgs"></div>
-    <div class="toolbar" id="bankTools" hidden><button class="small" id="clearBank">Remove bank</button></div>
-  </div>
+  <div class="step-head"><h2>Upload question bank</h2><span class="hint" id="bankHint">No file loaded</span></div>
+  <label class="drop" id="drop"><b>Drop your question bank here</b><span>CSV, TSV or Excel · or click to choose a file</span><input type="file" id="fileInput" accept=".csv,.tsv,.txt,.xlsx,.xls"></label>
+  <div id="mapping"></div>
+  <div id="qcPanel"></div>
+  <div class="msgs" id="bankMsgs"></div>
+  <div class="toolbar" id="bankTools" hidden><button class="small" id="clearBank">Remove bank</button></div>
 </section>
 
 <!-- STEP 5 -->
 <section class="step" id="step5">
-  <div class="step-head"><span class="n">STEP 5</span><h2>Table of Specification &amp; Exam</h2></div>
-  <div class="step-body">
-    <div class="toolbar" style="margin:0 0 14px">
+  <div class="step-head"><h2>Table of Specification &amp; exam</h2></div>
+  <div class="card">
+    <div class="genbar">
       <button class="primary" id="generate">Create TOS &amp; exam</button>
       <button id="remake" disabled title="Pick a fresh set of questions and reshuffle">Remake exam</button>
       <button id="reshuffle" disabled title="Keep the same questions, reshuffle order and options">Reshuffle only</button>
-      <span class="spacer"></span>
-      <label style="font-size:13px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="shuffleOptions" checked> Shuffle options</label>
-      <label style="font-size:13px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="mixContents"> Mix contents</label>
+      <div class="opts">
+        <label><input type="checkbox" id="shuffleOptions" checked> Shuffle options</label>
+        <label><input type="checkbox" id="mixContents"> Mix contents</label>
+      </div>
     </div>
+  </div>
+  <div class="card">
+    <h3>Sets &amp; Bubble Tsek sheets</h3>
     <div class="btbar">
       <div class="field"><label for="setsSel">Exam sets</label><select id="setsSel"><option value="1">1 set</option><option value="2">2 sets (A and B)</option></select></div>
       <div class="field"><label for="btRoll">Roll no. digits</label><select id="btRoll"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
       <div class="field"><label for="btMc">Points per correct</label><input type="number" id="btMc" min="0.5" max="20" step="0.5"></div>
       <div class="field"><label for="btMi">Points off per wrong</label><input type="number" id="btMi" min="0" max="20" step="0.5"></div>
-      <p class="note">These go into the Bubble Tsek answer sheets. Items and choices (A–D or A–E) come from the exam itself. Bubble Tsek grades up to 2 sets.</p>
+      <p class="note">Items and choices (A–D or A–E) come from the exam itself. Bubble Tsek grades up to 2 sets.</p>
     </div>
-    <div class="summary" id="summary" hidden></div>
-    <div class="msgs" id="genMsgs"></div>
   </div>
+  <div class="summary" id="summary" hidden></div>
+  <div class="msgs" id="genMsgs"></div>
   <div class="tabs" id="tabs">
     <button data-pane="tosPane" class="active">Table of Specification</button>
     <button data-pane="examPane">Exam</button>
@@ -393,19 +515,17 @@ footer.foot{color:var(--ink-3);font-size:13px;margin-top:30px}
     <button data-pane="bubblePane">Bubble sheets</button>
   </div>
   <div class="setswitch" id="setSwitch" hidden></div>
-  <div class="step-body">
-    <div class="pane active" id="tosPane"><div class="empty">Create the TOS to preview it here.</div></div>
-    <div class="pane" id="examPane"><div class="empty">Create the exam to preview it here.</div></div>
-    <div class="pane" id="keyPane"><div class="empty">The answer key appears after the exam is created.</div></div>
-    <div class="pane" id="bubblePane"><div class="empty">The Bubble Tsek key sheet and answer sheets appear after the exam is created.</div></div>
-    <div class="toolbar" id="exportTools" hidden>
-      <span id="exportBtns" style="display:contents"></span>
-      <span class="spacer"></span>
-      <button class="ghost small" id="resetAll">Start over</button>
-    </div>
+  <div class="pane active" id="tosPane"><div class="empty">Press <b>Create TOS &amp; exam</b> to preview the TOS here.</div></div>
+  <div class="pane" id="examPane"><div class="empty">The exam preview appears here after you create it.</div></div>
+  <div class="pane" id="keyPane"><div class="empty">The answer key appears after the exam is created.</div></div>
+  <div class="pane" id="bubblePane"><div class="empty">The Bubble Tsek key sheet and answer sheets appear after the exam is created.</div></div>
+  <div class="toolbar" id="exportTools" hidden>
+    <span id="exportBtns" style="display:contents"></span>
+    <span class="spacer"></span>
+    <button class="ghost small" id="resetAll">Start over</button>
   </div>
 </section>
-<footer class="foot">Everything runs in your browser. Nothing is uploaded anywhere; your inputs are remembered on this device only.</footer>
+</main>
 </div>
 
 <script src="lib/xlsx-js-style.bundle.js"></script>
@@ -545,6 +665,8 @@ const TEMPLATES = {
 };
 const TPL_FIELDS = ['department','checkedBy','checkedByTitle','notedBy','notedByTitle','reviewedBy','reviewedByTitle','instructions','examSchool','closing'];
 const TPL_DEFAULTS = {
+  t1: { department:'SCHOOL OF COMPUTING', checkedBy:'', checkedByTitle:'Program Chair', notedBy:'', notedByTitle:'Dean', reviewedBy:'Genalyn D. Villafuerte', reviewedByTitle:'BSEMC, Program Chair',
+        instructions:'Read each item carefully. Write the letter of the correct answer on the space provided before the number.', examSchool:'', closing:'' },
   t2: { department:'IT DIVISION', checkedBy:'', checkedByTitle:'', notedBy:'', notedByTitle:'', reviewedBy:'', reviewedByTitle:'',
         instructions:'Any form of cheating will not be tolerated and will result in a score of zero. Only black or blue pen must be used, and the correct answer must be shaded on the answer sheet provided. No erasures are allowed, and all answers must be written legibly.',
         examSchool:'LA CONCEPCION COLLEGE – IT Division', closing:'God Bless and Good Luck' }
@@ -558,26 +680,31 @@ const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<'
 
 /* ---------- state ---------- */
 const DEFAULTS = {
-  subject:'', courseCode:'', semester:'1ST SEMESTER', term:'MIDTERM', ay:'2026 – 2027', totalItems:60,
-  preparedBy:'', dateSubmitted: new Date().toISOString().slice(0,10), department:'SCHOOL OF COMPUTING',
-  checkedBy:'', checkedByTitle:'Program Chair', notedBy:'', notedByTitle:'Dean',
-  reviewedBy:'Genalyn D. Villafuerte', reviewedByTitle:'BSEMC, Program Chair',
-  instructions:'Read each item carefully. Write the letter of the correct answer on the space provided before the number.',
+  subject:'', courseCode:'', semester:'1ST SEMESTER', term:'MIDTERM', ay:'2026 – 2027', totalItems:100,
+  preparedBy:'', dateSubmitted: new Date().toISOString().slice(0,10),
   profile:[15,10,15,25,20,15],
   contents:[
-    {name:'Introduction to Database Systems', objectives:'Identify and explain the major building blocks and components of a database system.\nDifferentiate data, information and knowledge.', hours:3, skills:null},
-    {name:'Relational Model', objectives:'Apply relational concepts to design tables, keys and relationships.', hours:4.5, skills:null},
-    {name:'SQL Fundamentals', objectives:'Write SQL statements to create, query and modify data.\nUse joins and aggregate functions to answer questions from multiple tables.', hours:6, skills:null},
-    {name:'Normalization', objectives:'Analyze table designs and normalize them up to 3NF.', hours:4.5, skills:null},
+    {name:'Introduction to Computers', objectives:'Classify the types of computers according to size and purpose.\nDescribe how computers evolved through the Digital Age.', hours:3, skills:null},
+    {name:'Computer Hardware', objectives:'Identify the functions of input, output, processing and storage devices.', hours:4.5, skills:null},
+    {name:'Computer Software', objectives:'Differentiate system software from application software.', hours:3, skills:null},
+    {name:'Networks and the Internet', objectives:'Explain how computers communicate through networks.\nDescribe common network types such as PAN, LAN and WAN.', hours:4.5, skills:null},
   ],
   shuffleOptions:true, mixContents:false,
-  sets:1, bt:{roll:3, mc:1, mi:0}, preferClean:true, template:'t1', profiles:null
+  sets:1, bt:{roll:3, mc:1, mi:0}, preferClean:true, template:'t2', profiles:null
 };
 let state = Object.assign(JSON.parse(JSON.stringify(DEFAULTS)), load()||{});
 state.bt = Object.assign({roll:3,mc:1,mi:0}, state.bt||{});
 const UI = { set:0 };
-if(!state.profiles){ const p={}; TPL_FIELDS.forEach(k=> p[k]=state[k]??''); state.profiles = { t1:p, t2:Object.assign({}, TPL_DEFAULTS.t2) }; }
-if(!TEMPLATES[state.template]) state.template='t1';
+function ensureProfiles(hadSaved){
+  if(!state.profiles){
+    // a browser that used the older one-school version keeps its CCSJDM values as Template 1
+    const t1 = {}; TPL_FIELDS.forEach(k=> t1[k] = (hadSaved && state[k]!=null) ? state[k] : TPL_DEFAULTS.t1[k]);
+    state.profiles = { t1, t2:Object.assign({}, TPL_DEFAULTS.t2) };
+  }
+  if(!TEMPLATES[state.template]) state.template='t2';
+  TPL_FIELDS.forEach(k=> state[k] = state.profiles[state.template][k] ?? '');
+}
+ensureProfiles(!!load());
 let QC = null;                      // quality-check result for the loaded bank
 let bank = loadBank() || null;      // {rows:[], labels:[], map:{label:contentIndex|-1}, fileName}
 let exam = null;                    // {items:[{q, opts, correct, content, level, ...}], seed}
@@ -613,7 +740,7 @@ function ensureSkills(){
     if(!Array.isArray(c.skills) || c.skills.length!==6) c.skills = suggestSkills(items[i]);
   });
 }
-function skillsSum(c){ return c.skills.reduce((a,b)=>a+(Number(b)||0),0); }
+function skillsSum(c){ return (c.skills||[]).reduce((a,b)=>a+(Number(b)||0),0); }
 
 /* ---------- normalizers ---------- */
 const norm = s => String(s==null?'':s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
@@ -687,7 +814,45 @@ function bindFields(){
   $('#shuffleOptions').addEventListener('change', e=>{ state.shuffleOptions=e.target.checked; save(); });
   $('#mixContents').addEventListener('change', e=>{ state.mixContents=e.target.checked; save(); });
 }
-function applyTemplateVisibility(){ $$('[data-tpl]').forEach(el=> el.hidden = el.dataset.tpl !== state.template); }
+function applyTemplateVisibility(){
+  $$('[data-tpl]').forEach(el=> el.hidden = el.dataset.tpl !== state.template);
+  $$('.tplopt').forEach(o=>{ const on = o.dataset.t===state.template; o.classList.toggle('on', on); o.querySelector('input').checked = on; });
+  const rt=$('#railTpl'); if(rt) rt.textContent = tpl().school;
+}
+/* ---------- step navigation (one step at a time) ---------- */
+const STEP_TITLES = ['Exam details','Contents & hours','Questions needed','Question bank','TOS & exam'];
+let curStep = 1;
+function goStep(n){
+  curStep = Math.max(1, Math.min(5, n));
+  $$('section.step').forEach((s,i)=> s.classList.toggle('active', i+1===curStep));
+  $('#whereLbl').textContent = `STEP ${curStep} OF 5 · ${STEP_TITLES[curStep-1].toUpperCase()}`;
+  try{ localStorage.setItem('tosb.step', String(curStep)); }catch(e){}
+  updateRail(); window.scrollTo({top:0});
+}
+function stepState(){
+  const {items,total} = allocation();
+  const rowsOk = state.contents.length>0 && state.contents.every((c,i)=> skillsSum(c)===items[i]);
+  let short = 0; if(bank){ const cnt=bankCounts(); state.contents.forEach((c,i)=> c.skills.forEach((v,k)=>{ if(v>cnt[i][k]) short++; })); }
+  return [
+    { done: !!(state.subject && total>0), attn:false, sub: state.subject ? `${total} items · ${tpl().school.split(' ').slice(0,2).join(' ')}` : 'Subject not set' },
+    { done: rowsOk, attn: state.contents.length>0 && !rowsOk, sub: `${state.contents.length} content${state.contents.length===1?'':'s'} · ${fmt(state.contents.reduce((a,c)=>a+(Number(c.hours)||0),0))} hrs` },
+    { done: rowsOk, attn:false, sub: 'Copy the question request' },
+    { done: !!bank && short===0, attn: !!bank && short>0, sub: bank ? `${bank.rows.length} questions${short?` · ${short} short`:''}` : 'No file yet' },
+    { done: !!exam, attn:false, sub: exam ? `${exam.pool.length} items${exam.sets.length>1?' · Sets A & B':''}` : 'Not created yet' },
+  ];
+}
+function updateRail(){
+  const st = stepState();
+  $$('#railSteps .stepbtn').forEach((b,i)=>{ b.classList.toggle('cur', i+1===curStep); b.classList.toggle('done', st[i].done); b.classList.toggle('attn', st[i].attn); b.setAttribute('aria-current', i+1===curStep?'step':'false'); const s=$('#rs'+(i+1)); if(s) s.textContent = st[i].sub; });
+}
+function buildStepNav(){
+  $$('section.step').forEach((sec,i)=>{
+    const n=i+1, nav=document.createElement('div'); nav.className='stepnav';
+    nav.innerHTML = (n>1?`<button data-go="${n-1}">← ${STEP_TITLES[n-2]}</button>`:'<span></span>') + (n<5?`<button class="primary" data-go="${n+1}">Next: ${STEP_TITLES[n]} →</button>`:'');
+    sec.appendChild(nav);
+  });
+  $$('[data-go]').forEach(b=> b.addEventListener('click', ()=> goStep(+b.dataset.go)));
+}
 /* When hours/total change, re-suggest skills for rows whose row total no longer matches */
 function reflowSkills(){
   const {items} = allocation();
@@ -1035,7 +1200,6 @@ function renderOutputs(){
   renderExportButtons();
   $('#exportTools').hidden=false; $('#remake').disabled=false; $('#reshuffle').disabled=false;
   renderChips();
-  $('#step5').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 /* ---------- downloads ---------- */
@@ -1420,6 +1584,7 @@ function renderQC(){
 
 /* ---------- chips ---------- */
 function renderChips(){
+  if($('#railSteps')) setTimeout(updateRail);
   const {total} = allocation();
   const planned = state.contents.reduce((a,c)=>a+skillsSum(c),0);
   const chips = [];
@@ -1435,7 +1600,17 @@ function renderChips(){
 let installEvt=null;
 window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); installEvt=e; const b=$('#installBtn'); if(b) b.hidden=false; });
 window.addEventListener('appinstalled', ()=>{ const b=$('#installBtn'); if(b) b.hidden=true; installEvt=null; });
+/* ---------- light / dark / auto ---------- */
+function setTheme(t){
+  if(t==='light'||t==='dark') document.documentElement.setAttribute('data-theme', t); else { document.documentElement.removeAttribute('data-theme'); t='auto'; }
+  try{ localStorage.setItem('tosb.theme', t); }catch(e){}
+  $$('[data-theme-set]').forEach(b=> b.setAttribute('aria-pressed', String(b.dataset.themeSet===t)));
+}
 function init(){
+  let t0='auto'; try{ t0 = localStorage.getItem('tosb.theme')||'auto'; }catch(e){}
+  setTheme(t0);
+  $$('[data-theme-set]').forEach(b=> b.addEventListener('click', ()=> setTheme(b.dataset.themeSet)));
+  buildStepNav();
   $('#installBtn').addEventListener('click', async ()=>{ if(!installEvt) return; installEvt.prompt(); try{ await installEvt.userChoice; }catch(e){} installEvt=null; $('#installBtn').hidden=true; });
   bindFields(); renderProfile(); renderContents(); renderNeeds(); if(bank){ remapBank(); }
   $('#addRow').addEventListener('click', ()=>{ state.contents.push({name:'',objectives:'',hours:1,skills:null}); reflowSkills(); save(); renderContents(); renderNeeds(); $$('#contentBody textarea')[ (state.contents.length-1)*2 ]?.focus(); });
@@ -1456,9 +1631,11 @@ function init(){
   $('#copyBrief').addEventListener('click', copyBrief);
   $('#dlBrief').addEventListener('click', ()=> saveFile(`QuestionRequest_${fileBase()}.txt`, new Blob([briefText()],{type:'text/plain'})));
   $('#dlTemplate').addEventListener('click', ()=> saveFile('question_bank_template.csv', templateCsv()));
-  $('#resetAll').addEventListener('click', ()=>{ state = JSON.parse(JSON.stringify(DEFAULTS)); exam=null; save(); bindFields(); renderProfile(); renderContents(); renderNeeds(); $('#summary').hidden=true; $('#exportTools').hidden=true; $('#genMsgs').innerHTML=''; ['tosPane','examPane','keyPane'].forEach(id=> $('#'+id).innerHTML='<div class="empty">Create the TOS and exam to preview them here.</div>'); renderChips(); window.scrollTo({top:0,behavior:'smooth'}); });
+  $('#resetAll').addEventListener('click', ()=>{ state = JSON.parse(JSON.stringify(DEFAULTS)); ensureProfiles(false); exam=null; save(); goStep(1); bindFields(); renderProfile(); renderContents(); renderNeeds(); $('#summary').hidden=true; $('#exportTools').hidden=true; $('#genMsgs').innerHTML=''; ['tosPane','examPane','keyPane'].forEach(id=> $('#'+id).innerHTML='<div class="empty">Create the TOS and exam to preview them here.</div>'); renderChips(); window.scrollTo({top:0,behavior:'smooth'}); });
   if(bank) renderBank();
   renderChips();
+  let s0=1; try{ s0 = +(localStorage.getItem('tosb.step')||1); }catch(e){}
+  goStep(s0||1);
   window.addEventListener('beforeprint', ()=>{ document.documentElement.setAttribute('data-print','1'); });
 }
 init();
