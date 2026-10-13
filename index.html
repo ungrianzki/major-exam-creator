@@ -73,6 +73,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body)
 .steps li{position:relative}
 .stepbtn{all:unset;box-sizing:border-box;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:center;width:100%;padding:9px 8px 9px 0;border-radius:8px;cursor:pointer;color:var(--rail-dim)}
 .stepbtn:hover{color:var(--rail-ink)}
+.rail .stepbtn:hover,.rail .stepbtn:focus{background:transparent;border-color:transparent}
+.rail .navbtn:hover{background:var(--rail-2);border-color:var(--rail-2)}
 .stepbtn:focus-visible{outline:2px solid var(--rail-hi);outline-offset:2px}
 .bub{width:34px;height:34px;border-radius:50%;border:2px solid #4A5A7E;background:var(--rail);display:grid;place-items:center;font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--rail-dim);position:relative;z-index:1;transition:background .2s,border-color .2s,color .2s}
 .stepbtn .t{display:block;font-weight:700;font-size:14.5px;line-height:1.25}
@@ -257,6 +259,90 @@ pre.spec{background:var(--surface-2);border:1px solid var(--line);padding:10px 1
 .qclist{margin:6px 0 0;padding-left:18px;max-height:220px;overflow:auto;display:grid;gap:4px;overflow-wrap:anywhere}
 .qcpref{display:flex;gap:8px;align-items:flex-start;margin-top:12px;font-size:14px}
 
+/* ---------- test parts (step 1) ---------- */
+.partsTbl{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+.partsTbl th{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.partsTbl td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+.partsTbl tr.off td:not(:first-child){opacity:.45}
+.partsTbl td.nm{white-space:nowrap;font-weight:700}
+.partsTbl td.nm small{display:block;font-weight:400;color:var(--ink-3);font-size:12px}
+.partsTbl input[type=number]{width:80px;text-align:center;font-family:var(--font-mono)}
+.partsTbl textarea{min-height:38px;font-size:13.5px}
+.scan{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.scan.y{background:var(--ok-soft);color:var(--ok)} .scan.n{background:var(--sunken);color:var(--ink-2)}
+.partsSum{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;font-size:14px;color:var(--ink-2)}
+.partsSum b{color:var(--ink);font-family:var(--font-mono)}
+.typechips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.typechips span{font-size:12px;padding:2px 8px;border-radius:4px;background:var(--sunken);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.typechips span.short{outline:2px solid var(--bad);outline-offset:-1px}
+
+/* ---------- step 3: content & objective picker ---------- */
+.picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.pick{border:1.5px solid var(--line);border-radius:var(--r);padding:12px 14px;background:var(--surface)}
+.pick.on{border-color:var(--accent);background:var(--accent-soft)}
+.pick .ph{display:flex;gap:9px;align-items:flex-start;cursor:pointer;font-size:14.5px}
+.pick .ph b{flex:1;overflow-wrap:anywhere}
+.pick .ph span{font-size:12.5px;color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+.pick .objs{display:grid;gap:4px;margin:8px 0 0 25px}
+.pick .objs label{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--ink-2);cursor:pointer}
+.pick .objs label small{color:var(--ink-3);white-space:nowrap;margin-left:auto;padding-left:8px}
+.pick:not(.on) .objs{opacity:.55}
+.pick.manual{border-style:dashed}
+.pick .tag{font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:4px;background:var(--warn-soft);color:var(--warn);margin-left:4px}
+table.edit td .hv{display:block;text-align:center;font-family:var(--font-mono);font-size:11.5px;opacity:.75;margin-top:2px}
+table.edit td .hv.short{color:var(--bad);opacity:1;font-weight:700}
+table.edit td.ro{font-size:13.5px;line-height:1.4;color:var(--ink-2)}
+table.edit td.ro b{color:var(--ink)}
+.covgrid{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 6px}
+.covgrid .cv{border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 12px;min-width:120px;background:var(--surface)}
+.covgrid .cv .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2);font-weight:700}
+.covgrid .cv .v{font-family:var(--font-display);font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.covgrid .cv.short{border-color:var(--bad)} .covgrid .cv.short .v{color:var(--bad)}
+.shortlist{margin:6px 0 0;padding-left:18px;font-size:13.5px;display:grid;gap:2px;max-height:200px;overflow:auto}
+.bankedit{display:grid;gap:10px}
+.bankedit .be{border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 12px}
+.bankedit .be .objs{display:grid;gap:6px;margin-top:8px;padding-left:14px}
+.bankedit .be .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+.bankedit .be small{color:var(--ink-3);white-space:nowrap}
+
+/* ---------- question banks page ---------- */
+.navbtn{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:10px 8px;border-radius:8px;cursor:pointer;color:var(--rail-dim);font-weight:700;font-size:14.5px;border-top:1px solid var(--rail-2)}
+.navbtn:hover{color:var(--rail-ink);background:var(--rail-2)}
+.navbtn:focus-visible{outline:2px solid var(--rail-hi);outline-offset:2px}
+.navbtn.cur{color:var(--rail-ink);background:var(--rail-2)}
+.navbtn .ico{width:34px;height:34px;display:grid;place-items:center;flex:none}
+.navbtn small{display:block;font-weight:400;font-size:12.5px;color:var(--rail-dim)}
+section.page{display:none;max-width:1120px}
+section.page.active{display:block}
+.banklist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.bank{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow)}
+.bank.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft),var(--shadow)}
+.bank h4{margin:0;font-family:var(--font-display);font-size:17px;font-weight:700;overflow-wrap:anywhere}
+.bank .meta{font-size:13px;color:var(--ink-3)}
+.bank .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.newbank{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end}
+@media (max-width:560px){.newbank{grid-template-columns:1fr}}
+.qfilters{display:grid;grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
+@media (max-width:720px){.qfilters{grid-template-columns:1fr 1fr}}
+table.qtbl{border-collapse:collapse;width:100%;min-width:820px;font-size:13.5px}
+table.qtbl th{background:var(--surface-2);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);text-align:left;padding:7px 8px;white-space:nowrap;position:sticky;top:0}
+table.qtbl td{border-bottom:1px solid var(--line);padding:7px 8px;vertical-align:top}
+table.qtbl td.q{min-width:280px}
+table.qtbl td.q small{display:block;color:var(--ink-3);margin-top:2px}
+.tpill{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:4px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.bankpick{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end}
+@media (max-width:560px){.bankpick{grid-template-columns:1fr}}
+
+/* ---------- extra test types on the paper previews ---------- */
+.mtab{width:100%;border-collapse:collapse;margin:4px 0 12px;break-inside:avoid}
+.mtab th{text-align:left;font-weight:700;padding:2px 6px;border-bottom:1px solid #000}
+.mtab td{padding:2px 6px;vertical-align:top;width:50%}
+.essay{margin:6px 0 12px;break-inside:avoid}
+.essay .ln{border-bottom:1px solid #000;height:18px}
+.exam .partgap,.exam2 .partgap{height:10px}
+.exam2 .st span:first-child{white-space:nowrap}
+.exam2 .pins{font-style:italic;margin:-6px 0 10px}
+
 /* ---------- narrow screens: rail becomes a top bar ---------- */
 @media (max-width:860px){
   .app{grid-template-columns:1fr}
@@ -267,15 +353,17 @@ pre.spec{background:var(--surface-2);border:1px solid var(--line);padding:10px 1
   .steps::before{display:none}
   .stepbtn{grid-template-columns:34px;padding:0 2px}
   .stepbtn .lbl{display:none}
+  .navbtn{width:auto;border-top:none;padding:0 2px}
+  .navbtn .nlbl{display:none}
 }
 @media (prefers-reduced-motion:no-preference){button{transition:background .12s,border-color .12s}}
 @media print{
   body{background:#fff}
-  .rail,.topbar,.themeseg,.stepnav,section.step:not(#step5){display:none!important}
+  .rail,.topbar,.themeseg,.stepnav,section.page,section.step:not(#stepExam){display:none!important}
   .app{display:block}
   .main{padding:0}
-  #step5{display:block!important}
-  #step5 .step-head,#step5 .card,#step5 .tabs,#step5 .summary,#step5 .msgs,#exportTools,#setSwitch,.btinfo{display:none!important}
+  #stepExam{display:block!important}
+  #stepExam .step-head,#stepExam .card,#stepExam .tabs,#stepExam .summary,#stepExam .msgs,#exportTools,#setSwitch,.btinfo{display:none!important}
   .sheet{box-shadow:none;border:none;margin:0}
   .pane{display:none}.pane.active{display:block}
   .exam .cols{column-count:2}
@@ -364,11 +452,11 @@ pre.spec{background:var(--surface-2);border:1px solid var(--line);padding:10px 1
   </div>
   <ol class="steps" id="railSteps">
     <li><button class="stepbtn" data-go="1"><span class="bub">1</span><span class="lbl"><span class="t">Exam details</span><span class="s" id="rs1"></span></span></button></li>
-    <li><button class="stepbtn" data-go="2"><span class="bub">2</span><span class="lbl"><span class="t">Contents &amp; hours</span><span class="s" id="rs2"></span></span></button></li>
-    <li><button class="stepbtn" data-go="3"><span class="bub">3</span><span class="lbl"><span class="t">Questions needed</span><span class="s" id="rs3"></span></span></button></li>
-    <li><button class="stepbtn" data-go="4"><span class="bub">4</span><span class="lbl"><span class="t">Question bank</span><span class="s" id="rs4"></span></span></button></li>
-    <li><button class="stepbtn" data-go="5"><span class="bub">5</span><span class="lbl"><span class="t">TOS &amp; exam</span><span class="s" id="rs5"></span></span></button></li>
+    <li><button class="stepbtn" data-go="2"><span class="bub">2</span><span class="lbl"><span class="t">Question bank</span><span class="s" id="rs2"></span></span></button></li>
+    <li><button class="stepbtn" data-go="3"><span class="bub">3</span><span class="lbl"><span class="t">Contents &amp; hours</span><span class="s" id="rs3"></span></span></button></li>
+    <li><button class="stepbtn" data-go="4"><span class="bub">4</span><span class="lbl"><span class="t">TOS &amp; exam</span><span class="s" id="rs4"></span></span></button></li>
   </ol>
+  <button class="navbtn" id="navBanks" type="button"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.1 7.6 3 12 3s8 1.1 8 2.5S16.4 8 12 8 4 6.9 4 5.5z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4 5.5v6C4 12.9 7.6 14 12 14s8-1.1 8-2.5v-6M4 11.5v6C4 18.9 7.6 20 12 20s8-1.1 8-2.5v-6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></span><span class="nlbl">Question banks<small id="navBanksN">No saved banks</small></span></button>
   <div class="rail-foot">
     <div class="tplcard"><div><small>Exam template</small><b id="railTpl"></b></div></div>
     <button class="primary small" id="installBtn" hidden>Install app</button>
@@ -400,10 +488,15 @@ pre.spec{background:var(--surface-2);border:1px solid var(--line);padding:10px 1
       <div class="field"><label for="semester">Semester</label><select id="semester"><option>1ST SEMESTER</option><option>2ND SEMESTER</option><option>SUMMER</option></select></div>
       <div class="field"><label for="term">Term</label><select id="term"><option value="PRELIMINARIES">Preliminaries</option><option value="MIDTERM">Midterm</option><option value="FINALS">Finals</option></select></div>
       <div class="field"><label for="ay">Academic year</label><input type="text" id="ay" placeholder="2026 – 2027"></div>
-      <div class="field"><label for="totalItems">Total number of items</label><input type="number" id="totalItems" min="1" max="500" step="1"></div>
       <div class="field span2"><label for="instructions">Exam instructions</label><textarea id="instructions"></textarea></div>
       <div class="field" data-tpl="t2"><label for="closing">Closing line</label><input type="text" id="closing"></div>
     </div>
+  </div>
+  <div class="card">
+    <h3>Test parts</h3>
+    <div class="tblwrap"><table class="partsTbl" id="partsTbl"></table></div>
+    <div class="partsSum" id="partsSum"></div>
+    <p class="note" style="margin:8px 0 0">The parts print in this order. Multiple choice, True or False and Matching (groups of 5, letters A–E) go on the Bubble Tsek answer sheet. Identification and Essay are answered on the test paper and checked by hand. The TOS counts every question as one item.</p>
   </div>
   <div class="card">
     <h3>People &amp; dates</h3>
@@ -418,10 +511,42 @@ pre.spec{background:var(--surface-2);border:1px solid var(--line);padding:10px 1
   </div>
 </section>
 
-<!-- STEP 2 -->
-<section class="step" id="step2">
-  <div class="step-head"><h2>Contents, objectives &amp; hours</h2><span class="hint">One objective per line · % and items follow the hours · skill columns are editable</span></div>
+<!-- STEP 2: QUESTION BANK -->
+<section class="step" id="stepBank">
+  <div class="step-head"><h2>Question bank</h2><span class="hint" id="bankHint">No bank chosen</span></div>
   <div class="card">
+    <div class="bankpick">
+      <div class="field"><label for="bankSel">Use this saved bank</label><select id="bankSel"></select></div>
+      <button type="button" id="goBanks">Manage question banks</button>
+    </div>
+    <div class="typechips" id="bankTypes"></div>
+  </div>
+  <label class="drop" id="drop" style="margin-top:14px"><b>Drop a question bank file here</b><span id="dropHint">CSV, TSV or Excel · it is saved as a new bank · or click to choose a file</span><input type="file" id="fileInput" accept=".csv,.tsv,.txt,.xlsx,.xls"></label>
+  <label class="qcpref" style="margin-top:8px"><input type="checkbox" id="addToSel"> Add the file to the bank above instead of making a new bank (questions already in it are skipped)</label>
+  <div class="card" style="margin-top:14px">
+    <details style="margin-top:14px">
+      <summary>Question bank file format</summary>
+      <p style="margin:8px 0 0;font-size:14px">A CSV, TSV or Excel file with these column headers (order and capitalization don't matter). Option E may be blank for 4-option items.</p>
+      <pre class="spec">Question | Option A | Option B | Option C | Option D | Option E | CORRECT ANSWER | DIFFICULTY | BLOOMS | CONTENT | OBJECTIVES | TYPE | POINTS | RUBRIC</pre>
+      <p style="margin:8px 0 0;font-size:14px"><b>CORRECT ANSWER</b> is the letter (A–E). <b>BLOOMS</b> is Remembering / Understanding / Applying / Analyzing / Evaluating / Creating (any casing). <b>CONTENT</b> is the topic name (keep it the same in every file you add to this bank). <b>OBJECTIVES</b> is the objective the question checks. <b>TYPE</b> is Multiple choice, True or False, Matching, Identification or Essay (blank = multiple choice). <b>POINTS</b> and <b>RUBRIC</b> are for essays. DIFFICULTY is kept for the answer key.</p>
+      <div class="toolbar"><button class="small" id="dlTemplate">Download blank template (.csv)</button></div>
+    </details>
+  </div>
+  <div id="qcPanel"></div>
+  <div class="msgs" id="bankMsgs"></div>
+  <div class="toolbar" id="bankTools" hidden><button class="small" id="clearBank">Stop using this bank</button></div>
+</section>
+
+<!-- STEP 3: CONTENTS & HOURS -->
+<section class="step" id="stepContents">
+  <div class="step-head"><h2>Contents, objectives &amp; hours</h2><span class="hint">Tick what this exam covers · type the hours · red numbers need more questions</span></div>
+  <div class="card">
+    <h3 id="pickTitle">Contents &amp; objectives in the bank</h3>
+    <div id="pickList"></div>
+    <div class="toolbar"><button id="addRow">+ Add a content that isn't in the bank</button></div>
+  </div>
+  <div class="card">
+    <h3>Table of Specification plan</h3>
     <div class="tblwrap">
       <table class="edit" id="contentTable">
         <thead><tr>
@@ -434,11 +559,24 @@ pre.spec{background:var(--surface-2);border:1px solid var(--line);padding:10px 1
       </table>
     </div>
     <div class="toolbar">
-      <button id="addRow">+ Add content</button>
       <button id="autoSkills" title="Redistribute every row's items across the six skills using the target mix below">Auto-fill skills</button>
       <span class="spacer"></span>
       <span id="skillNote" style="font-size:13.5px;color:var(--ink-2);font-family:var(--font-mono)"></span>
     </div>
+    <p class="note" style="margin:8px 0 0">The small number under each skill is how many questions the bank has for that content and level (ticked objectives and the test types in your exam parts only). Red means that cell is still short: not enough questions of the test types your exam parts call for.</p>
+  </div>
+  <div class="card" id="covCard">
+    <h3>Does the bank have enough questions?</h3>
+    <div id="covMsg"></div>
+    <div class="toolbar">
+      <button class="primary" id="moreBtn">Add questions to this bank</button>
+      <button id="copyBrief">Copy request for missing questions</button>
+      <button id="dlBrief">Download request (.txt)</button>
+      <label style="font-size:14px;display:flex;gap:7px;align-items:center">Extra per count <input type="number" id="briefExtra" min="0" max="10" step="1" value="2" style="width:62px"></label>
+      <span id="briefNote" style="font-size:13.5px;color:var(--ok);font-weight:700"></span>
+    </div>
+    <p class="note" style="margin:10px 0 0;font-size:13.5px">The request lists only what's missing, by content, Bloom's level and test type. Paste it into your question-builder chat with the lesson materials, then add the CSV you get back with <b>Add questions to this bank</b>.</p>
+    <input type="file" id="moreFile" accept=".csv,.tsv,.txt,.xlsx,.xls" hidden>
   </div>
   <div class="card">
     <details>
@@ -449,41 +587,8 @@ pre.spec{background:var(--surface-2);border:1px solid var(--line);padding:10px 1
   </div>
 </section>
 
-<!-- STEP 3 -->
-<section class="step" id="step3">
-  <div class="step-head"><h2>Questions you need</h2><span class="hint">Prepare at least this many per content and skill; extras are fine</span></div>
-  <div class="needs" id="needs"></div>
-  <div class="card" style="margin-top:14px">
-    <h3>Ask for the question bank</h3>
-    <div class="toolbar" style="margin-top:0">
-      <button class="primary" id="copyBrief">Copy question request</button>
-      <button id="dlBrief">Download as .txt</button>
-      <label style="font-size:14px;display:flex;gap:7px;align-items:center">Extra per cell <input type="number" id="briefExtra" min="0" max="10" step="1" value="2" style="width:62px"></label>
-      <span id="briefNote" style="font-size:13.5px;color:var(--ok);font-weight:700"></span>
-    </div>
-    <p class="note" style="margin:10px 0 0;font-size:13.5px">Paste the request into your question-builder chat together with your lesson materials. It lists every content, its objectives and exactly how many questions you need per skill, and asks for the CSV in the format this app reads. "Extra per cell" asks for spare questions so Remake has variety.</p>
-    <details style="margin-top:14px">
-      <summary>Question bank file format</summary>
-      <p style="margin:8px 0 0;font-size:14px">A CSV, TSV or Excel file with these column headers (order and capitalization don't matter). Option E may be blank for 4-option items.</p>
-      <pre class="spec">Question | Option A | Option B | Option C | Option D | Option E | CORRECT ANSWER | DIFFICULTY | BLOOMS | CONTENT | OBJECTIVES</pre>
-      <p style="margin:8px 0 0;font-size:14px"><b>CORRECT ANSWER</b> is the letter (A–E). <b>BLOOMS</b> is Remembering / Understanding / Applying / Analyzing / Evaluating / Creating (any casing). <b>CONTENT</b> should match a content name from Step 2. <b>OBJECTIVES</b> should match one of the objectives you typed for that content (same wording, or close to it); the app spreads the chosen questions across the objectives. DIFFICULTY is kept for the answer key.</p>
-      <div class="toolbar"><button class="small" id="dlTemplate">Download blank template (.csv)</button></div>
-    </details>
-  </div>
-</section>
-
-<!-- STEP 4 -->
-<section class="step" id="step4">
-  <div class="step-head"><h2>Upload question bank</h2><span class="hint" id="bankHint">No file loaded</span></div>
-  <label class="drop" id="drop"><b>Drop your question bank here</b><span>CSV, TSV or Excel · or click to choose a file</span><input type="file" id="fileInput" accept=".csv,.tsv,.txt,.xlsx,.xls"></label>
-  <div id="mapping"></div>
-  <div id="qcPanel"></div>
-  <div class="msgs" id="bankMsgs"></div>
-  <div class="toolbar" id="bankTools" hidden><button class="small" id="clearBank">Remove bank</button></div>
-</section>
-
-<!-- STEP 5 -->
-<section class="step" id="step5">
+<!-- STEP 4: TOS & EXAM -->
+<section class="step" id="stepExam">
   <div class="step-head"><h2>Table of Specification &amp; exam</h2></div>
   <div class="card">
     <div class="genbar">
@@ -524,6 +629,23 @@ pre.spec{background:var(--surface-2);border:1px solid var(--line);padding:10px 1
     <span class="spacer"></span>
     <button class="ghost small" id="resetAll">Start over</button>
   </div>
+</section>
+<!-- QUESTION BANKS -->
+<section class="page" id="banksPage">
+  <div class="step-head"><h2>Question banks</h2><span class="hint">Saved on this computer · one bank per subject works best</span></div>
+  <div id="banksList">
+    <div class="card">
+      <h3>New bank from a file</h3>
+      <div class="newbank">
+        <div class="field"><label for="newBankName">Bank name</label><input type="text" id="newBankName" placeholder="e.g. Living in the IT Era"></div>
+        <label class="drop" id="newBankDrop" style="padding:12px 18px;flex-direction:row;gap:8px"><b style="font-size:15px">Choose CSV / Excel file</b><input type="file" id="newBankFile" accept=".csv,.tsv,.txt,.xlsx,.xls"></label>
+      </div>
+      <div class="msgs" id="newBankMsgs"></div>
+    </div>
+    <div class="banklist" id="bankCards" style="margin-top:14px"></div>
+  </div>
+  <div id="bankDetail" hidden></div>
+  <input type="file" id="addFileInput" accept=".csv,.tsv,.txt,.xlsx,.xls" hidden>
 </section>
 </main>
 </div>
@@ -673,6 +795,23 @@ const TPL_DEFAULTS = {
 };
 function tpl(){ return TEMPLATES[state.template] || TEMPLATES.t1; }
 const LEVELS = ['Remembering','Understanding','Applying','Analyzing','Evaluating','Creating'];
+/* Test types. Parts always print in TYPE_ORDER, so the scannable ones (on the Bubble Tsek sheet) come first. */
+const TYPES = {
+  mc:   { name:'Multiple choice', short:'MC',        t1:'MULTIPLE CHOICE', t2:'Multiple Choices', scan:true,
+          instr:'' },
+  tf:   { name:'True or False',   short:'True/False', t1:'TRUE OR FALSE',  t2:'True or False',    scan:true,
+          instr:'Write TRUE if the statement is correct and FALSE if it is wrong. On your answer sheet, shade A for TRUE and B for FALSE.' },
+  match:{ name:'Matching type',   short:'Matching',  t1:'MATCHING TYPE',   t2:'Matching Type',    scan:true,
+          instr:'Match each item in Column A with the correct answer in Column B. Shade the letter of your answer on your answer sheet.' },
+  id:   { name:'Identification',  short:'Identification', t1:'IDENTIFICATION', t2:'Identification', scan:false,
+          instr:'Write the correct answer on the space provided before each number.' },
+  essay:{ name:'Essay',           short:'Essay',     t1:'ESSAY',           t2:'Essay',            scan:false,
+          instr:'Answer each question in complete sentences. The points for each item are shown in parentheses.' },
+};
+const TYPE_ORDER = ['mc','tf','match','id','essay'];
+const MATCH_MAX = 5;               // a matching group uses letters A–E so Bubble Tsek can scan it
+const ROMAN = ['I','II','III','IV','V','VI'];
+function defaultParts(n){ const p={}; TYPE_ORDER.forEach(t=> p[t]={ n: t==='mc'? n : 0, instr: TYPES[t].instr }); p.essay.pts = 5; return p; }
 const LOTS_IDX = [0,1,2], HOTS_IDX = [3,4,5];
 const $ = (s, el=document) => el.querySelector(s);
 const $$ = (s, el=document) => Array.from(el.querySelectorAll(s));
@@ -683,17 +822,18 @@ const DEFAULTS = {
   subject:'', courseCode:'', semester:'1ST SEMESTER', term:'MIDTERM', ay:'2026 – 2027', totalItems:100,
   preparedBy:'', dateSubmitted: new Date().toISOString().slice(0,10),
   profile:[15,10,15,25,20,15],
-  contents:[
-    {name:'Introduction to Computers', objectives:'Classify the types of computers according to size and purpose.\nDescribe how computers evolved through the Digital Age.', hours:3, skills:null},
-    {name:'Computer Hardware', objectives:'Identify the functions of input, output, processing and storage devices.', hours:4.5, skills:null},
-    {name:'Computer Software', objectives:'Differentiate system software from application software.', hours:3, skills:null},
-    {name:'Networks and the Internet', objectives:'Explain how computers communicate through networks.\nDescribe common network types such as PAN, LAN and WAN.', hours:4.5, skills:null},
-  ],
+  contents:[],
   shuffleOptions:true, mixContents:false,
-  sets:1, bt:{roll:3, mc:1, mi:0}, preferClean:true, template:'t2', profiles:null
+  sets:1, bt:{roll:3, mc:1, mi:0}, preferClean:true, template:'t2', profiles:null, parts:null, bankId:null
 };
 let state = Object.assign(JSON.parse(JSON.stringify(DEFAULTS)), load()||{});
 state.bt = Object.assign({roll:3,mc:1,mi:0}, state.bt||{});
+if(!state.parts) state.parts = defaultParts(Math.max(1, Math.round(Number(state.totalItems)||100)));
+TYPE_ORDER.forEach(t=>{ if(!state.parts[t]) state.parts[t] = defaultParts(0)[t]; });
+function partN(t){ return Math.max(0, Math.round(Number(state.parts[t]?.n)||0)); }
+function partsTotal(){ return TYPE_ORDER.reduce((a,t)=> a + partN(t), 0); }
+function scanTotal(){ return TYPE_ORDER.filter(t=>TYPES[t].scan).reduce((a,t)=> a + partN(t), 0); }
+state.totalItems = partsTotal();
 const UI = { set:0 };
 function ensureProfiles(hadSaved){
   if(!state.profiles){
@@ -706,14 +846,280 @@ function ensureProfiles(hadSaved){
 }
 ensureProfiles(!!load());
 let QC = null;                      // quality-check result for the loaded bank
-let bank = loadBank() || null;      // {rows:[], labels:[], map:{label:contentIndex|-1}, fileName}
+let bank = null;                    // the saved bank in use: {id,name,rows,labels,map,problems}
 let exam = null;                    // {items:[{q, opts, correct, content, level, ...}], seed}
 let downloadsNs = undefined;        // artifact downloads capability (resolved later)
 
 function load(){ try{ const s=localStorage.getItem('tosb.state'); return s?JSON.parse(s):null; }catch(e){ return null; } }
 function save(){ try{ localStorage.setItem('tosb.state', JSON.stringify(state)); }catch(e){} }
-function loadBank(){ try{ const s=localStorage.getItem('tosb.bank'); return s?JSON.parse(s):null; }catch(e){ return null; } }
-function saveBank(){ try{ if(bank) localStorage.setItem('tosb.bank', JSON.stringify(bank)); else localStorage.removeItem('tosb.bank'); }catch(e){} }
+/* ---------- saved question banks (IndexedDB, with a localStorage fallback) ---------- */
+const LIB = { db:null, banks:[], ready:false };
+function idbOpen(){ return new Promise((res,rej)=>{ if(!window.indexedDB) return rej(new Error('no idb')); const r=indexedDB.open('majorexam',1);
+  r.onupgradeneeded=()=>{ r.result.createObjectStore('banks',{keyPath:'id'}); }; r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }); }
+async function libLoad(){
+  try{
+    LIB.db = await idbOpen();
+    LIB.banks = await new Promise((res,rej)=>{ const q=LIB.db.transaction('banks').objectStore('banks').getAll(); q.onsuccess=()=>res(q.result||[]); q.onerror=()=>rej(q.error); });
+  }catch(e){ LIB.db=null; try{ LIB.banks = JSON.parse(localStorage.getItem('tosb.lib')||'[]'); }catch(e2){ LIB.banks=[]; } }
+  LIB.banks.forEach(fixBank);
+  // the one-bank version kept its bank in localStorage — move it into the library once
+  try{ const old = localStorage.getItem('tosb.bank'); if(old){ const o = JSON.parse(old);
+    if(o && o.rows && o.rows.length){ const b = newBank(state.subject || (o.fileName||'').replace(/\.[^.]+$/,'') || 'My question bank', o.rows); b.map = o.map||{}; fixBank(b); libPut(b); if(!state.bankId) state.bankId = b.id; }
+    localStorage.removeItem('tosb.bank'); } }catch(e){}
+  LIB.ready = true;
+}
+function libPersistFallback(){ if(LIB.db) return; try{ localStorage.setItem('tosb.lib', JSON.stringify(LIB.banks)); }catch(e){ toast('Browser storage is full. Delete a bank you no longer need.'); } }
+function libPut(b){
+  b.updatedAt = Date.now(); if(!LIB.banks.includes(b)) LIB.banks.push(b);
+  if(LIB.db){ try{ const plain = JSON.parse(JSON.stringify(b)); LIB.db.transaction('banks','readwrite').objectStore('banks').put(plain); }catch(e){} } else libPersistFallback();
+}
+function libDel(id){
+  LIB.banks = LIB.banks.filter(b=>b.id!==id);
+  if(LIB.db){ try{ LIB.db.transaction('banks','readwrite').objectStore('banks').delete(id); }catch(e){} } else libPersistFallback();
+}
+function newBank(name, rows){ return { id:'bk'+Date.now().toString(36)+Math.random().toString(36).slice(2,6), name: String(name||'Question bank').trim()||'Question bank', createdAt:Date.now(), updatedAt:Date.now(), rows: rows||[], map:{}, problems:[] }; }
+function fixBank(b){ b.rows = (b.rows||[]).filter(r=>r && r.q); b.rows.forEach(r=>{ if(!r.type) r.type = (r.opts&&r.opts.length>=2)?'mc':(r.answer?'id':'mc'); }); b.map = b.map||{}; b.labels = Array.from(new Set(b.rows.map(r=>r.contentLabel))); BIDX = null; return b; }
+function saveBank(){ if(bank){ fixBank(bank); libPut(bank); } }
+/* add rows to a bank, skipping questions it already has (same type + same wording) */
+function mergeRows(b, rows){ const have = new Set(b.rows.map(rowKey)); let added=0, skipped=0; rows.forEach(r=>{ const k=rowKey(r); if(have.has(k)){ skipped++; return; } have.add(k); b.rows.push(r); added++; }); fixBank(b); return {added, skipped}; }
+function renderBankTypesOnly(){
+  const box = $('#bankTypes'); if(!bank){ box.innerHTML=''; return; }
+  const tc = typeCounts(bank.rows), have = coverage();
+  box.innerHTML = TYPE_ORDER.filter(t=> tc[t] || partN(t)).map(t=>{ const need = partN(t), short = need>0 && have.byType[t] < need; return `<span class="${short?'short':''}" title="${need?`${need} needed in this exam`:'not used in this exam'}">${TYPES[t].short} ${tc[t]}${need?` <small>/ ${need} needed</small>`:''}</span>`; }).join('');
+}
+function renderBankSel(){
+  const sel = $('#bankSel'); if(!sel) return;
+  const list = LIB.banks.slice().sort((a,b)=> a.name.localeCompare(b.name));
+  sel.innerHTML = `<option value="">${list.length? '— choose a saved bank —' : 'No saved banks yet — drop a file below'}</option>` + list.map(b=>`<option value="${b.id}" ${bank&&bank.id===b.id?'selected':''}>${esc(b.name)} · ${b.rows.length} questions</option>`).join('');
+  $('#addToSel').disabled = !bank; if(!bank) $('#addToSel').checked = false;
+}
+function renderNavBanks(){ const n = LIB.banks.length; $('#navBanksN').textContent = n? `${n} saved bank${n>1?'s':''}` : 'No saved banks'; }
+
+/* ---------- Question banks page ---------- */
+let curPage = null;
+const PAGE_UI = { detail:null, q:'', type:'', content:'', level:'', confirmDel:null, addTarget:null, editOpen:false };
+function goBanks(){
+  curPage = 'banks';
+  $$('section.step').forEach(s=> s.classList.remove('active')); $('#banksPage').classList.add('active');
+  $('#whereLbl').textContent = 'QUESTION BANKS';
+  renderBanksPage(); updateRail(); window.scrollTo({top:0});
+}
+function fmtDate(t){ try{ return new Date(t).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); }catch(e){ return ''; } }
+function levelCounts(rows){ const c=[0,0,0,0,0,0]; rows.forEach(r=>{ if(r.level>=0) c[r.level]++; }); return c; }
+function renderBanksPage(){
+  const det = PAGE_UI.detail && LIB.banks.find(b=>b.id===PAGE_UI.detail);
+  $('#banksList').hidden = !!det; $('#bankDetail').hidden = !det;
+  if(det) return renderBankDetail(det);
+  const list = LIB.banks.slice().sort((a,b)=> (b.updatedAt||0)-(a.updatedAt||0));
+  $('#bankCards').innerHTML = list.length ? list.map(b=>{
+    const tc = typeCounts(b.rows), lc = levelCounts(b.rows), inUse = bank && bank.id===b.id;
+    return `<div class="bank ${inUse?'sel':''}"><div><h4>${esc(b.name)}</h4><div class="meta">${b.rows.length} questions · ${b.labels.length} content${b.labels.length===1?'':'s'} · updated ${fmtDate(b.updatedAt)}${inUse?' · <b style="color:var(--accent)">in use</b>':''}</div></div>
+      <div class="typechips">${TYPE_ORDER.filter(t=>tc[t]).map(t=>`<span>${TYPES[t].short} ${tc[t]}</span>`).join('')}</div>
+      <div class="typechips">${LEVELS.map((l,k)=> lc[k]?`<span>${l.slice(0,3)} ${lc[k]}</span>`:'').join('')}</div>
+      <div class="acts">
+        ${inUse? '<button class="small" disabled>In use</button>' : `<button class="small primary" data-bk="use" data-id="${b.id}">Use in this exam</button>`}
+        <button class="small" data-bk="open" data-id="${b.id}">Open</button>
+        <button class="small" data-bk="add" data-id="${b.id}">Add a file</button>
+        <button class="small" data-bk="csv" data-id="${b.id}">Export CSV</button>
+        <button class="small ghost" data-bk="del" data-id="${b.id}" style="color:var(--bad)">${PAGE_UI.confirmDel===b.id?'Click again to delete':'Delete'}</button>
+      </div></div>`; }).join('')
+    : `<div class="empty" style="grid-column:1/-1">No saved banks yet. Make one from a CSV or Excel file above, or upload a file in Step 2.</div>`;
+  $$('#bankCards [data-bk]').forEach(b=> b.addEventListener('click', ()=> bankAction(b.dataset.bk, b.dataset.id)));
+}
+function bankAction(act, id){
+  const b = LIB.banks.find(x=>x.id===id); if(!b) return;
+  if(act==='use'){ useBank(id); renderBanksPage(); }
+  if(act==='open'){ PAGE_UI.detail=id; PAGE_UI.q=''; PAGE_UI.type=''; PAGE_UI.content=''; PAGE_UI.level=''; renderBanksPage(); window.scrollTo({top:0}); }
+  if(act==='add'){ PAGE_UI.addTarget=id; $('#addFileInput').click(); }
+  if(act==='csv') saveFile(`QuestionBank_${b.name.replace(/[^\w-]+/g,'_')}.csv`, bankCsv(b));
+  if(act==='del'){
+    if(PAGE_UI.confirmDel!==id){ PAGE_UI.confirmDel=id; renderBanksPage(); setTimeout(()=>{ if(PAGE_UI.confirmDel===id){ PAGE_UI.confirmDel=null; if(curPage==='banks') renderBanksPage(); } }, 4000); return; }
+    PAGE_UI.confirmDel=null; libDel(id); if(bank && bank.id===id) useBank(null); PAGE_UI.detail=null; renderBankSel(); renderNavBanks(); renderBanksPage();
+  }
+}
+function bankCsv(b){
+  const head = ['Question','Option A','Option B','Option C','Option D','Option E','CORRECT ANSWER','DIFFICULTY','BLOOMS','CONTENT','OBJECTIVES','TYPE','POINTS','RUBRIC'];
+  const rows = b.rows.map(r=>{
+    const o = r.type==='mc' ? r.opts.concat(['','','','','']).slice(0,5) : ['','','','',''];
+    const ans = r.type==='mc' ? 'ABCDE'[r.correct] : r.type==='tf' ? (r.correct?'FALSE':'TRUE') : r.type==='essay' ? '' : r.answer;
+    return [r.q, ...o, ans, r.difficulty||'', r.level>=0?LEVELS[r.level]:'', r.contentLabel||'', r.objective||'', TYPES[r.type].name, r.type==='essay'&&r.points? String(r.points):'', r.type==='essay'? (r.rubric||''):''];
+  });
+  const csv = [head, ...rows].map(r=> r.map(v=>{ v=String(v==null?'':v); return /[",\n\r]/.test(v)? `"${v.replace(/"/g,'""')}"` : v; }).join(',')).join('\r\n');
+  return new Blob(['﻿'+csv],{type:'text/csv'});
+}
+function renderBankDetail(b){
+  const box = $('#bankDetail'), U = PAGE_UI;
+  const nq = norm(U.q);
+  const match = b.rows.filter(r=> (!U.type || r.type===U.type) && (!U.content || r.contentLabel===U.content) && (U.level==='' || String(r.level)===U.level)
+    && (!nq || norm([r.q, r.answer||'', ...(r.opts||[]), r.rubric||''].join(' ')).includes(nq)));
+  const shown = match.slice(0,300);
+  const ans = r => r.type==='mc' ? `${'ABCDE'[r.correct]} · ${r.opts[r.correct]}` : r.type==='tf' ? (r.correct?'FALSE':'TRUE') : r.type==='essay' ? `${r.points? r.points+' pts':''}${r.rubric? (r.points?' · ':'')+r.rubric:''}` : r.answer;
+  box.innerHTML = `<div class="toolbar" style="margin:0 0 14px"><button class="small" id="bdBack">← All banks</button><span class="spacer"></span>
+      ${bank&&bank.id===b.id? '<span class="note">In use in this exam</span>' : `<button class="small primary" id="bdUse">Use in this exam</button>`}
+      <button class="small" id="bdAdd">Add a file</button><button class="small" id="bdCsv">Export CSV</button></div>
+    <div class="card"><div class="grid"><div class="field span2"><label for="bdName">Bank name</label><input type="text" id="bdName" value="${esc(b.name)}"></div>
+      <div class="field"><label>Questions</label><div style="font-family:var(--font-display);font-size:24px;font-weight:700">${b.rows.length}</div></div>
+      <div class="field"><label>By type</label><div class="typechips" style="margin:0">${TYPE_ORDER.map(t=>{ const v=typeCounts(b.rows)[t]; return v?`<span>${TYPES[t].short} ${v}</span>`:''; }).join('')}</div></div></div></div>
+    <div class="card"><details id="bdEditBox" ${PAGE_UI.editOpen?'open':''}><summary>Contents &amp; objectives (rename or merge)</summary>
+      <p class="note" style="margin:8px 0 10px">Rename a content to fix a typo. Give it the exact name of another content to merge the two. Objectives work the same way inside a content. Changes apply to every question in this bank.</p>
+      <div class="bankedit">${bankIndex(b).labels.map((L,li)=>{ const e = bankIndex(b).byLabel.get(L); return `<div class="be"><div class="row"><input type="text" value="${esc(L)}" data-ren-c="${li}" aria-label="Content name"><small>${e.n} questions</small></div>
+        <div class="objs">${e.clusters.map((x,xi)=>`<div class="row"><input type="text" value="${esc(x.key? x.text : '')}" placeholder="(no objective given)" data-ren-o="${li}" data-k="${xi}" data-lbl="${esc(L)}" data-key="${esc(x.key)}" aria-label="Objective"><small>${x.n}</small></div>`).join('')}</div></div>`; }).join('')}</div>
+    </details></div>
+    <div class="card"><div class="qfilters">
+        <div class="field"><label for="bdQ">Search</label><input type="text" id="bdQ" value="${esc(U.q)}" placeholder="Words in the question, choices or answer"></div>
+        <div class="field"><label for="bdT">Type</label><select id="bdT"><option value="">All types</option>${TYPE_ORDER.map(t=>`<option value="${t}" ${U.type===t?'selected':''}>${TYPES[t].name}</option>`).join('')}</select></div>
+        <div class="field"><label for="bdC">Content</label><select id="bdC"><option value="">All contents</option>${b.labels.map(l=>`<option ${U.content===l?'selected':''}>${esc(l)}</option>`).join('')}</select></div>
+        <div class="field"><label for="bdL">Bloom's level</label><select id="bdL"><option value="">All levels</option>${LEVELS.map((l,k)=>`<option value="${k}" ${U.level===String(k)?'selected':''}>${l}</option>`).join('')}</select></div>
+      </div>
+      <p class="note" style="margin:0 0 8px">Showing ${shown.length} of ${match.length} matching question${match.length===1?'':'s'}${match.length>shown.length?' (narrow the search to see the rest)':''}.</p>
+      <div class="tblwrap" style="max-height:62vh;overflow:auto"><table class="qtbl"><thead><tr><th>#</th><th>Type</th><th>Question</th><th>Answer</th><th>Content</th><th>Bloom's</th><th>Difficulty</th><th></th></tr></thead><tbody>
+        ${shown.map(r=>`<tr><td class="mono">${b.rows.indexOf(r)+1}</td><td><span class="tpill">${TYPES[r.type].short}</span></td><td class="q">${esc(r.q)}${r.type==='mc'?`<small>${r.opts.map((o,k)=>`${'ABCDE'[k]}. ${esc(o)}`).join(' · ')}</small>`:''}</td><td>${esc(ans(r))}</td><td>${esc(r.contentLabel)}</td><td>${r.level>=0?LEVELS[r.level]:'<span style="color:var(--bad)">?</span>'}</td><td>${esc(r.difficulty||'')}</td><td><button class="iconbtn" data-delq="${b.rows.indexOf(r)}" title="Delete this question">×</button></td></tr>`).join('')}
+      </tbody></table></div></div>`;
+  $('#bdBack').onclick = ()=>{ PAGE_UI.detail=null; renderBanksPage(); };
+  $('#bdEditBox').addEventListener('toggle', e=>{ PAGE_UI.editOpen = e.target.open; });
+  const after = ()=>{ fixBank(b); libPut(b); if(bank===b){ BIDX=null; QC=null; linkContents(); syncContents(); reflowSkills(); save(); renderBank(); renderPick(); renderContents(); renderNeeds(); renderChips(); } renderBankSel(); renderBankDetail(b); };
+  $$('#bankDetail [data-ren-c]').forEach(inp=> inp.addEventListener('change', ()=>{
+    const I = bankIndex(b), oldL = inp.defaultValue, newL = inp.value.trim(); if(!newL || newL===oldL || !I.byLabel.has(oldL)) return;
+    b.rows.forEach(r=>{ if((r.contentLabel||'')===oldL) r.contentLabel = newL; });
+    if(bank===b){ const a = state.contents.find(c=>!c.manual && c.label===oldL), t = state.contents.find(c=>!c.manual && c.label===newL);
+      if(a && t){ t.hours = (Number(t.hours)||0) + (Number(a.hours)||0); state.contents.splice(state.contents.indexOf(a),1); } else if(a){ a.label = newL; a.name = newL; }
+      if(state.hoursMemo && state.hoursMemo[oldL]!=null){ state.hoursMemo[newL] = state.hoursMemo[oldL]; delete state.hoursMemo[oldL]; } }
+    after();
+  }));
+  $$('#bankDetail [data-ren-o]').forEach(inp=> inp.addEventListener('change', ()=>{
+    const I = bankIndex(b), L = inp.dataset.lbl, e = I.byLabel.get(L), cl = e && e.clusters.find(c=> c.key===inp.dataset.key), txt = inp.value.trim(); if(!cl) return;
+    if(norm(txt)===cl.key && txt===cl.text) return;
+    b.rows.forEach(r=>{ if((r.contentLabel||'')===L && I.objOf.get(r)===cl.key) r.objective = txt; });
+    if(bank===b){ const c = state.contents.find(c=>!c.manual && c.label===L); if(c && (c.objOff||[]).includes(cl.key)) c.objOff = c.objOff.map(k=> k===cl.key ? norm(cleanObjective(txt)) : k); }
+    after();
+  }));
+  if($('#bdUse')) $('#bdUse').onclick = ()=>{ useBank(b.id); renderBanksPage(); };
+  $('#bdAdd').onclick = ()=> bankAction('add', b.id);
+  $('#bdCsv').onclick = ()=> bankAction('csv', b.id);
+  $('#bdName').onchange = e=>{ b.name = e.target.value.trim()||b.name; libPut(b); renderBankSel(); renderNavBanks(); if(bank===b) renderBank(); };
+  const refilter = (k,v)=>{ PAGE_UI[k]=v; renderBankDetail(b); };
+  let qt; $('#bdQ').oninput = e=>{ clearTimeout(qt); const v=e.target.value; qt=setTimeout(()=>{ refilter('q', v); const el=$('#bdQ'); el.focus(); el.setSelectionRange(v.length, v.length); }, 250); };
+  $('#bdT').onchange = e=> refilter('type', e.target.value);
+  $('#bdC').onchange = e=> refilter('content', e.target.value);
+  $('#bdL').onchange = e=> refilter('level', e.target.value);
+  $$('#bankDetail [data-delq]').forEach(x=> x.addEventListener('click', ()=>{ b.rows.splice(+x.dataset.delq, 1); fixBank(b); libPut(b); if(bank===b){ QC=null; renderBank(); renderNeeds(); renderChips(); } renderBankSel(); renderBankDetail(b); }));
+}
+async function addFileToBank(file, id){
+  const b = LIB.banks.find(x=>x.id===id); if(!b) return;
+  try{ const parsed = await readBankFile(file); const r = mergeRows(b, parsed.rows); b.problems = parsed.problems; libPut(b);
+    if(bank===b){ QC=null; useBank(b.id); }
+    renderBankSel(); renderBanksPage();
+    const m = curPage==='banks' ? (PAGE_UI.detail? $('#bankDetail') : $('#newBankMsgs')) : $('#bankMsgs');
+    m.insertAdjacentHTML('afterbegin', `<div class="msg ok">Added ${r.added} question${r.added===1?'':'s'} to “${esc(b.name)}”${r.skipped?` · ${r.skipped} already in it, skipped`:''}${parsed.problems.length?` · ${parsed.problems.length} row note${parsed.problems.length>1?'s':''} (see Step 2)`:''}.</div>`);
+  }catch(err){ toast('Could not read the file: '+err.message); }
+}
+async function newBankFromFile(file){
+  const msgs = $('#newBankMsgs'); msgs.innerHTML='';
+  try{ const parsed = await readBankFile(file);
+    const b = newBank($('#newBankName').value.trim() || file.name.replace(/\.[^.]+$/,''), parsed.rows); b.problems = parsed.problems; b.fileName=file.name; fixBank(b); libPut(b);
+    $('#newBankName').value=''; if(!bank) useBank(b.id); renderBankSel(); renderNavBanks(); renderBanksPage();
+    msgs.innerHTML = `<div class="msg ok">Saved “${esc(b.name)}” with ${b.rows.length} questions${parsed.problems.length?` · ${parsed.problems.length} row${parsed.problems.length>1?'s':''} skipped or noted`:''}.</div>`;
+  }catch(err){ msgs.innerHTML = `<div class="msg bad">Could not read the file: ${esc(err.message)}</div>`; }
+}
+async function addMoreQuestions(file){
+  const box = $('#covMsg');
+  try{
+    const parsed = await readBankFile(file); let note;
+    if(bank){ const r = mergeRows(bank, parsed.rows); bank.problems = parsed.problems; saveBank(); note = `Added ${r.added} question${r.added===1?'':'s'} to “${bank.name}”${r.skipped?` · ${r.skipped} already in it, skipped`:''}.`; useBank(bank.id); }
+    else { const b = newBank(state.subject || file.name.replace(/\.[^.]+$/,''), parsed.rows); b.problems = parsed.problems; fixBank(b); libPut(b); note = `Saved as a new bank “${b.name}” with ${b.rows.length} questions.`; useBank(b.id); }
+    // newly added contents that match a hand-typed row get linked; brand-new contents appear unticked in the list
+    $('#covMsg').insertAdjacentHTML('afterbegin', `<div class="msg ok">${esc(note)}${parsed.problems.length?` ${parsed.problems.length} row note${parsed.problems.length>1?'s':''} (see Step 2).`:''}</div>`);
+  }catch(err){ box.insertAdjacentHTML('afterbegin', `<div class="msg bad">Could not read the file: ${esc(err.message)}</div>`); }
+}
+function useBank(id){
+  bank = (id && LIB.banks.find(b=>b.id===id)) || null; state.bankId = bank ? bank.id : null; save(); QC=null;
+  BIDX = null; linkContents(); syncContents(); reflowSkills(); save();
+  renderBankSel(); renderBank(); renderPick(); renderContents(); renderNeeds(); renderChips(); renderNavBanks();
+}
+
+/* ---------- bank-first contents ----------
+   Each TOS row is either linked to a CONTENT of the chosen bank (row.label) or typed by hand (row.manual).
+   A bank content's objectives are the OBJECTIVES of its questions, with near-identical wordings merged. */
+let BIDX = null;
+function jacc(a,b){ const A=new Set(a.split(' ').filter(Boolean)), B=new Set(b.split(' ').filter(Boolean)); if(!A.size||!B.size) return 0; let i=0; A.forEach(x=>{ if(B.has(x)) i++; }); return i/(A.size+B.size-i); }
+function bankIndex(b){
+  b = b || bank; if(!b) return null;
+  const ver = b.id+':'+(b.updatedAt||0)+':'+b.rows.length;
+  if(b===bank && BIDX && BIDX.ver===ver) return BIDX;
+  const byLabel = new Map(), objOf = new Map();
+  b.rows.forEach(r=>{
+    const L = r.contentLabel||''; if(!byLabel.has(L)) byLabel.set(L, {label:L, n:0, clusters:[]});
+    const e = byLabel.get(L); e.n++;
+    const text = cleanObjective(r.objective||''), k = norm(text);
+    let cl = e.clusters.find(c=> c.key===k) || (k ? e.clusters.find(c=> c.key && jacc(c.key,k)>=0.85) : null);
+    if(!cl){ cl = {key:k, text: text||'(no objective given)', n:0}; e.clusters.push(cl); }
+    cl.n++; objOf.set(r, cl.key);
+  });
+  const res = {ver, byLabel, objOf, labels:[...byLabel.keys()]};
+  if(b===bank) BIDX = res;
+  return res;
+}
+/* which TOS row a bank question belongs to (-1 = not used: content not ticked or objective unticked) */
+function targetMap(){
+  const I = bankIndex(); if(!I) return ()=>-1;
+  const l2c = new Map(); state.contents.forEach((c,i)=>{ if(!c.manual && c.label!=null) l2c.set(c.label, i); });
+  return r=>{ const ci = l2c.get(r.contentLabel||''); if(ci==null) return -1; const off = state.contents[ci].objOff||[]; return off.length && off.includes(I.objOf.get(r)) ? -1 : ci; };
+}
+/* old setups typed their contents by hand: link them to the bank's contents by name */
+function linkContents(){
+  const I = bankIndex(); if(!I) return;
+  const labels = I.labels, used = new Set(state.contents.filter(c=>!c.manual && c.label!=null && labels.includes(c.label)).map(c=>c.label));
+  const legacy = bank.map || {};
+  state.contents.forEach((c,i)=>{
+    if(c.label!=null && labels.includes(c.label) && !c.manual) return;
+    if(c.manual){ const n = norm(c.name); const L = n && labels.find(l=> !used.has(l) && norm(l)===n); if(L){ c.manual=false; c.label=L; c.objOff=[]; used.add(L); } return; }
+    let L = Object.keys(legacy).find(l=> legacy[l]===i && labels.includes(l) && !used.has(l));
+    if(!L){ const n = norm(c.label||c.name); L = labels.find(l=> !used.has(l) && norm(l)===n) || labels.find(l=> !used.has(l) && n && (norm(l).includes(n)||n.includes(norm(l)))); }
+    if(L){ c.label = L; used.add(L); }
+    else if(c.label==null){ c.manual = true; }
+  });
+  sortContents();
+}
+function sortContents(){
+  const I = bankIndex(), order = I ? I.labels : [];
+  const rank = c => (!c.manual && order.includes(c.label)) ? order.indexOf(c.label) : 1e6;
+  state.contents = state.contents.map((c,i)=>({c,i})).sort((a,b)=> rank(a.c)-rank(b.c) || a.i-b.i).map(x=>x.c);
+}
+/* keep each linked row's name and objectives in step with the bank and the ticked objectives */
+function syncContents(){
+  const I = bankIndex(); if(!I) return;
+  state.contents.forEach(c=>{
+    if(c.manual) return; const e = I.byLabel.get(c.label); if(!e) return;
+    c.name = c.label; c.objOff = (c.objOff||[]).filter(k=> e.clusters.some(x=>x.key===k));
+    c.objectives = e.clusters.filter(x=> !c.objOff.includes(x.key)).map(x=> x.text).join('\n');
+  });
+}
+function renderPick(){
+  const box = $('#pickList'), I = bankIndex();
+  $('#pickTitle').textContent = bank ? `Contents & objectives in “${bank.name}”` : 'Contents & objectives';
+  if(!I){ box.innerHTML = `<div class="empty" style="margin-top:0">Choose or upload a question bank in Step 2 first. Its contents and objectives show up here to tick.</div>`; renderManualPicks(box, true); return; }
+  const rows = new Map(); state.contents.forEach((c,i)=>{ if(!c.manual && c.label!=null) rows.set(c.label, c); });
+  box.innerHTML = `<div class="picks">${I.labels.map((L,li)=>{ const e = I.byLabel.get(L), c = rows.get(L), on = !!c;
+    return `<div class="pick ${on?'on':''}"><label class="ph"><input type="checkbox" data-pick="${li}" ${on?'checked':''}><b>${esc(L)||'<em>(no content name)</em>'}</b><span>${e.n} question${e.n===1?'':'s'}</span></label>
+      <div class="objs">${e.clusters.map((x,xi)=>`<label><input type="checkbox" data-obj="${li}" data-k="${xi}" ${on && !(c.objOff||[]).includes(x.key)?'checked':''} ${on?'':'disabled'}><span>${esc(x.text)}</span><small>${x.n}</small></label>`).join('')}</div></div>`; }).join('')}</div>`;
+  renderManualPicks(box, false);
+  $$('#pickList [data-pick]').forEach(cb=> cb.addEventListener('change', ()=>{
+    const L = I.labels[+cb.dataset.pick];
+    if(cb.checked){ const memo = (state.hoursMemo||{})[L]; state.contents.push({name:L, label:L, objOff:[], objectives:'', hours: memo!=null? memo : 3, skills:null}); }
+    else { const i = state.contents.findIndex(c=> !c.manual && c.label===L); if(i>=0){ state.hoursMemo = Object.assign({}, state.hoursMemo, {[L]: state.contents[i].hours}); state.contents.splice(i,1); } }
+    sortContents(); syncContents(); reflowSkills(); save(); renderPick(); renderContents(); renderNeeds(); renderChips();
+  }));
+  $$('#pickList [data-obj]').forEach(cb=> cb.addEventListener('change', ()=>{
+    const L = I.labels[+cb.dataset.obj], key = I.byLabel.get(L).clusters[+cb.dataset.k].key, c = state.contents.find(c=> !c.manual && c.label===L); if(!c) return;
+    c.objOff = (c.objOff||[]).filter(k=>k!==key); if(!cb.checked) c.objOff.push(key);
+    syncContents(); save(); renderContents(); renderNeeds(); renderChips();
+  }));
+}
+function renderManualPicks(box, noBank){
+  const man = state.contents.map((c,i)=>({c,i})).filter(x=> x.c.manual || (bankIndex() && !bankIndex().byLabel.has(x.c.label)));
+  if(!man.length) return;
+  box.insertAdjacentHTML('beforeend', `<p class="note" style="margin:12px 0 6px">${noBank?'Contents typed by hand':'Contents not in this bank (0 questions — use the request below to get questions for them)'}:</p><div class="picks">${man.map(x=>`<div class="pick on manual"><div class="ph"><b>${esc(x.c.name)||'<em>Untitled content</em>'}</b><span class="tag">not in bank</span></div></div>`).join('')}</div>`);
+}
 
 /* ---------- math ---------- */
 function largestRemainder(weights, total){
@@ -790,7 +1196,7 @@ function guessContent(label){
 }
 
 /* ---------- rendering: step 1 ---------- */
-const FIELDS = ['examSchool','closing','subject','courseCode','semester','term','ay','totalItems','preparedBy','dateSubmitted','department','checkedBy','checkedByTitle','notedBy','notedByTitle','reviewedBy','reviewedByTitle','instructions'];
+const FIELDS = ['examSchool','closing','subject','courseCode','semester','term','ay','preparedBy','dateSubmitted','department','checkedBy','checkedByTitle','notedBy','notedByTitle','reviewedBy','reviewedByTitle','instructions'];
 function bindFields(){
   FIELDS.forEach(id=>{
     const el = $('#'+id); if(!el) return;
@@ -820,35 +1226,36 @@ function applyTemplateVisibility(){
   const rt=$('#railTpl'); if(rt) rt.textContent = tpl().school;
 }
 /* ---------- step navigation (one step at a time) ---------- */
-const STEP_TITLES = ['Exam details','Contents & hours','Questions needed','Question bank','TOS & exam'];
+const STEP_TITLES = ['Exam details','Question bank','Contents & hours','TOS & exam'];
+const NSTEPS = STEP_TITLES.length;
 let curStep = 1;
 function goStep(n){
-  curStep = Math.max(1, Math.min(5, n));
+  curStep = Math.max(1, Math.min(NSTEPS, n)); curPage = null; $('#banksPage').classList.remove('active');
   $$('section.step').forEach((s,i)=> s.classList.toggle('active', i+1===curStep));
-  $('#whereLbl').textContent = `STEP ${curStep} OF 5 · ${STEP_TITLES[curStep-1].toUpperCase()}`;
+  $('#whereLbl').textContent = `STEP ${curStep} OF ${NSTEPS} · ${STEP_TITLES[curStep-1].toUpperCase()}`;
   try{ localStorage.setItem('tosb.step', String(curStep)); }catch(e){}
   updateRail(); window.scrollTo({top:0});
 }
 function stepState(){
   const {items,total} = allocation();
   const rowsOk = state.contents.length>0 && state.contents.every((c,i)=> skillsSum(c)===items[i]);
-  let short = 0; if(bank){ const cnt=bankCounts(); state.contents.forEach((c,i)=> c.skills.forEach((v,k)=>{ if(v>cnt[i][k]) short++; })); }
+  const cov = bank ? coverage() : null, short = cov ? cov.total - cov.flow : 0;
   return [
     { done: !!(state.subject && total>0), attn:false, sub: state.subject ? `${total} items · ${tpl().school.split(' ').slice(0,2).join(' ')}` : 'Subject not set' },
-    { done: rowsOk, attn: state.contents.length>0 && !rowsOk, sub: `${state.contents.length} content${state.contents.length===1?'':'s'} · ${fmt(state.contents.reduce((a,c)=>a+(Number(c.hours)||0),0))} hrs` },
-    { done: rowsOk, attn:false, sub: 'Copy the question request' },
-    { done: !!bank && short===0, attn: !!bank && short>0, sub: bank ? `${bank.rows.length} questions${short?` · ${short} short`:''}` : 'No file yet' },
+    { done: !!bank, attn:false, sub: bank ? `${snip(bank.name,22)} · ${bank.rows.length}` : 'No bank chosen' },
+    { done: rowsOk && !!bank && short===0, attn: state.contents.length>0 && (!rowsOk || short>0), sub: state.contents.length ? `${state.contents.length} content${state.contents.length===1?'':'s'} · ${fmt(state.contents.reduce((a,c)=>a+(Number(c.hours)||0),0))} hrs${short?` · ${short} short`:''}` : 'Nothing ticked yet' },
     { done: !!exam, attn:false, sub: exam ? `${exam.pool.length} items${exam.sets.length>1?' · Sets A & B':''}` : 'Not created yet' },
   ];
 }
 function updateRail(){
   const st = stepState();
-  $$('#railSteps .stepbtn').forEach((b,i)=>{ b.classList.toggle('cur', i+1===curStep); b.classList.toggle('done', st[i].done); b.classList.toggle('attn', st[i].attn); b.setAttribute('aria-current', i+1===curStep?'step':'false'); const s=$('#rs'+(i+1)); if(s) s.textContent = st[i].sub; });
+  $('#navBanks').classList.toggle('cur', curPage==='banks');
+  $$('#railSteps .stepbtn').forEach((b,i)=>{ b.classList.toggle('cur', !curPage && i+1===curStep); b.classList.toggle('done', st[i].done); b.classList.toggle('attn', st[i].attn); b.setAttribute('aria-current', i+1===curStep?'step':'false'); const s=$('#rs'+(i+1)); if(s) s.textContent = st[i].sub; });
 }
 function buildStepNav(){
   $$('section.step').forEach((sec,i)=>{
     const n=i+1, nav=document.createElement('div'); nav.className='stepnav';
-    nav.innerHTML = (n>1?`<button data-go="${n-1}">← ${STEP_TITLES[n-2]}</button>`:'<span></span>') + (n<5?`<button class="primary" data-go="${n+1}">Next: ${STEP_TITLES[n]} →</button>`:'');
+    nav.innerHTML = (n>1?`<button data-go="${n-1}">← ${STEP_TITLES[n-2]}</button>`:'<span></span>') + (n<NSTEPS?`<button class="primary" data-go="${n+1}">Next: ${STEP_TITLES[n]} →</button>`:'');
     sec.appendChild(nav);
   });
   $$('[data-go]').forEach(b=> b.addEventListener('click', ()=> goStep(+b.dataset.go)));
@@ -864,17 +1271,21 @@ function renderContents(){
   ensureSkills();
   const {items, pct, sumH, total} = allocation();
   const tb = $('#contentBody'); tb.innerHTML='';
+  const have = bankCounts(), I = bankIndex();
+  if(!state.contents.length) tb.innerHTML = `<tr><td colspan="13"><div class="empty" style="margin:6px 0">Tick the contents this exam covers above, or add a content by hand.</div></td></tr>`;
   state.contents.forEach((c,i)=>{
     const tr = document.createElement('tr');
     const s = skillsSum(c); if(s!==items[i]) tr.classList.add('mismatch');
+    const linked = !c.manual && I && I.byLabel.has(c.label);
     tr.innerHTML = `<td class="num">${i+1}</td>
-      <td><textarea data-f="name" data-i="${i}" placeholder="Content / topic">${esc(c.name)}</textarea></td>
-      <td><textarea data-f="objectives" data-i="${i}" placeholder="One objective per line">${esc(c.objectives)}</textarea></td>
+      ${linked ? `<td class="ro"><b>${esc(c.name)}</b></td><td class="ro">${objHtml(c) || '<em>No objective ticked</em>'}</td>`
+               : `<td><textarea data-f="name" data-i="${i}" placeholder="Content / topic">${esc(c.name)}</textarea></td>
+      <td><textarea data-f="objectives" data-i="${i}" placeholder="One objective per line">${esc(c.objectives)}</textarea></td>`}
       <td class="num"><input type="number" min="0" step="0.5" data-f="hours" data-i="${i}" value="${esc(c.hours)}"></td>
       <td class="num">${(pct[i]*100).toFixed(1)}%</td>
       <td class="num itemsum" title="Allocated from hours: ${items[i]} · Skill columns add up to ${s}">${items[i]}${s!==items[i]?` <span style="font-size:11px">(skills=${s})</span>`:''}</td>
-      ${c.skills.map((v,k)=>`<td class="${k<3?'lots':'hots'}"><input type="number" min="0" step="1" data-f="skill" data-k="${k}" data-i="${i}" value="${v||''}"></td>`).join('')}
-      <td class="rowtools"><button class="iconbtn" data-del="${i}" title="Remove row">×</button></td>`;
+      ${c.skills.map((v,k)=>`<td class="${k<3?'lots':'hots'}"><input type="number" min="0" step="1" data-f="skill" data-k="${k}" data-i="${i}" value="${v||''}" aria-label="${LEVELS[k]} items for ${esc(c.name)}"><span class="hv" title="${have[i][k]} question${have[i][k]===1?'':'s'} in the bank">${have[i][k]}</span></td>`).join('')}
+      <td class="rowtools"><button class="iconbtn" data-del="${i}" title="${linked?'Untick this content':'Remove this content'}">×</button></td>`;
     tb.appendChild(tr);
   });
   const tot = LEVELS.map((_,k)=> state.contents.reduce((a,c)=>a+(Number(c.skills[k])||0),0));
@@ -887,12 +1298,13 @@ function renderContents(){
   $$('#contentBody textarea, #contentBody input').forEach(el=>{
     el.addEventListener('input', ()=>{
       const i = +el.dataset.i, f = el.dataset.f;
-      if(f==='skill'){ state.contents[i].skills[+el.dataset.k] = Math.max(0, Math.round(Number(el.value)||0)); save(); updateTotalsOnly(); renderNeeds(); renderChips(); return; }
-      if(f==='hours'){ state.contents[i].hours = Number(el.value)||0; reflowSkills(); save(); renderContents(); renderNeeds(); renderChips(); return; }
-      state.contents[i][f] = el.value; save(); if(f==='name'){ remapBank(); renderNeeds(); }
+      if(f==='skill'){ const k=+el.dataset.k; state.contents[i].skills[k] = Math.max(0, Math.round(Number(el.value)||0)); save(); updateTotalsOnly(); renderNeeds(); renderChips(); return; }
+      if(f==='hours'){ state.contents[i].hours = Number(el.value)||0; save(); return; }
+      state.contents[i][f] = el.value; save(); if(f==='name'){ renderPick(); renderNeeds(); }
     });
   });
-  $$('#contentBody [data-del]').forEach(b=> b.addEventListener('click', ()=>{ state.contents.splice(+b.dataset.del,1); reflowSkills(); save(); renderContents(); remapBank(); renderNeeds(); renderChips(); }));
+  $$('#contentBody input[data-f="hours"]').forEach(el=> el.addEventListener('change', ()=>{ state.contents[+el.dataset.i].hours = Number(el.value)||0; if(!state.contents[+el.dataset.i].manual) state.hoursMemo = Object.assign({}, state.hoursMemo, {[state.contents[+el.dataset.i].label]: state.contents[+el.dataset.i].hours}); reflowSkills(); save(); renderContents(); renderNeeds(); renderChips(); }));
+  $$('#contentBody [data-del]').forEach(b=> b.addEventListener('click', ()=>{ const c = state.contents[+b.dataset.del]; if(c && !c.manual) state.hoursMemo = Object.assign({}, state.hoursMemo, {[c.label]: c.hours}); state.contents.splice(+b.dataset.del,1); reflowSkills(); save(); renderPick(); renderContents(); renderNeeds(); renderChips(); }));
   renderChips();
 }
 function updateTotalsOnly(){
@@ -927,24 +1339,57 @@ function renderProfileNote(){
 function bankCounts(){
   // counts[contentIdx][levelIdx]
   const counts = state.contents.map(()=> [0,0,0,0,0,0]);
-  if(bank) bank.rows.forEach(r=>{ const ci = bank.map[r.contentLabel]; if(ci>=0 && r.level>=0 && counts[ci]) counts[ci][r.level]++; });
+  if(bank){ const T = targetMap(); bank.rows.forEach(r=>{ if(!partN(r.type)) return; const ci = T(r); if(ci>=0 && r.level>=0 && counts[ci]) counts[ci][r.level]++; }); }
   return counts;
 }
-function renderNeeds(){
-  const box = $('#needs'); box.innerHTML='';
-  const counts = bankCounts();
-  state.contents.forEach((c,i)=>{
-    const d = document.createElement('div'); d.className='need';
-    const n = skillsSum(c);
-    const objs = objList(c);
-    const objCounts = objs.map(()=>0); let unmatchedObj=0;
-    if(bank) bank.rows.forEach(r=>{ if(bank.map[r.contentLabel]===i){ const k=objIndex(r.objective,i); if(k>=0) objCounts[k]++; else unmatchedObj++; } });
-    const objLine = objs.length ? `<div style="font-size:12px;color:var(--ink-2);margin:4px 0 6px">${objs.map((o,k)=>`<div title="${esc(o)}">${k+1}. ${esc(o.length>70?o.slice(0,68)+'…':o)}${bank?` <b>· ${objCounts[k]} in bank</b>`:''}</div>`).join('')}${bank&&unmatchedObj?`<div>(${unmatchedObj} question${unmatchedObj>1?'s':''} not matched to an objective)</div>`:''}</div>` : '';
-    d.innerHTML = `<h4>${esc(c.name)||'<em>Untitled content</em>'} <span style="font-weight:400;color:var(--ink-3)">· ${n} item${n===1?'':'s'}</span></h4>${objLine}
-      <div class="lv">${c.skills.map((v,k)=>{ if(!v) return ''; const have = counts[i][k]; const short = bank && have<v; return `<span class="${k<3?'l':'h'} ${bank?'have':''} ${short?'short':''}" title="${bank?`${have} in bank`:''}">${LEVELS[k]} ${v}${bank?` <small>/ ${have}</small>`:''}</span>`; }).join('')}</div>`;
-    box.appendChild(d);
+function renderNeeds(){ renderCoverage(); }
+/* red have-counts: cells the bank can't fill with the right test type */
+function refreshHv(miss){
+  miss = miss || missingPlan().miss;
+  $$('#contentBody input[data-f="skill"]').forEach(el=>{ const i=+el.dataset.i, k=+el.dataset.k, hv=el.nextElementSibling; if(!hv || !miss[i]) return;
+    const n = Object.values(miss[i][k]).reduce((a,b)=>a+b,0); hv.classList.toggle('short', n>0);
+    hv.title = `${hv.textContent} question${hv.textContent==='1'?'':'s'} in the bank` + (n? ` · ${n} more needed of the right type` : ''); });
+}
+/* what is still missing: the max-flow leftovers, assigned to content × level × type (essays high, matching/ID low) */
+function missingPlan(){
+  const cells = tosCells(), types = TYPE_ORDER;
+  const miss = state.contents.map(()=> LEVELS.map(()=> ({})));
+  if(!cells.length) return {miss, total:0};
+  let cap;
+  if(bank){ const T = targetMap(), tgt = new Map(bank.rows.map(r=>[r, T(r)])); cap = types.map(t=> cells.map(c=> bank.rows.filter(r=> r.type===t && tgt.get(r)===c.ci && r.level===c.lv).length)); }
+  else cap = types.map(()=> cells.map(()=>0));
+  const {x} = maxFlow(cells.map(c=>c.d), types.map(t=>partN(t)), cap, mulberry32(3));
+  const remC = cells.map((c,k)=> c.d - types.reduce((a,_,ti)=> a + x[ti][k], 0));
+  const remT = {}; types.forEach((t,ti)=> remT[t] = partN(t) - cells.reduce((a,_,k)=> a + x[ti][k], 0));
+  const pref = { essay:[5,4,3,2,1,0], match:[0,1,2,3,4,5], id:[0,1,2,3,4,5], tf:[1,0,2,3,4,5], mc:[0,1,2,3,4,5] };
+  let total = 0;
+  ['essay','match','id','tf','mc'].forEach(t=>{
+    for(const lv of pref[t]){
+      let moved = true;
+      while(remT[t]>0 && moved){ moved=false; cells.forEach((c,k)=>{ if(remT[t]>0 && c.lv===lv && remC[k]>0){ remC[k]--; remT[t]--; miss[c.ci][lv][t]=(miss[c.ci][lv][t]||0)+1; total++; moved=true; } }); }
+      if(remT[t]<=0) break;
+    }
   });
-  if(!state.contents.length) box.innerHTML = '<div class="empty">Add contents in Step 2 first.</div>';
+  return {miss, total};
+}
+function renderCoverage(){
+  const box = $('#covMsg'); if(!box) return;
+  const cells = tosCells(), need = cells.reduce((a,c)=>a+c.d,0);
+  if(!state.contents.length){ box.innerHTML = `<p class="note" style="margin:0">Tick at least one content above.</p>`; return; }
+  const cov = coverage(), have = bankCounts();
+  const short = need - (bank ? cov.flow : 0);
+  const typeCards = TYPE_ORDER.filter(t=>partN(t)).map(t=>{ const h = bank? cov.byType[t] : 0, s = h < partN(t);
+    return `<div class="cv ${s?'short':''}"><div class="k">${TYPES[t].short}</div><div class="v">${h} <small style="font-size:13px;font-weight:400">/ ${partN(t)} needed</small></div></div>`; }).join('');
+  const shortCells = [], {miss} = missingPlan();
+  state.contents.forEach((c,i)=> LEVELS.forEach((L,k)=>{ const m = miss[i][k], n = Object.values(m).reduce((a,b)=>a+b,0); if(!n) return;
+    shortCells.push(`${esc(c.name||'Untitled')} · ${L}: ${n} more needed (${TYPE_ORDER.filter(t=>m[t]).map(t=>`${TYPES[t].short} ${m[t]}`).join(', ')}) — bank has ${have[i][k]} here`); }));
+  refreshHv(miss);
+  box.innerHTML = `<div class="covgrid"><div class="cv ${short>0?'short':''}"><div class="k">Bank can fill</div><div class="v">${bank? cov.flow : 0} <small style="font-size:13px;font-weight:400">/ ${need} items</small></div></div>${typeCards}</div>`
+    + (short<=0 ? `<div class="msg ok">The bank has enough questions for this TOS. Go on to Step 4.</div>`
+       : `<div class="msg warn">${short} item${short>1?'s':''} can't be filled with the right content, Bloom's level and test type yet. Add questions with the button below, lower the hours of a short content, or change the Bloom's split. The generator can still borrow from nearby levels of the same content, and it tells you what it changed.</div>`
+         + (shortCells.length ? `<details style="margin-top:6px"><summary>Short cells (${shortCells.length})</summary><ul class="shortlist">${shortCells.map(x=>`<li>${x}</li>`).join('')}</ul></details>` : ''));
+  $('#moreBtn').textContent = bank ? 'Add questions to this bank' : 'Upload a question bank';
+  $('#copyBrief').disabled = $('#dlBrief').disabled = short<=0;
 }
 
 /* ---------- step 4: bank ---------- */
@@ -954,8 +1399,20 @@ const HEADER_MAP = {
   optiona:'A', a:'A', optionb:'B', b:'B', optionc:'C', c:'C', optiond:'D', d:'D', optione:'E', e:'E',
   correctanswer:'ans', answer:'ans', correct:'ans', key:'ans', answerkey:'ans',
   difficulty:'diff', difficultylevel:'diff', blooms:'bloom', bloom:'bloom', bloomstaxonomy:'bloom', bloomslevel:'bloom', level:'bloom', skill:'bloom', targetskill:'bloom',
-  content:'content', topic:'content', unit:'content', objectives:'obj', objective:'obj'
+  content:'content', topic:'content', unit:'content', objectives:'obj', objective:'obj',
+  type:'type', itemtype:'type', testtype:'type', questiontype:'type', typeoftest:'type', kind:'type',
+  points:'pts', point:'pts', pts:'pts', score:'pts', rubric:'rubric', criteria:'rubric', scoringguide:'rubric', modelanswer:'rubric'
 };
+function typeOf(s){
+  const t = norm(s).replace(/\s+/g,''); if(!t) return '';
+  if(/^(mc|mcq|multiplechoices?|multiple|choice)$/.test(t)) return 'mc';
+  if(/^(tf|trueorfalse|truefalse|modifiedtrueorfalse|true)$/.test(t)) return 'tf';
+  if(/^(match|matching|matchingtype)$/.test(t)) return 'match';
+  if(/^(id|identification|fillintheblanks?|fillin|completion|shortanswer|enumeration)$/.test(t)) return 'id';
+  if(/^(essay|problemsolving|openended|constructedresponse|explanation)$/.test(t)) return 'essay';
+  return '?';
+}
+const rowKey = r => r.type + '|' + norm(r.q);
 function parseWorkbook(data, name){
   const wb = XLSX.read(data, {type:'array', raw:false});
   const ws = wb.Sheets[wb.SheetNames[0]];
@@ -972,51 +1429,69 @@ function parseWorkbook(data, name){
     if(!o.q) continue;
     const opts = ['A','B','C','D','E'].map(L=> o[L]||'').map(s=>s.trim());
     while(opts.length && !opts[opts.length-1]) opts.pop();
-    if(opts.some(s=>!s)){ problems.push(`Row ${r+1}: an option in the middle is blank.`); }
-    const optsClean = opts.filter(Boolean);
-    let ans = (o.ans||'').trim().toUpperCase();
-    let ai = -1;
-    if(/^[A-E]$/.test(ans)) ai = ans.charCodeAt(0)-65;
-    else if(/^[A-E][.)]/.test(ans)) ai = ans.charCodeAt(0)-65;
-    else if(ans){ ai = optsClean.findIndex(x=> norm(x)===norm(ans)); }
-    if(ai<0 || ai>=optsClean.length){ problems.push(`Row ${r+1}: correct answer "${o.ans||''}" does not point to an option — skipped.`); continue; }
-    if(optsClean.length<2){ problems.push(`Row ${r+1}: fewer than two options — skipped.`); continue; }
+    const ansRaw = (o.ans||'').trim(), ansU = ansRaw.toUpperCase();
+    let type = typeOf(o.type);
+    if(type==='?'){ problems.push(`Row ${r+1}: TYPE "${o.type}" is not one of Multiple choice / True or False / Matching / Identification / Essay — skipped.`); continue; }
+    if(!type){
+      if(opts.filter(Boolean).length>=2) type='mc';
+      else if(/^(TRUE|FALSE|T|F)$/.test(ansU)) type='tf';
+      else if(ansRaw) type='id';
+      else { problems.push(`Row ${r+1}: no options and no answer — skipped.`); continue; }
+    }
     const level = levelIndex(o.bloom);
+    const base = { type, q:o.q, level, difficulty:difficultyLabel(o.diff), contentLabel:(o.content||'').trim(), objective:cleanObjective(o.obj), src:r+1 };
+    if(type==='mc'){
+      if(opts.some(s=>!s)){ problems.push(`Row ${r+1}: an option in the middle is blank.`); }
+      const optsClean = opts.filter(Boolean);
+      let ai = -1;
+      if(/^[A-E]$/.test(ansU) || /^[A-E][.)]/.test(ansU)) ai = ansU.charCodeAt(0)-65;
+      else if(ansRaw){ ai = optsClean.findIndex(x=> norm(x)===norm(ansRaw)); }
+      if(ai<0 || ai>=optsClean.length){ problems.push(`Row ${r+1}: correct answer "${ansRaw}" does not point to an option — skipped.`); continue; }
+      if(optsClean.length<2){ problems.push(`Row ${r+1}: fewer than two options — skipped.`); continue; }
+      Object.assign(base, { opts:optsClean, correct:ai });
+    } else if(type==='tf'){
+      const v = /^(TRUE|T|A|1|TAMA)$/.test(ansU) ? 0 : /^(FALSE|F|B|0|MALI)$/.test(ansU) ? 1 : -1;
+      if(v<0){ problems.push(`Row ${r+1}: True or False answer must be TRUE or FALSE — skipped.`); continue; }
+      Object.assign(base, { opts:['TRUE','FALSE'], correct:v });
+    } else if(type==='match' || type==='id'){
+      let a = ansRaw;
+      if(/^[A-E]$/.test(ansU) && opts[ansU.charCodeAt(0)-65]) a = opts[ansU.charCodeAt(0)-65];
+      if(!a){ problems.push(`Row ${r+1}: ${TYPES[type].name} needs the answer in CORRECT ANSWER — skipped.`); continue; }
+      base.answer = a;
+    } else { // essay
+      base.points = Math.max(0, Number(o.pts)||0);
+      base.rubric = (o.rubric||'') || ansRaw;
+    }
     if(level<0) problems.push(`Row ${r+1}: Bloom's level "${o.bloom||''}" not recognized — it can only fill in as a substitute.`);
-    rows.push({ q:o.q, opts:optsClean, correct:ai, level, difficulty:difficultyLabel(o.diff), contentLabel:(o.content||'').trim(), objective:cleanObjective(o.obj), src:r+1 });
+    rows.push(base);
   }
   const labels = Array.from(new Set(rows.map(r=>r.contentLabel))).sort();
   return {rows, labels, problems, fileName:name};
 }
+async function readBankFile(file){ const buf = await file.arrayBuffer(); return parseWorkbook(new Uint8Array(buf), file.name); }
 async function handleFile(file){
   const msgs = $('#bankMsgs'); msgs.innerHTML='';
   try{
-    const buf = await file.arrayBuffer();
-    const parsed = parseWorkbook(new Uint8Array(buf), file.name);
-    const map={}; parsed.labels.forEach(l=> map[l]=guessContent(l));
-    bank = {rows:parsed.rows, labels:parsed.labels, map, fileName:file.name};
-    saveBank();
-    renderBank(parsed.problems);
-    renderNeeds(); renderChips();
+    const parsed = await readBankFile(file);
+    let note;
+    if($('#addToSel').checked && bank){
+      const r = mergeRows(bank, parsed.rows); bank.problems = parsed.problems; saveBank();
+      note = `Added ${r.added} question${r.added===1?'':'s'} to “${bank.name}”${r.skipped?` · ${r.skipped} already in it, skipped`:''}.`;
+      useBank(bank.id);
+    } else {
+      const b = newBank(state.subject || file.name.replace(/\.[^.]+$/,''), parsed.rows); b.problems = parsed.problems; b.fileName = file.name; fixBank(b); libPut(b);
+      note = `Saved as a new bank “${b.name}” with ${b.rows.length} questions. You can rename it on the Question banks page.`;
+      useBank(b.id);
+    }
+    $('#bankMsgs').insertAdjacentHTML('afterbegin', `<div class="msg ok">${esc(note)}</div>`);
   }catch(err){ msgs.innerHTML = `<div class="msg bad">Could not read the file: ${esc(err.message)}</div>`; }
 }
-function remapBank(){ if(!bank) return; bank.labels.forEach(l=>{ if(!(bank.map[l]>=0 && bank.map[l]<state.contents.length)) bank.map[l]=guessContent(l); }); saveBank(); renderBank(); }
 function renderBank(problems){
-  const hint = $('#bankHint'), mapBox = $('#mapping'), msgs = $('#bankMsgs');
+  const hint = $('#bankHint'), msgs = $('#bankMsgs');
   $('#bankTools').hidden = !bank;
-  if(!bank){ hint.textContent='No file loaded'; mapBox.innerHTML=''; msgs.innerHTML=''; renderQC(); return; }
-  const five = bank.rows.filter(r=>r.opts.length===5).length, four = bank.rows.filter(r=>r.opts.length===4).length, other = bank.rows.length-five-four;
-  hint.textContent = `${bank.fileName} · ${bank.rows.length} questions`;
-  let html = `<p style="margin:12px 0 0;font-size:14px"><b>${bank.rows.length}</b> usable questions loaded (${five} with 5 options, ${four} with 4${other?`, ${other} with another count`:''}). Match each CONTENT label in the file to a content row:</p><div class="mapgrid">`;
-  bank.labels.forEach((l,li)=>{
-    const n = bank.rows.filter(r=>r.contentLabel===l).length;
-    html += `<div class="lbl">${esc(l)||'<em>(blank)</em>'} <small>· ${n}</small></div><div class="arrow">→</div><select data-label="${li}">
-      <option value="-1" ${bank.map[l]<0?'selected':''}>— not used —</option>
-      ${state.contents.map((c,i)=>`<option value="${i}" ${bank.map[l]===i?'selected':''}>${esc(c.name)||'Untitled '+(i+1)}</option>`).join('')}</select>`;
-  });
-  html += '</div>';
-  mapBox.innerHTML = html;
-  $$('#mapping select').forEach(s=> s.addEventListener('change', ()=>{ bank.map[bank.labels[+s.dataset.label]] = Number(s.value); saveBank(); renderNeeds(); renderChips(); renderBankMsgs(); }));
+  if(!bank){ hint.textContent='No bank chosen'; msgs.innerHTML=''; $('#bankTypes').innerHTML=''; renderQC(); return; }
+  hint.textContent = `${bank.name} · ${bank.rows.length} questions`;
+  renderBankTypesOnly();
   if(problems) bank.problems = problems;
   renderBankMsgs();
   renderQC();
@@ -1024,15 +1499,9 @@ function renderBank(problems){
 function renderBankMsgs(){
   const msgs = $('#bankMsgs'); msgs.innerHTML='';
   if(!bank) return;
-  const out=[];
-  const unmatched = bank.labels.filter(l=> !(bank.map[l]>=0));
-  if(unmatched.length) out.push(`<div class="msg warn">${unmatched.length} content label${unmatched.length>1?'s are':' is'} not matched to a row, so those questions won't be used: ${unmatched.map(esc).join(', ')||'(blank)'}.</div>`);
-  const counts = bankCounts();
-  const shorts=[];
-  state.contents.forEach((c,i)=> c.skills.forEach((v,k)=>{ if(v>counts[i][k]) shorts.push(`${c.name}: ${LEVELS[k]} needs ${v}, bank has ${counts[i][k]}`); }));
-  if(shorts.length) out.push(`<div class="msg warn">Short in ${shorts.length} cell${shorts.length>1?'s':''}. The generator will substitute other levels from the same content where it can and tell you what it changed.<br><small>${shorts.map(esc).join(' · ')}</small></div>`);
-  if(bank.problems && bank.problems.length) out.push(`<div class="msg warn">${bank.problems.length} row note${bank.problems.length>1?'s':''}:<br><small>${bank.problems.slice(0,12).map(esc).join('<br>')}${bank.problems.length>12?'<br>…':''}</small></div>`);
-  if(!out.length) out.push(`<div class="msg ok">Bank covers every content and skill you need.</div>`);
+  const out=[], I = bankIndex();
+  out.push(`<div class="msg ok">“${esc(bank.name)}” has ${bank.rows.length} questions in ${I.labels.length} content${I.labels.length===1?'':'s'}. Pick the contents and objectives for this exam in Step 3.</div>`);
+  if(bank.problems && bank.problems.length) out.push(`<div class="msg warn">${bank.problems.length} row note${bank.problems.length>1?'s':''} from the last file:<br><small>${bank.problems.slice(0,12).map(esc).join('<br>')}${bank.problems.length>12?'<br>…':''}</small></div>`);
   msgs.innerHTML = out.join('');
 }
 
@@ -1041,38 +1510,134 @@ function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.im
 function shuffle(arr, rnd){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(rnd()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 const LAST_RE = /^(all|none|both|neither|a and b|a & b|b and c)\b.*(above|these|choices|options)?/i;
 
+/* ---------- planning: which test type fills which TOS cell ----------
+   Cells = content × Bloom level (from Step 3). Quotas = items per test part (Step 1).
+   A small max-flow finds an assignment that fills every cell AND every part from what the bank has. */
+function tosCells(){ const cells=[]; state.contents.forEach((c,ci)=> (c.skills||[]).forEach((d,lv)=>{ d=Number(d)||0; if(d>0) cells.push({ci,lv,d}); })); return cells; }
+function maxFlow(demand, quota, cap, rnd){
+  // nodes: 0 = source, 1..T = types, T+1..T+C = cells, T+C+1 = sink
+  const T=quota.length, C=demand.length, N=T+C+2, S=0, K=N-1;
+  const R = Array.from({length:N}, ()=> new Array(N).fill(0));
+  quota.forEach((q,t)=> R[S][1+t]=q);
+  for(let t=0;t<T;t++) for(let c=0;c<C;c++) R[1+t][1+T+c] = cap[t][c];
+  demand.forEach((d,c)=> R[1+T+c][K]=d);
+  const order = shuffle([...Array(N).keys()], rnd||Math.random);
+  let flow=0;
+  for(;;){
+    const prev = new Array(N).fill(-1); prev[S]=S; const qu=[S];
+    while(qu.length && prev[K]<0){ const u=qu.shift(); for(const v of order){ if(prev[v]<0 && R[u][v]>0){ prev[v]=u; qu.push(v); } } }
+    if(prev[K]<0) break;
+    let f=Infinity; for(let v=K; v!==S; v=prev[v]) f=Math.min(f, R[prev[v]][v]);
+    for(let v=K; v!==S; v=prev[v]){ R[prev[v]][v]-=f; R[v][prev[v]]+=f; }
+    flow+=f;
+  }
+  const x = quota.map((_,t)=> demand.map((_,c)=> cap[t][c] - R[1+t][1+T+c]));
+  return {flow, x};
+}
+function typeCounts(rows){ const c={}; TYPE_ORDER.forEach(t=>c[t]=0); (rows||[]).forEach(r=>{ if(c[r.type]!=null) c[r.type]++; }); return c; }
+/* what the chosen bank can cover for this exam (no substitutions) */
+function coverage(){
+  const types = TYPE_ORDER, cells = tosCells();
+  const out = { byType:{}, flow:0, total: cells.reduce((a,c)=>a+c.d,0) };
+  types.forEach(t=> out.byType[t] = 0);
+  if(!bank) return out;
+  const T = targetMap(), tgt = new Map(bank.rows.map(r=>[r, T(r)]));
+  const cap = types.map(t=> cells.map(c=> bank.rows.filter(r=> r.type===t && tgt.get(r)===c.ci && r.level===c.lv).length));
+  types.forEach((t,ti)=> out.byType[t] = bank.rows.filter(r=> r.type===t && tgt.get(r)>=0).length);
+  out.cells = cells; out.cap = cap;
+  const r = maxFlow(cells.map(c=>c.d), types.map(t=>partN(t)), cap, mulberry32(7));
+  out.flow = r.flow; return out;
+}
+/* a suggested type split per cell, used for the question request and the blank template:
+   essays go to the highest levels, matching / identification / true-false to the lowest, multiple choice fills the rest */
+function typePlan(){
+  const rem = state.contents.map(c=> (c.skills||[]).map(v=>Number(v)||0));
+  const plan = state.contents.map(()=> LEVELS.map(()=> ({})));
+  const pref = { essay:[5,4,3,2,1,0], match:[0,1,2,3,4,5], id:[0,1,2,3,4,5], tf:[1,0,2,3,4,5] };
+  ['essay','match','id','tf'].forEach(t=>{
+    let q = partN(t);
+    for(const lv of pref[t]){
+      let moved = true;
+      while(q>0 && moved){ moved=false; for(let ci=0; ci<rem.length && q>0; ci++){ if(rem[ci][lv]>0){ rem[ci][lv]--; plan[ci][lv][t]=(plan[ci][lv][t]||0)+1; q--; moved=true; } } }
+      if(q<=0) break;
+    }
+  });
+  rem.forEach((row,ci)=> row.forEach((v,lv)=>{ if(v>0) plan[ci][lv].mc = v; }));
+  return plan;
+}
+
 function generate(seed){
   const rnd = mulberry32(seed);
-  const {items} = allocation();
   const notes=[]; const picked=[]; const used=new Set(); const usedStem=new Set();
   if(!QC) QC = qualityCheck(bank.rows);
   const useRow = r => { used.add(r); usedStem.add(norm(r.q)); };
-  const rowsFor = (ci, lv) => {
-    let list = spreadByObjective(bank.rows.filter(r=> bank.map[r.contentLabel]===ci && r.level===lv && !used.has(r) && !usedStem.has(norm(r.q))), ci, rnd);
+  const T = targetMap(), tgt = new Map(bank.rows.map(r=>[r, T(r)]));
+  const poolOf = (t, ci, lv) => {
+    let list = spreadByObjective(bank.rows.filter(r=> r.type===t && tgt.get(r)===ci && r.level===lv && !used.has(r) && !usedStem.has(norm(r.q))), ci, rnd);
     if(state.preferClean) list = list.filter(r=>!QC.flagged.has(r)).concat(list.filter(r=>QC.flagged.has(r)));
     return list;
   };
-  state.contents.forEach((c,ci)=>{
-    c.skills.forEach((need,lv)=>{
-      need = Number(need)||0; if(!need) return;
-      let pool = rowsFor(ci,lv);
-      let take = pool.slice(0,need); take.forEach(useRow);
-      let short = need - take.length;
-      if(short>0){
-        // substitute: same content, same group first, then other group, then unrecognized level
-        const group = lv<3?LOTS_IDX:HOTS_IDX, other = lv<3?HOTS_IDX:LOTS_IDX;
-        const order = [...group.filter(k=>k!==lv), ...other, -1];
-        for(const k of order){ if(short<=0) break; const p = rowsFor(ci,k).slice(0,short); p.forEach(r=>{useRow(r); take.push(r);}); short -= p.length; }
-        const substituted = take.filter(r=>r.level!==lv).length;
-        if(substituted) notes.push(`${c.name} · ${LEVELS[lv]}: only ${need-short-substituted} available, used ${substituted} from other level${substituted>1?'s':''} of the same content.`);
-        if(short>0) notes.push(`${c.name} · ${LEVELS[lv]}: still ${short} short — the exam has fewer items here. Add questions to the bank.`);
+  const types = TYPE_ORDER, cells = tosCells();
+  const remQ = {}; types.forEach(t=> remQ[t] = partN(t));
+  cells.forEach(c=> c.got = 0);
+  const take = (t, c, lv, n) => { const p = poolOf(t, c.ci, lv).slice(0, n); p.forEach(r=>{ useRow(r); picked.push({row:r, type:t, ci:c.ci, plannedLevel:c.lv, level: r.level>=0? r.level : c.lv, obj: objIndex(r.objective, c.ci)}); }); c.got += p.length; remQ[t] -= p.length; return p.length; };
+  // 1) exact fill: right content, right level, right type
+  const cap = types.map(t=> cells.map(c=> poolOf(t, c.ci, c.lv).length));
+  const {x} = maxFlow(cells.map(c=>c.d), types.map(t=>remQ[t]), cap, rnd);
+  types.forEach((t,ti)=> cells.forEach((c,k)=>{ if(x[ti][k]) take(t, c, c.lv, x[ti][k]); }));
+  // 2) still short: same content, nearby Bloom levels first, any type that still has room
+  const levelOrder = lv => { const group = lv<3?LOTS_IDX:HOTS_IDX, other = lv<3?HOTS_IDX:LOTS_IDX; return [...group.filter(k=>k!==lv), ...other, -1]; };
+  cells.forEach(c=>{
+    c.subs = 0; let short = c.d - c.got; if(short<=0) return;
+    for(const lv of levelOrder(c.lv)){
+      for(const t of [...types].sort((a,b)=> remQ[b]-remQ[a])){
+        if(short<=0) break; if(remQ[t]<=0) continue;
+        const n = take(t, c, lv, Math.min(short, remQ[t])); short -= n; c.subs += n;
       }
-      take.forEach(r=> picked.push({row:r, ci, plannedLevel:lv, level: r.level>=0? r.level : lv, obj: objIndex(r.objective, ci)}));
-    });
+      if(short<=0) break;
+    }
   });
-  const ex = { seed, pool: picked, notes };
+  // 3) a part the bank can't fill: keep the TOS complete with extra multiple choice (then true/false, identification) from the same content
+  const missing = {}; types.forEach(t=>{ if(remQ[t]>0) missing[t] = remQ[t]; });
+  const extra = {};
+  cells.forEach(c=>{
+    let short = c.d - c.got; if(short<=0) return;
+    for(const lv of [c.lv, ...levelOrder(c.lv)]){
+      for(const t of ['mc','tf','id']){ if(short<=0) break; const n = take(t, c, lv, short); if(lv!==c.lv) c.subs += n; extra[t] = (extra[t]||0) + n; short -= n; }
+      if(short<=0) break;
+    }
+  });
+  cells.forEach(c=>{
+    const name = state.contents[c.ci].name, short = c.d - c.got;
+    if(c.subs) notes.push(`${name} · ${LEVELS[c.lv]}: used ${c.subs} question${c.subs>1?'s':''} from another Bloom's level of the same content.`);
+    if(short>0) notes.push(`${name} · ${LEVELS[c.lv]}: still ${short} short — add questions to the bank.`);
+  });
+  Object.keys(missing).forEach(t=>{ const got = partN(t) - missing[t]; notes.push(`${TYPES[t].name}: the bank had only ${got} of the ${partN(t)} needed in the right contents.`); });
+  const ex_ = Object.keys(extra).filter(t=>extra[t]>0);
+  if(ex_.length) notes.push(`To keep the TOS complete, the exam uses ${ex_.map(t=>`${extra[t]} extra ${TYPES[t].name.toLowerCase()}`).join(' and ')} item${ex_.reduce((a,t)=>a+extra[t],0)>1?'s':''} instead. Add questions to the bank to get the parts you planned.`);
+  const ex = { seed, pool: picked, notes, groups: matchGroups(picked.filter(p=>p.type==='match'), rnd, notes) };
   makeSets(ex, seed);
   return ex;
+}
+/* matching items are split into groups of at most 5 (letters A–E), kept within a content when possible, with no repeated answer inside a group */
+function matchGroups(items, rnd, notes){
+  if(!items.length) return [];
+  if(items.length===1){ notes.push('Matching needs at least 2 items; the single matching item was printed as a group of one. Set Matching to 0 or 2+.'); }
+  const sorted = []; state.contents.forEach((_,ci)=> sorted.push(...shuffle(items.filter(i=>i.ci===ci), rnd)));
+  const g = Math.ceil(sorted.length / MATCH_MAX), base = Math.floor(sorted.length / g), extra = sorted.length % g;
+  const groups = []; let k=0;
+  for(let i=0;i<g;i++){ const size = base + (i<extra?1:0); groups.push(sorted.slice(k, k+size)); k+=size; }
+  // swap out repeated answers inside a group
+  const ak = it => norm(it.row.answer);
+  groups.forEach((G,gi)=>{
+    for(let a=0;a<G.length;a++) for(let b=a+1;b<G.length;b++) if(ak(G[a])===ak(G[b])){
+      let fixed=false;
+      for(let hi=0; hi<groups.length && !fixed; hi++){ if(hi===gi) continue; const H=groups[hi];
+        for(let hk=0; hk<H.length && !fixed; hk++){ if(!G.some((x,xi)=>xi!==b && ak(x)===ak(H[hk])) && !H.some((x,xi)=>xi!==hk && ak(x)===ak(G[b]))){ [G[b],H[hk]]=[H[hk],G[b]]; fixed=true; } } }
+      if(!fixed) notes.push(`Matching: two items share the answer “${G[a].row.answer}” in one group. Edit one of them in the bank.`);
+    }
+  });
+  return groups;
 }
 /* Shuffle a pool, then interleave it by objective so the first N picks cover as many objectives as possible */
 function spreadByObjective(rows, ci, rnd){
@@ -1082,21 +1647,21 @@ function spreadByObjective(rows, ci, rnd){
   for(let i=0; lists.some(l=>l.length>i); i++) lists.forEach(l=>{ if(l[i]) out.push(l[i]); });
   return out;
 }
-/* Build Set A (and B): each set has its own question order and option order.
-   Options are placed so the correct letters come out balanced (each letter gets its fair share, no run of 4 same letters).
-   "All / None of the above"-type options stay last. */
+/* Build Set A (and B): same questions, each set with its own order of questions and choices.
+   Multiple-choice answers are placed so each letter gets its fair share (no run of 4); "All / None of the above" stays last.
+   Parts always print in TYPE_ORDER; numbering runs 1..N through all parts, so the scannable parts are items 1..S. */
 function makeSets(ex, seed){
   const n = Math.max(1, Math.min(2, Number(state.sets)||1));
   ex.sets = [];
-  for(let s=0; s<n; s++) ex.sets.push(arrangeSet(ex.pool, mulberry32(seed*7+13+s*7919)));
+  for(let s=0; s<n; s++) ex.sets.push(arrangeSet(ex, mulberry32(seed*7+13+s*7919)));
   if(UI.set >= n) UI.set = 0;
 }
-function arrangeSet(pool, rnd){
-  let list = pool.slice();
-  if(state.mixContents) list = shuffle(list, rnd);
-  else { const by = state.contents.map(()=>[]); list.forEach(it=> by[it.ci].push(it)); list = by.flatMap(g=> shuffle(g, rnd)); }
+function arrangeSet(ex, rnd){
+  const ordered = list => { if(state.mixContents) return shuffle(list, rnd); const by = state.contents.map(()=>[]); list.forEach(it=> by[it.ci].push(it)); return by.flatMap(g=> shuffle(g, rnd)); };
+  const out = [];
+  // multiple choice
   const due=[0,0,0,0,0], got=[0,0,0,0,0], recent=[];
-  return list.map((base,i)=>{
+  ordered(ex.pool.filter(p=>p.type==='mc')).forEach(base=>{
     const r = base.row, all = r.opts.map((_,k)=>k);
     let perm = all;
     if(state.shuffleOptions){
@@ -1112,22 +1677,38 @@ function arrangeSet(pool, rnd){
         perm = others.concat(pinned);
       }
     }
-    const correct = perm.indexOf(r.correct);
-    got[correct]++; recent.push(correct);
-    return Object.assign({}, base, { no:i+1, opts: perm.map(k=> r.opts[k]), correct });
+    const correct = perm.indexOf(r.correct); got[correct]++; recent.push(correct);
+    out.push(Object.assign({}, base, { opts: perm.map(k=> r.opts[k]), correct }));
   });
+  // true or false (A = TRUE, B = FALSE)
+  ordered(ex.pool.filter(p=>p.type==='tf')).forEach(base=> out.push(Object.assign({}, base, { opts:['TRUE','FALSE'], correct: base.row.correct })));
+  // matching: each group keeps its items; premises and Column B letters are shuffled per set
+  shuffle(ex.groups.map((g,i)=>i), rnd).forEach((gi, gpos)=>{
+    const G = ex.groups[gi], choices = shuffle(G.map(it=> it.row.answer), rnd);
+    shuffle(G, rnd).forEach(base=> out.push(Object.assign({}, base, { grp:gpos, choices, correct: choices.indexOf(base.row.answer) })));
+  });
+  // identification and essay
+  ordered(ex.pool.filter(p=>p.type==='id')).forEach(base=> out.push(Object.assign({}, base)));
+  ex.pool.filter(p=>p.type==='essay').forEach(base=> out.push(Object.assign({}, base, { pts: base.row.points || Number(state.parts.essay.pts) || 5 })));
+  out.forEach((it,i)=> it.no = i+1);
+  return out;
 }
+function setParts(set){ return TYPE_ORDER.map(t=>({ t, items: set.filter(it=>it.type===t) })).filter(p=>p.items.length); }
+function partInstr(t){ const v = (state.parts[t]?.instr||'').trim(); if(v) return v; return (t==='mc' && state.template==='t1') ? state.instructions : ''; }
+function scanItems(set){ return set.filter(it=> TYPES[it.type].scan); }
+function itemPoints(it){ return it.type==='essay' ? it.pts : (Number(state.bt.mc)||1); }
+function pointsTotal(set){ return set.reduce((a,it)=> a + itemPoints(it), 0); }
 function curSet(){ return exam ? (exam.sets[UI.set] || exam.sets[0]) : []; }
 function setName(s){ return 'SET ' + 'AB'[s]; }
 
 function onGenerate(fresh){
   const msgs = $('#genMsgs'); msgs.innerHTML='';
   const problems=[];
-  if(!state.contents.length) problems.push('Add at least one content in Step 2.');
+  if(!state.contents.length) problems.push('Tick at least one content in Step 3.');
   const {items,total} = allocation();
-  if(!(total>0)) problems.push('Set the total number of items in Step 1.');
+  if(!(total>0)) problems.push('Give at least one test part some items in Step 1.');
   state.contents.forEach((c,i)=>{ if(skillsSum(c)!==items[i]) problems.push(`"${c.name||'Row '+(i+1)}": skill columns add up to ${skillsSum(c)} but ${items[i]} items are allocated. Fix the row or press Auto-fill skills.`); });
-  if(!bank) problems.push('Upload a question bank in Step 4.');
+  if(!bank) problems.push('Choose a saved question bank or upload a file in Step 2.');
   if(problems.length){ msgs.innerHTML = problems.map(p=>`<div class="msg bad">${esc(p)}</div>`).join(''); return; }
   const seed = fresh || !exam ? Math.floor(Math.random()*1e9) : exam.seed;
   exam = generate(seed);
@@ -1154,13 +1735,14 @@ function renderOutputs(){
   const {hours,sumH} = allocation();
   // summary
   const sm = $('#summary'); sm.hidden=false;
-  sm.innerHTML = [['Items in exam', n], ['Contents', state.contents.length], ['LOTS', n?Math.round(lots/n*100)+'%':'—'], ['HOTS', n?Math.round(hots/n*100)+'%':'—'], ['Bank used', bank? `${n} / ${bank.rows.length}`:'—']].map(([k,v])=>`<div class="s"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+  const S0 = scanItems(exam.sets[0]).length;
+  sm.innerHTML = [['Items in exam', n], ['On bubble sheet', S0], ['Checked by hand', n-S0], ['LOTS', n?Math.round(lots/n*100)+'%':'—'], ['HOTS', n?Math.round(hots/n*100)+'%':'—'], ['Total points', fmt(pointsTotal(exam.sets[0]))]].map(([k,v])=>`<div class="s"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
   const gm = $('#genMsgs');
   const gmsgs = exam.notes.map(x=>`<div class="msg warn">${esc(x)}</div>`);
-  if(!gmsgs.length) gmsgs.push(`<div class="msg ok">Exam built exactly as planned — ${n} items, every cell filled from the bank.</div>`);
+  if(!gmsgs.length) gmsgs.push(`<div class="msg ok">Exam built exactly as planned — ${n} items (${setParts(exam.sets[0]).map(p=>`${TYPES[p.t].short} ${p.items.length}`).join(' · ')}), every TOS cell filled from the bank.</div>`);
   const longIn = QC ? exam.pool.filter(it=> QC.longestSet.has(it.row)).length : 0;
   if(longIn) gmsgs.push(`<div class="msg warn">${longIn} item${longIn>1?'s':''} in this exam still ha${longIn>1?'ve':'s'} the correct answer as the longest option (the bank didn't have enough clean questions for those cells). They're marked ★ in the answer key.</div>`);
-  const letterLine = exam.sets.map((set,s)=>{ const c=[0,0,0,0,0]; set.forEach(it=>c[it.correct]++); return `${exam.sets.length>1?setName(s)+': ':''}${'ABCDE'.split('').map((L,k)=>c[k]?`${L} ${c[k]}`:'').filter(Boolean).join(' · ')}`; }).join('&nbsp;&nbsp;|&nbsp;&nbsp;');
+  const letterLine = exam.sets.map((set,s)=>{ const c=[0,0,0,0,0]; scanItems(set).forEach(it=>c[it.correct]++); return `${exam.sets.length>1?setName(s)+': ':''}${'ABCDE'.split('').map((L,k)=>c[k]?`${L} ${c[k]}`:'').filter(Boolean).join(' · ')}`; }).join('&nbsp;&nbsp;|&nbsp;&nbsp;');
   gmsgs.push(`<div class="msg ok">Correct-answer letters — ${letterLine}</div>`);
   gm.innerHTML = gmsgs.join('');
   renderSetSwitch();
@@ -1185,16 +1767,15 @@ function renderOutputs(){
     <div class="ehead"><img src="${IMG.seal}" alt=""><div><div class="l1">Republic of the Philippines<br>Province of Bulacan<br>City of San Jose del Monte</div><div class="l2">CITY COLLEGE OF SAN JOSE DEL MONTE</div><div class="l3">Road 1, Barangay Minuyan Proper, City of San Jose del Monte, Bulacan</div></div><img src="${IMG.bagong}" alt=""></div>
     <hr>
     <div class="titles"><div class="t1">${termLabel()}</div><div>${esc(semLine())}</div><div>${esc(state.courseCode)}${state.courseCode&&state.subject?' – ':''}${esc(state.subject)}</div>${exam.sets.length>1?`<div class="t1" style="margin-top:4px">${setName(UI.set)}</div>`:''}</div>
-    <div class="part">I. MULTIPLE CHOICE. ${esc(state.instructions)}</div>
-    <div class="cols">${curSet().map(it=>`<div class="q"><div class="stem"><span class="no">_____${it.no}.</span><span>${esc(it.row.q)}</span></div>${it.opts.map((o,k)=>`<div class="opt">${letters[k]}. ${esc(o)}</div>`).join('')}</div>`).join('')}</div>
+    ${partsHtml(curSet(), 't1')}
     <div class="sigblock"><div>Prepared by:</div><div class="nm">${esc(state.preparedBy)||'Faculty Name'}</div><div class="role">Faculty</div><div>Reviewed by:</div><div class="nm">${esc(state.reviewedBy)}</div><div class="role">${esc(state.reviewedByTitle)}</div></div>
     <div class="efoot"><img src="${IMG.building}" alt=""><div><b>Address:</b> New Government Center, Brgy. Dulong Bayan, City of San Jose del Monte, Bulacan<br><b>Website:</b> csjdm.gov.ph <b>Contact:</b> 044-919-7370 to 89 local 0119<br><b>Email:</b> contact.csjdmpio@gmail.com</div></div>
   </div></div>`;
   // Key
   const L = 'ABCDE';
   $('#keyPane').innerHTML = `<div class="sheet"><div class="key"><h3>ANSWER KEY — ${termLabel()}${exam.sets.length>1?' — '+setName(UI.set):''}</h3><div class="meta">${esc(state.courseCode)} ${esc(state.subject)} · ${esc(semLine())} · seed ${exam.seed}</div>
-    <table><thead><tr><th>#</th><th>Ans</th><th>Content</th><th>Obj</th><th>Skill</th><th>Difficulty</th><th>Question</th></tr></thead><tbody>
-    ${curSet().map(it=>`<tr><td class="c">${it.no}</td><td class="c">${L[it.correct]}${QC&&QC.longestSet.has(it.row)?' ★':''}</td><td>${esc(state.contents[it.ci].name)}</td><td class="c">${it.obj>=0?it.obj+1:'–'}</td><td>${LEVELS[it.level]}${it.level!==it.plannedLevel?` <small>(for ${LEVELS[it.plannedLevel]})</small>`:''}</td><td>${esc(it.row.difficulty)}</td><td>${esc(it.row.q)}</td></tr>`).join('')}
+    <table><thead><tr><th>#</th><th>Part</th><th>Answer</th><th>Content</th><th>Obj</th><th>Skill</th><th>Difficulty</th><th>Question</th></tr></thead><tbody>
+    ${curSet().map(it=>`<tr><td class="c">${it.no}</td><td>${TYPES[it.type].short}</td><td class="c">${esc(answerText(it))}${QC&&QC.longestSet.has(it.row)?' ★':''}</td><td>${esc(state.contents[it.ci].name)}</td><td class="c">${it.obj>=0?it.obj+1:'–'}</td><td>${LEVELS[it.level]}${it.level!==it.plannedLevel?` <small>(for ${LEVELS[it.plannedLevel]})</small>`:''}</td><td>${esc(it.row.difficulty)}</td><td>${esc(it.row.q)}</td></tr>`).join('')}
     </tbody></table></div></div>`;
   renderBubblePane();
   renderExportButtons();
@@ -1314,15 +1895,10 @@ function buildExamDocx(s){
     para(run(semLine(),{bold:true}),{alignment:D.AlignmentType.CENTER}),
     para(run(`${state.courseCode}${state.courseCode&&state.subject?' – ':''}${state.subject}`,{bold:true}),{alignment:D.AlignmentType.CENTER}),
     ...(exam.sets.length>1 ? [para(run(setName(s),{bold:true,size:22}),{alignment:D.AlignmentType.CENTER})] : []),
-    para(run(''),{}),
-    para([run('I.\tMULTIPLE CHOICE. ',{bold:true}), run(state.instructions,{bold:true})],{tabStops:[{type:D.TabStopType.LEFT,position:560}]}),
-    para(run(''),{}),
   ];
-  const letters='abcde';
-  const itemKids = [];
-  items.forEach(it=>{
-    itemKids.push(para([run(`_____${it.no}. `), run(it.row.q)],{indent:{left:560,hanging:560}, keepNext:true, spacing:{after:0}}));
-    it.opts.forEach((o,k)=> itemKids.push(para(run(`${letters[k]}. ${o}`),{indent:{left:860,hanging:300}, keepNext: k<it.opts.length-1, spacing:{after: k===it.opts.length-1?80:0}})));
+  const partSecs = docxParts(D, items, {
+    run, para, letters:'abcde', stemBold:false, numPre:{mc:'_____', tf:'_____', id:'______________'},
+    head: (t, roman, ins) => [ para(run(''),{keepNext:true}), para([run(`${roman}.\t${TYPES[t].t1}. `,{bold:true}), run(ins,{bold:true})],{tabStops:[{type:D.TabStopType.LEFT,position:560}], spacing:{after:120}, keepNext:true}) ],
   });
   const sigKids = [
     para(run(''),{}), para(run('Prepared by:'),{}), para(run(''),{}), para(run(''),{}),
@@ -1330,17 +1906,49 @@ function buildExamDocx(s){
     para(run('Reviewed by:'),{}), para(run(''),{}), para(run(''),{}),
     para(run(state.reviewedBy,{bold:true}),{}), para(run(state.reviewedByTitle),{}),
   ];
+  const hf = {headers:{default:header}, footers:{default:footer}};
+  const sec = (cols, children) => Object.assign({ properties: Object.assign({ page, type:D.SectionType.CONTINUOUS }, cols>1?{column:{count:cols, space:720}}:{}), children }, hf);
   const doc = new D.Document({ styles:{default:{document:{run:{font:F,size:18}}}}, sections:[
-    { properties:{ page, type:D.SectionType.CONTINUOUS }, headers:{default:header}, footers:{default:footer}, children: titleKids },
-    { properties:{ page, type:D.SectionType.CONTINUOUS, column:{count:2, space:720} }, headers:{default:header}, footers:{default:footer}, children: itemKids },
-    { properties:{ page, type:D.SectionType.CONTINUOUS }, headers:{default:header}, footers:{default:footer}, children: sigKids },
+    sec(1, titleKids), ...partSecs.map(ps=> sec(ps.cols, ps.children)), sec(1, sigKids),
   ]});
   return D.Packer.toBlob(doc);
 }
 /* ---------- Template 2: La Concepcion College (IT Division) ---------- */
 function t2Title(){ const w = state.term==='PRELIMINARIES'?'Preliminary':state.term==='FINALS'?'Final':'Midterm'; const s = /^1/.test(state.semester)?'1st Sem':/^2/.test(state.semester)?'2nd Sem':'Summer'; return {w, s, ay:String(state.ay||'').replace(/\s*[–—]\s*/g,' - ')}; }
 function t2Course(){ return `${state.courseCode}${state.courseCode&&state.subject?'-':''}${state.subject}`; }
-function t2Score(){ const n = exam.sets[0].length * (Number(state.bt.mc)||1); return fmt(n); }
+function t2Score(){ return fmt(pointsTotal(exam.sets[0])); }
+/* ---------- the test parts on the paper preview ---------- */
+function answerText(it){
+  const L='ABCDE';
+  if(it.type==='mc') return L[it.correct];
+  if(it.type==='tf') return `${L[it.correct]} · ${it.correct? 'FALSE':'TRUE'}`;
+  if(it.type==='match') return `${L[it.correct]} · ${it.choices[it.correct]}`;
+  if(it.type==='id') return it.row.answer;
+  return `${fmt(it.pts)} pts${it.row.rubric? ' · '+it.row.rubric : ''}`;
+}
+function essayLines(it){ return Math.max(4, Math.min(12, Math.round(it.pts)+1)); }
+function partsHtml(set, tp){
+  const letters = tp==='t1' ? 'abcde' : 'ABCDE', L='ABCDE';
+  return setParts(set).map((p,pi)=>{
+    const ins = partInstr(p.t);
+    const head = tp==='t1'
+      ? `<div class="part">${ROMAN[pi]}. ${TYPES[p.t].t1}. ${esc(ins)}</div>`
+      : `<div class="band">${TYPES[p.t].t2}</div>${ins?`<div class="pins">${esc(ins)}</div>`:''}`;
+    const qcls = tp==='t1'?'q':'q2', stem = (no, q, pre) => tp==='t1'
+      ? `<div class="stem"><span class="no">${pre}${no}.</span><span>${esc(q)}</span></div>`
+      : `<div class="st"><span>${pre? pre+' ':''}${no}.</span><span>${esc(q)}</span></div>`;
+    let body = '';
+    if(p.t==='mc') body = `<div class="${tp==='t1'?'cols':'cols2'}">${p.items.map(it=>`<div class="${qcls}">${stem(it.no, it.row.q, tp==='t1'?'_____':'')}${it.opts.map((o,k)=>`<div class="${tp==='t1'?'opt':'op'}">${letters[k]}. ${esc(o)}</div>`).join('')}</div>`).join('')}</div>`;
+    if(p.t==='tf') body = `<div class="${tp==='t1'?'cols':'cols2'}">${p.items.map(it=>`<div class="${qcls}">${stem(it.no, it.row.q, '_____')}</div>`).join('')}</div>`;
+    if(p.t==='id') body = `<div class="${tp==='t1'?'cols':'cols2'}">${p.items.map(it=>`<div class="${qcls}">${stem(it.no, it.row.q, '______________')}</div>`).join('')}</div>`;
+    if(p.t==='match'){
+      const groups = []; p.items.forEach(it=>{ (groups[it.grp] = groups[it.grp]||[]).push(it); });
+      body = groups.filter(Boolean).map(G=> `<table class="mtab"><tr><th>Column A</th><th>Column B</th></tr>${G.map((it,k)=>`<tr><td>_____ ${it.no}. ${esc(it.row.q)}</td><td>${L[k]}. ${esc(G[0].choices[k]||'')}</td></tr>`).join('')}${G[0].choices.length>G.length? G[0].choices.slice(G.length).map((c,k)=>`<tr><td></td><td>${L[G.length+k]}. ${esc(c)}</td></tr>`).join(''):''}</table>`).join('');
+    }
+    if(p.t==='essay') body = p.items.map(it=>`<div class="essay"><div><b>${it.no}.</b> ${esc(it.row.q)} <i>(${fmt(it.pts)} pts)</i></div>${'<div class="ln"></div>'.repeat(essayLines(it))}</div>`).join('');
+    return `${pi?'<div class="partgap"></div>':''}${head}${body}`;
+  }).join('');
+}
 function examHtmlT2(){
   const T = t2Title(), set = curSet(), L='ABCDE';
   return `<div class="sheet"><div class="exam2">
@@ -1350,8 +1958,7 @@ function examHtmlT2(){
     <div class="info"><span>Name: ______________________________</span><span>Date of Exam: ________________________</span><span>Course, Year, and Section: ______________</span><span>Subject Teacher: ______________________</span></div>
     <div class="ins"><b>INSTRUCTIONs:</b><i>${esc(state.instructions)}</i></div>
     <div class="gb">${esc(state.closing)}</div>
-    <div class="band">Multiple Choices</div>
-    <div class="cols2">${set.map(it=>`<div class="q2"><div class="st"><span>${it.no}.</span><span>${esc(it.row.q)}</span></div>${it.opts.map((o,k)=>`<div class="op">${L[k]}. ${esc(o)}</div>`).join('')}</div>`).join('')}</div>
+    ${partsHtml(set, 't2')}
     <div class="end">END OF EXAM</div>
   </div></div>`;
 }
@@ -1381,21 +1988,62 @@ function buildExamDocxT2(s){
     para(run('INSTRUCTIONs:',{font:TNR,size:22,bold:true})),
     para(run(state.instructions,{italics:true}),{spacing:{after:120}}),
     para(run(state.closing,{size:22,bold:true}),{alignment:D.AlignmentType.CENTER, spacing:{after:120}}),
-    para(run('Multiple Choices',{size:22,bold:true}),{alignment:D.AlignmentType.CENTER, border:{top:{style:D.BorderStyle.SINGLE,size:6,color:'000000',space:4}, bottom:{style:D.BorderStyle.SINGLE,size:6,color:'000000',space:4}}, spacing:{before:60, after:200}}),
   ];
-  const qs = [];
-  items.forEach(it=>{
-    qs.push(para([run(`${it.no}.\t`,{font:AN,bold:true}), run(it.row.q,{font:AN,bold:true})],{indent:{left:450,hanging:450}, tabStops:[{type:D.TabStopType.LEFT,position:450}], keepNext:true, keepLines:true}));
-    it.opts.forEach((o,k)=> qs.push(para(run(`${L[k]}. ${o}`,{font:AN}),{indent:{left:450}, keepNext:k<it.opts.length-1, spacing:{after:k===it.opts.length-1?100:0}})));
+  const band = {top:{style:D.BorderStyle.SINGLE,size:6,color:'000000',space:4}, bottom:{style:D.BorderStyle.SINGLE,size:6,color:'000000',space:4}};
+  const partSecs = docxParts(D, items, {
+    run: (t,o={}) => run(t, Object.assign({font:AN}, o)), para, letters:'ABCDE', stemBold:true, numPre:{tf:'_____', id:'______________'},
+    head: (t, roman, ins) => [ para(run(TYPES[t].t2,{size:22,bold:true}),{alignment:D.AlignmentType.CENTER, border:band, spacing:{before:120, after: ins?60:200}, keepNext:true}),
+      ...(ins? [para(run(ins,{italics:true}),{spacing:{after:160}, keepNext:true})] : []) ],
   });
   const end = [ para(run('END OF EXAM'),{alignment:D.AlignmentType.CENTER, border:{top:{style:D.BorderStyle.SINGLE,size:6,color:'000000',space:4}, bottom:{style:D.BorderStyle.SINGLE,size:6,color:'000000',space:4}}, spacing:{before:240}}) ];
   const page = { size:{width:12240,height:18720}, margin:{top:720,right:720,bottom:720,left:720,header:720,footer:720} };
   const doc = new D.Document({ styles:{default:{document:{run:{font:AR,size:20}}}}, sections:[
     { properties:{page}, children: top },
-    { properties:{page, type:D.SectionType.CONTINUOUS, column:{count:2, space:720}}, children: qs },
+    ...partSecs.map(ps=> ({ properties: Object.assign({page, type:D.SectionType.CONTINUOUS}, ps.cols>1?{column:{count:ps.cols, space:720}}:{}), children: ps.children })),
     { properties:{page, type:D.SectionType.CONTINUOUS}, children: end },
   ]});
   return D.Packer.toBlob(doc);
+}
+/* Word sections for every test part. Returns [{cols, children}] — a one-column heading section, then the items
+   (two columns for multiple choice / true-false / identification, one column for matching tables and essays). */
+function docxParts(D, set, o){
+  const {run, para} = o, L='ABCDE', out=[];
+  const none = {style:D.BorderStyle.NONE,size:0,color:'FFFFFF'}, noB = {top:none,bottom:none,left:none,right:none,insideHorizontal:none,insideVertical:none};
+  const stemP = (it, pre, last) => para([run(`${pre?pre+' ':''}${it.no}.\t`,{bold:o.stemBold}), run(it.row.q,{bold:o.stemBold})],
+      {indent:{left: pre? 1150:450, hanging: pre? 1150:450}, tabStops:[{type:D.TabStopType.LEFT, position: pre?1150:450}], keepNext:!last, keepLines:true, spacing:{after: last?100:0}});
+  setParts(set).forEach((p,pi)=>{
+    const head = o.head(p.t, ROMAN[pi], partInstr(p.t)), oneCol = (p.t==='match'||p.t==='essay');
+    // one-column parts keep their heading in the same section, glued to the first item
+    if(!oneCol) out.push({cols:1, children: head});
+    const kids = oneCol ? head.slice() : [];
+    if(p.t==='mc') p.items.forEach(it=>{
+      kids.push(stemP(it, o.numPre.mc||'', false));
+      it.opts.forEach((op,k)=> kids.push(para(run(`${o.letters[k]}. ${op}`),{indent:{left: o.numPre.mc? 1450:450, hanging: o.numPre.mc? 300:0}, keepNext:k<it.opts.length-1, spacing:{after:k===it.opts.length-1?100:0}})));
+    });
+    if(p.t==='tf') p.items.forEach(it=> kids.push(stemP(it, o.numPre.tf, true)));
+    if(p.t==='id') p.items.forEach(it=> kids.push(stemP(it, o.numPre.id, true)));
+    if(p.t==='match'){
+      const groups=[]; p.items.forEach(it=>{ (groups[it.grp]=groups[it.grp]||[]).push(it); });
+      groups.filter(Boolean).forEach(G=>{
+        const rows = Math.max(G.length, G[0].choices.length);
+        // keepNext on every row but the last keeps a matching group on one page
+        const tr = (a,b,bold,last) => new D.TableRow({cantSplit:true, children:[a,b].map(t=> new D.TableCell({width:{size:5400,type:D.WidthType.DXA}, borders:noB, children:[para(run(t,{bold:!!bold}),{spacing:{after:40}, keepNext:!last, keepLines:true})]}))});
+        kids.push(new D.Table({width:{size:10800,type:D.WidthType.DXA}, columnWidths:[5400,5400], borders:noB,
+          rows:[tr('Column A','Column B',true,false), ...Array.from({length:rows},(_,k)=> tr(G[k]? `_____ ${G[k].no}. ${G[k].row.q}` : '', G[0].choices[k]!=null? `${L[k]}. ${G[0].choices[k]}` : '', false, k===rows-1))]}));
+        kids.push(para(run(''),{spacing:{after:120}}));
+      });
+    }
+    if(p.t==='essay') p.items.forEach(it=>{
+      kids.push(para([run(`${it.no}. `,{bold:true}), run(it.row.q), run(`  (${fmt(it.pts)} pts)`,{italics:true})],{keepNext:true, spacing:{before:80, after:80}}));
+      // answer lines as table rows (consecutive bordered paragraphs would merge into one line)
+      const ln = {style:D.BorderStyle.SINGLE,size:4,color:'000000'};
+      kids.push(new D.Table({width:{size:10800,type:D.WidthType.DXA}, columnWidths:[10800], borders:noB,
+        rows: Array.from({length:essayLines(it)},(_,i)=> new D.TableRow({cantSplit:true, height:{value:400, rule:D.HeightRule.ATLEAST}, children:[ new D.TableCell({width:{size:10800,type:D.WidthType.DXA}, borders:{top:none,left:none,right:none,bottom:ln}, children:[para(run(''),{keepNext: i<essayLines(it)-1})]}) ]}))}));
+      kids.push(para(run(''),{spacing:{after:120}}));
+    });
+    out.push({cols: oneCol ? 1 : 2, children: kids.length? kids : [para(run(''))]});
+  });
+  return out;
 }
 function buildKeyDocx(){
   const D = window.docx; const L='ABCDE';
@@ -1404,42 +2052,56 @@ function buildKeyDocx(){
   const cell = (t,o={}) => new D.TableCell({children:[new D.Paragraph({children:[run(t,o)], alignment:o.center?D.AlignmentType.CENTER:D.AlignmentType.LEFT})]});
   const page = {size:{width:12240,height:18720},margin:{top:720,right:720,bottom:720,left:720}};
   const sections = exam.sets.map((set,s)=>{
-    const rows = [ new D.TableRow({tableHeader:true, children:['#','Ans','Content','Obj','Skill','Difficulty','Question'].map(h=>cell(h,{bold:true}))}) ];
-    set.forEach(it=> rows.push(new D.TableRow({children:[cell(String(it.no),{center:true}), cell(L[it.correct],{bold:true,center:true}), cell(state.contents[it.ci].name), cell(it.obj>=0?String(it.obj+1):'–',{center:true}), cell(LEVELS[it.level]), cell(it.row.difficulty||''), cell(it.row.q)]})));
+    const rows = [ new D.TableRow({tableHeader:true, children:['#','Part','Answer','Content','Obj','Skill','Difficulty','Question'].map(h=>cell(h,{bold:true}))}) ];
+    set.forEach(it=> rows.push(new D.TableRow({children:[cell(String(it.no),{center:true}), cell(TYPES[it.type].short), cell(answerText(it),{bold:true}), cell(state.contents[it.ci].name), cell(it.obj>=0?String(it.obj+1):'–',{center:true}), cell(LEVELS[it.level]), cell(it.row.difficulty||''), cell(it.row.q)]})));
     return { properties: s ? {page, type: D.SectionType.NEXT_PAGE} : {page}, children:[
       p(`ANSWER KEY — ${termLabel()}${exam.sets.length>1?' — '+setName(s):''}`,{r:{bold:true,size:26}}),
       p(`${state.courseCode} ${state.subject} · ${semLine()} · seed ${exam.seed}`),
-      new D.Table({width:{size:100,type:D.WidthType.PERCENTAGE}, columnWidths:[500,500,2000,500,1300,1100,4900], rows})
+      new D.Table({width:{size:100,type:D.WidthType.PERCENTAGE}, columnWidths:[450,900,1500,1700,450,1150,1000,3650], rows})
     ]};
   });
   return D.Packer.toBlob(new D.Document({sections}));
 }
+function partsLine(){ return TYPE_ORDER.filter(t=>partN(t)).map(t=> `${TYPES[t].name} ${partN(t)}${t==='essay'?` (${fmt(Number(state.parts.essay.pts)||5)} points each)`:''}${t==='match'?` (in groups of up to ${MATCH_MAX})`:''}`).join(' · '); }
 function briefText(){
   const extra = Math.max(0, Math.round(Number($('#briefExtra')?.value)||0));
+  const {miss, total} = missingPlan();
+  const used = TYPE_ORDER.filter(t=> miss.some(row=> row.some(cell=> cell[t])));
   const lines=[];
-  lines.push(`QUESTION BANK REQUEST — ${state.subject||'(subject)'}${state.courseCode?` (${state.courseCode})`:''}`);
-  lines.push(`${state.semester}, ${state.term} · AY ${state.ay} · ${allocation().total}-item multiple-choice exam`);
+  lines.push(`QUESTION BANK REQUEST — missing questions for ${state.subject||'(subject)'}${state.courseCode?` (${state.courseCode})`:''}`);
+  lines.push(`${state.semester}, ${state.term} · AY ${state.ay} · ${partsTotal()}-item exam (${partsLine()})`);
+  lines.push(bank ? `My question bank “${bank.name}” is short by ${total} question${total===1?'':'s'} for this exam. Please write only the questions listed below.` : 'I have no questions yet for this exam. Please write the questions listed below.');
   lines.push('');
-  lines.push('Please write multiple-choice questions based ONLY on the lesson materials I am providing below. For each content, write the number of questions per skill listed here' + (extra?` (this already includes ${extra} spare question${extra>1?'s':''} per skill so I can vary the exam)`:'') + '.');
+  lines.push(`Write the questions based ONLY on the lesson materials I am providing below. For each content, write the number of questions per Bloom's level and test type listed here` + (extra?` (this already includes ${extra} spare question${extra>1?'s':''} for each count so I can vary the exam)`:'') + '.');
   lines.push('');
+  let n = 0;
   state.contents.forEach((c,i)=>{
-    const objs = objList(c);
-    lines.push(`CONTENT ${i+1}: ${c.name}`);
-    lines.push(`Hours taught: ${fmt(Number(c.hours)||0)} · Items in the exam: ${skillsSum(c)}`);
-    lines.push('Objectives:'); objs.forEach((o,k)=> lines.push(`  ${k+1}. ${o}`)); if(!objs.length) lines.push('  (none typed yet)');
-    const req = LEVELS.map((l,k)=> c.skills[k] ? `${l} ${c.skills[k]+extra}` : null).filter(Boolean);
-    lines.push(`Questions needed: ${req.join(', ')}  (total ${req.length? c.skills.reduce((a,v)=>a+(v?v+extra:0),0):0})`);
+    const levels = LEVELS.map((l,k)=>({l, cell: miss[i][k]})).filter(x=> Object.keys(x.cell).length);
+    if(!levels.length) return;
+    n++; const objs = objList(c);
+    lines.push(`CONTENT ${n}: ${c.name}`);
+    lines.push('Objectives:'); objs.forEach((o,k)=> lines.push(`  ${k+1}. ${o}`)); if(!objs.length) lines.push('  (none yet — write objectives that fit the lesson materials)');
+    lines.push('Questions needed:');
+    let tot=0;
+    levels.forEach(x=>{ const parts = TYPE_ORDER.filter(t=>x.cell[t]).map(t=>{ const v=x.cell[t]+extra; tot+=v; return `${TYPES[t].name} ${v}`; }); lines.push(`  ${x.l}: ${parts.join(', ')}`); });
+    lines.push(`  (total ${tot})`);
     if(objs.length>1) lines.push('Spread the questions across all the objectives above.');
     lines.push('');
   });
+  if(!n){ lines.push('(Nothing is missing — the bank already covers this TOS.)'); lines.push(''); }
   lines.push('RULES');
-  lines.push('- Use the exact CONTENT names and the exact OBJECTIVE wording above in the CSV so my app can match them.');
+  lines.push('- Use the exact CONTENT names and the exact OBJECTIVE wording above in the CSV so my app files the questions in the right place.');
   lines.push('- BLOOMS must be one of: Remembering, Understanding, Applying, Analyzing, Evaluating, Creating. Write real HOTS items (scenarios, comparisons, judging designs), not recall questions relabeled.');
   lines.push('- DIFFICULTY: Easy, Moderate, or Difficult.');
-  lines.push('- 4 or 5 options each (leave Option E blank for 4-option items). One clearly correct answer; distractors must be plausible; keep "All of the above" to a minimum.');
-  lines.push('- CORRECT ANSWER is the letter only (A–E). Do not number the objectives inside the OBJECTIVES cell.');
+  lines.push('- TYPE column: Multiple choice, True or False, Matching, Identification, or Essay.');
+  if(used.includes('mc')) lines.push('- Multiple choice: 4 or 5 options (leave Option E blank for 4-option items). One clearly correct answer; plausible distractors; keep "All of the above" to a minimum. CORRECT ANSWER is the letter only (A–E).');
+  if(used.includes('tf')) lines.push('- True or False: QUESTION is a statement; leave the options blank; CORRECT ANSWER is TRUE or FALSE. Make about half TRUE and half FALSE.');
+  if(used.includes('match')) lines.push('- Matching: one row per item. QUESTION is the Column A item (term, description or example); CORRECT ANSWER is its Column B match, written as text (no letters). Answers must be different from each other within a content. My app groups them 5 at a time.');
+  if(used.includes('id')) lines.push('- Identification: QUESTION asks for one specific term or name; CORRECT ANSWER is that term (short, one accepted answer).');
+  if(used.includes('essay')) lines.push(`- Essay: QUESTION is the essay prompt; POINTS is its score (${fmt(Number(state.parts.essay.pts)||5)} unless stated); RUBRIC lists what a full answer must include.`);
+  lines.push('- Do not number the objectives inside the OBJECTIVES cell.');
   lines.push('- Output ONE CSV block (comma-separated, quote any cell that contains a comma or line break) with this header row exactly:');
-  lines.push('Question,Option A,Option B,Option C,Option D,Option E,CORRECT ANSWER,DIFFICULTY,BLOOMS,CONTENT,OBJECTIVES');
+  lines.push('Question,Option A,Option B,Option C,Option D,Option E,CORRECT ANSWER,DIFFICULTY,BLOOMS,CONTENT,OBJECTIVES,TYPE,POINTS,RUBRIC');
   lines.push('');
   lines.push('LESSON MATERIALS:');
   lines.push('(paste or attach here)');
@@ -1447,35 +2109,66 @@ function briefText(){
 }
 async function copyBrief(){
   const t = briefText(); const note = $('#briefNote');
-  try{ await navigator.clipboard.writeText(t); note.textContent='Copied — paste it into your chat.'; }
+  try{ await navigator.clipboard.writeText(t); note.textContent='Copied — paste it into your question-builder chat.'; }
   catch(e){ const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); note.textContent='Copied — paste it into your chat.'; }catch(err){ note.textContent='Could not copy; use Download instead.'; } ta.remove(); }
   setTimeout(()=> note.textContent='', 4000);
 }
 function templateCsv(){
-  const rows = [['Question','Option A','Option B','Option C','Option D','Option E','CORRECT ANSWER','DIFFICULTY','BLOOMS','CONTENT','OBJECTIVES']];
-  state.contents.forEach(c=> LEVELS.forEach((l,k)=>{ const ol=objList(c); for(let i=0;i<(c.skills[k]||0);i++) rows.push(['','','','','','','','',l,c.name, ol.length? ol[(i+k)%ol.length] : '']); }));
+  const rows = [['Question','Option A','Option B','Option C','Option D','Option E','CORRECT ANSWER','DIFFICULTY','BLOOMS','CONTENT','OBJECTIVES','TYPE','POINTS','RUBRIC']];
+  const {miss} = missingPlan(), plan = state.contents.length ? miss : [];
+  state.contents.forEach((c,ci)=> LEVELS.forEach((l,k)=>{ const ol=objList(c); let n=0;
+    TYPE_ORDER.forEach(t=>{ for(let i=0;i<(plan[ci][k][t]||0);i++){ rows.push(['','','','','','','','',l,c.name, ol.length? ol[(n+k)%ol.length] : '', TYPES[t].name, t==='essay'? String(Number(state.parts.essay.pts)||5):'', '']); n++; } });
+  }));
+  if(rows.length===1) rows.push(['Which device is used to enter text into a computer?','Monitor','Keyboard','Printer','Speaker','','B','Easy','Remembering','Computer Hardware','Identify the functions of input, output, processing and storage devices.','Multiple choice','','']);
   const csv = rows.map(r=> r.map(v=> /[",\n]/.test(v)? `"${String(v).replace(/"/g,'""')}"` : v).join(',')).join('\r\n');
   return new Blob(['﻿'+csv],{type:'text/csv'});
 }
 
+/* ---------- Step 1: test parts ---------- */
+function renderParts(){
+  const tb = $('#partsTbl');
+  tb.innerHTML = `<thead><tr><th>Part</th><th>Items</th><th>Points each</th><th>Instructions printed on the exam</th><th>Checked by</th></tr></thead><tbody>` +
+    TYPE_ORDER.map(t=>{ const p = state.parts[t];
+      return `<tr class="${partN(t)?'':'off'}"><td class="nm">${TYPES[t].name}<small>${t==='match'?`groups of up to ${MATCH_MAX}, letters A–E`: t==='tf'?'A = TRUE, B = FALSE': t==='essay'?'answered on the paper':t==='id'?'written on the paper':'A–D or A–E'}</small></td>
+        <td><input type="number" min="0" max="300" step="1" id="pn_${t}" data-pt="${t}" data-k="n" value="${partN(t)}" aria-label="${TYPES[t].name} items"></td>
+        <td>${t==='essay'? `<input type="number" min="1" max="100" step="1" id="pp_essay" data-pt="essay" data-k="pts" value="${esc(p.pts)}" aria-label="Points per essay">` : `<span class="note">Points per correct (Step 5)</span>`}</td>
+        <td><textarea rows="2" id="pi_${t}" data-pt="${t}" data-k="instr" placeholder="${t==='mc'?'(uses the exam instructions above in Template 1; blank = no extra line)':''}" aria-label="${TYPES[t].name} instructions">${esc(p.instr||'')}</textarea></td>
+        <td>${TYPES[t].scan? '<span class="scan y">● Bubble Tsek</span>' : '<span class="scan n">✎ By hand</span>'}</td></tr>`; }).join('') + `</tbody>`;
+  $$('#partsTbl [data-pt]').forEach(el=> el.addEventListener('input', ()=>{
+    const t = el.dataset.pt, k = el.dataset.k;
+    state.parts[t][k] = k==='instr' ? el.value : Math.max(0, Math.round(Number(el.value)||0));
+    if(k==='n'){ el.closest('tr').classList.toggle('off', !partN(t)); state.totalItems = partsTotal(); reflowSkills(); renderContents(); renderPartsSum(); renderNeeds(); if(bank){ renderBankMsgs(); renderBankTypesOnly(); } }
+    save(); renderChips();
+  }));
+  renderPartsSum();
+}
+function renderPartsSum(){
+  const tot = partsTotal(), sc = scanTotal(), mN = partN('match');
+  const essPts = partN('essay') * (Number(state.parts.essay.pts)||0);
+  $('#partsSum').innerHTML = `<span>Total <b>${tot}</b> items</span><span>On the bubble sheet <b>${sc}</b></span><span>Checked by hand <b>${tot-sc}</b></span>${essPts?`<span>Essay points <b>${essPts}</b></span>`:''}` +
+    (sc>100 ? `<span style="color:var(--bad)">Bubble Tsek sheets hold up to 100 items.</span>` : '') +
+    (mN===1 ? `<span style="color:var(--bad)">Matching needs at least 2 items.</span>` : '');
+}
+
 /* ---------- Bubble Tsek answer sheets ---------- */
 function btCfg(s){
-  const set = exam.sets[s||0];
-  const opt = Math.max(2, Math.min(5, Math.max(...set.map(it=>it.opts.length))));
+  const set = scanItems(exam.sets[s||0]);
+  const nOpt = it => it.type==='match' ? it.choices.length : it.opts.length;
+  const opt = Math.max(2, Math.min(5, Math.max(2, ...set.map(nOpt))));
   return { roll: Math.max(2,Math.min(6,Math.round(Number(state.bt.roll)||3))), q: set.length, opt,
            mc: Math.max(0.5,Math.min(20,Math.round((Number(state.bt.mc)||1)*2)/2)), mi: Math.max(0,Math.min(20,Math.round((Number(state.bt.mi)||0)*2)/2)),
            vers: exam.sets.length, ver: s||0 };
 }
 function btProblem(){
   if(!exam) return 'Create the exam first.';
-  const n = exam.sets[0].length;
-  if(n<1) return 'The exam has no items.';
-  if(n>100) return `Bubble Tsek sheets hold up to 100 items; this exam has ${n}. Lower the total items or split the exam.`;
+  const n = scanItems(exam.sets[0]).length;
+  if(n<1) return 'No items go on the bubble sheet (this exam has only Identification / Essay).';
+  if(n>100) return `Bubble Tsek sheets hold up to 100 items; this exam has ${n} bubble-sheet items. Lower the items in Step 1.`;
   if(!window.jspdf) return 'The PDF tool did not load.';
   return '';
 }
 function sheetExamName(){ return `${state.courseCode||state.subject||''} ${state.term}`.trim().toUpperCase().slice(0,44); }
-function keySheetPrims(s){ return BT.keyPrims(btCfg(s), exam.sets[s].map(it=>it.correct), `ANSWER KEY${exam.sets.length>1?' — '+setName(s):''}`, sheetExamName()); }
+function keySheetPrims(s){ return BT.keyPrims(btCfg(s), scanItems(exam.sets[s]).map(it=>it.correct), `ANSWER KEY${exam.sets.length>1?' — '+setName(s):''}`, sheetExamName()); }
 function blankSheetPrims(s){ return BT.keyPrims(btCfg(s), null, '', sheetExamName()); }
 function renderBubblePane(){
   const pane = $('#bubblePane'); const prob = btProblem();
@@ -1483,6 +2176,8 @@ function renderBubblePane(){
   const c = btCfg(UI.set), two = exam.sets.length>1;
   pane.innerHTML = `<div class="btwrap">
     <div class="btinfo">
+      ${(()=>{ const all=curSet().length; return all>c.q ? `<div class="msg warn" style="margin:0 0 10px">Items ${c.q+1}–${all} (Identification / Essay) are answered on the test paper and checked by hand. Add their points to the Bubble Tsek score yourself.</div>` : ''; })()}
+      ${(()=>{ const tf=scanItems(curSet()).filter(it=>it.type==='tf'); return tf.length ? `<p class="note" style="margin:0 0 8px">True or False items ${tf[0].no}–${tf[tf.length-1].no}: students shade <b>A for TRUE</b> and <b>B for FALSE</b>.</p>` : ''; })()}
       <p style="margin:0 0 8px"><b>${c.q} items · choices A–${'ABCDE'[c.opt-1]} · roll no. ${c.roll} digits · ${fmt(c.mc)} point${c.mc===1?'':'s'} each${c.mi?` · ${fmt(c.mi)} off per wrong`:''}</b>${two?` · ${setName(UI.set)} (Bubble Tsek calls it Version ${'AB'[UI.set]})`:''}</p>
       <ol class="howto">
         <li>Print the <b>blank answer sheets</b>${two?' — Set A sheets go with the Set A exam, Set B with Set B. Each sheet carries a small mark at the bottom that tells Bubble Tsek which set it is':''}.</li>
@@ -1526,7 +2221,14 @@ const NEG_RE = /\b(not|except|least|false|incorrect|never)\b/gi;
 const AOTA_RE = /\b(all|none)\s+of\s+the\s+(above|choices|options|mentioned)\b/i;
 function qualityCheck(rows){
   const R = { longest:[], longestSet:new Set(), neg:[], aota:[], dup:[], dupLater:new Set(), dupOpt:[], letters:[0,0,0,0,0], runs:0, flagged:new Set() };
+  R.tf=[0,0]; R.matchDup=[];
+  const seenAns = new Map();
   rows.forEach(r=>{
+    if(r.type==='tf') R.tf[r.correct]++;
+    if(r.type==='match'){ const k = r.contentLabel+'|'+norm(r.answer); if(seenAns.has(k)) R.matchDup.push({r, other:seenAns.get(k)}); else seenAns.set(k, r); }
+  });
+  const mcRows = rows.filter(r=>r.type==='mc');
+  mcRows.forEach(r=>{
     const lens = r.opts.map(o=>o.trim().length), c = lens[r.correct], mx = Math.max(...lens.filter((_,k)=>k!==r.correct));
     if(c > mx){ R.longest.push({r, ratio:c/Math.max(1,mx)}); R.longestSet.add(r); R.flagged.add(r); }
     const negs = (r.q.match(NEG_RE)||[]).filter(w=> w!==w.toUpperCase());
@@ -1535,12 +2237,12 @@ function qualityCheck(rows){
     const on = r.opts.map(norm); if(new Set(on).size < on.length){ R.dupOpt.push({r}); R.flagged.add(r); }
     R.letters[r.correct]++;
   });
-  let run=1; for(let i=1;i<rows.length;i++){ if(rows[i].correct===rows[i-1].correct){ if(++run===4) R.runs++; } else run=1; }
+  let run=1; for(let i=1;i<mcRows.length;i++){ if(mcRows[i].correct===mcRows[i-1].correct){ if(++run===4) R.runs++; } else run=1; }
   // Duplicate = same wording, or nearly the same wording (≥90% shared words) with the same correct answer.
-  const sig = rows.map(r=>{ const n=norm(r.q); return {n, w:new Set(n.split(' ').filter(Boolean)), a:norm(r.opts[r.correct])}; });
+  const sig = rows.map(r=>{ const n=norm(r.q); return {n, w:new Set(n.split(' ').filter(Boolean)), a:norm(r.opts? r.opts[r.correct] : (r.answer||r.rubric||'')), t:r.type}; });
   for(let i=0;i<rows.length;i++) for(let k=i+1;k<rows.length;k++){
     if(R.dupLater.has(rows[k])) continue;
-    const a=sig[i], b=sig[k]; let same = a.n===b.n;
+    const a=sig[i], b=sig[k]; if(a.t!==b.t) continue; let same = a.n===b.n;
     if(!same && a.a===b.a && a.w.size>=5 && b.w.size>=5){ let inter=0; a.w.forEach(x=>{ if(b.w.has(x)) inter++; }); same = inter/(a.w.size+b.w.size-inter) >= 0.9; }
     if(same){ R.dup.push({a:rows[i], b:rows[k]}); R.dupLater.add(rows[k]); R.flagged.add(rows[k]); }
   }
@@ -1550,7 +2252,7 @@ function snip(s, n=90){ s=String(s||''); return s.length>n ? s.slice(0,n-1)+'…
 function renderQC(){
   const box = $('#qcPanel'); if(!bank){ box.innerHTML=''; QC=null; return; }
   QC = qualityCheck(bank.rows);
-  const n = bank.rows.length, pct = x => n? Math.round(x/n*100) : 0;
+  const n = bank.rows.length, nMC = bank.rows.filter(r=>r.type==='mc').length, pct = x => n? Math.round(x/n*100) : 0, pctMC = x => nMC? Math.round(x/nMC*100) : 0;
   const L4 = QC.letters.slice(0,4), tot4 = L4.reduce((a,b)=>a+b,0);
   const lop = tot4>=8 && L4.some(v=> v/tot4>0.35 || v/tot4<0.15);
   const rowList = (arr, f) => `<details><summary>Show ${arr.length>40?'first 40':'list'}</summary><ul class="qclist">${arr.slice(0,40).map(f).join('')}</ul></details>`;
@@ -1565,20 +2267,25 @@ function renderQC(){
   cards.push(card(QC.dup.length?'warn':'ok', 'Duplicate questions', QC.dup.length,
     QC.dup.length ? 'Same or nearly the same question appears more than once. The app never puts both copies in one exam.' : 'None found.',
     QC.dup.length ? `<button class="small" id="qcDedupe">Remove the extra copies</button>` + rowList(QC.dup, x=>`<li>Row ${x.a.src} ≈ Row ${x.b.src} · ${esc(snip(x.a.q))}</li>`) : ''));
-  cards.push(card(pct(QC.aota.length)>5?'warn':'ok', '"All / None of the above"', QC.aota.length,
-    `${pct(QC.aota.length)}% of the bank. ${pct(QC.aota.length)>5?'That\'s more than the 5% your master prompt allows; consider rewriting some.':'Within the 5% limit.'}`,
+  cards.push(card(pctMC(QC.aota.length)>5?'warn':'ok', '"All / None of the above"', QC.aota.length,
+    `${pctMC(QC.aota.length)}% of the multiple-choice questions. ${pctMC(QC.aota.length)>5?'That\'s more than the 5% your master prompt allows; consider rewriting some.':'Within the 5% limit.'}`,
     QC.aota.length ? rowList(QC.aota, x=>`<li>Row ${x.r.src} · ${esc(snip(x.r.q))}</li>`) : ''));
   cards.push(card(QC.dupOpt.length?'warn':'ok', 'Repeated choice in one question', QC.dupOpt.length,
     QC.dupOpt.length ? 'Two options in the same question say the same thing.' : 'None.',
     QC.dupOpt.length ? rowList(QC.dupOpt, x=>`<li>Row ${x.r.src} · ${esc(snip(x.r.q))}</li>`) : ''));
   cards.push(card(lop||QC.runs?'info':'ok', 'Answer letters in the file', '',
-    `<b>${'ABCDE'.split('').map((l,k)=>QC.letters[k]?`${l} ${pct(QC.letters[k])}%`:'').filter(Boolean).join(' · ')}</b><br>${lop?'Lopsided spread. ':''}${QC.runs?`${QC.runs} run${QC.runs>1?'s':''} of 4+ same letters in a row. `:''}${state.shuffleOptions?'Shuffle options is on, so the printed exam gets a fresh, balanced spread anyway.':'Shuffle options is off, so the exam keeps these letters.'}`));
+    `<b>${'ABCDE'.split('').map((l,k)=>QC.letters[k]?`${l} ${pctMC(QC.letters[k])}%`:'').filter(Boolean).join(' · ')||'No multiple-choice questions'}</b><br>${lop?'Lopsided spread. ':''}${QC.runs?`${QC.runs} run${QC.runs>1?'s':''} of 4+ same letters in a row. `:''}${state.shuffleOptions?'Shuffle options is on, so the printed exam gets a fresh, balanced spread anyway.':'Shuffle options is off, so the exam keeps these letters.'}`));
+  if(QC.tf[0]+QC.tf[1]){ const tt=QC.tf[0]+QC.tf[1], tp=Math.round(QC.tf[0]/tt*100);
+    cards.push(card(tp>65||tp<35?'warn':'ok', 'True or False balance', '', `<b>TRUE ${QC.tf[0]} · FALSE ${QC.tf[1]}</b><br>${tp>65||tp<35?'Mostly one answer, so students can guess. Aim for close to half and half.':'A good mix of TRUE and FALSE.'}`)); }
+  if(bank.rows.some(r=>r.type==='match')) cards.push(card(QC.matchDup.length?'warn':'ok', 'Matching answers repeated', QC.matchDup.length,
+    QC.matchDup.length ? 'Two matching items in the same content have the same answer. The app keeps them in different groups when it can.' : 'Every matching answer is unique within its content.',
+    QC.matchDup.length ? rowList(QC.matchDup, x=>`<li>Row ${x.r.src} and Row ${x.other.src} · ${esc(snip(x.r.answer,60))}</li>`) : ''));
   const flagged = QC.flagged.size;
   box.innerHTML = `<div class="qchead"><h3>Quality check</h3><span>${flagged? `${flagged} question${flagged>1?'s':''} flagged`:'No problems found'} · based on your master prompt rules</span></div>
     <div class="qcgrid">${cards.join('')}</div>
     <label class="qcpref"><input type="checkbox" id="preferClean" ${state.preferClean?'checked':''}> Use flagged questions only when there aren't enough clean ones (longest-answer, duplicate copies, repeated choices)</label>`;
-  const caps = $('#qcCaps'); if(caps) caps.addEventListener('click', ()=>{ bank.rows.forEach(r=>{ r.q = r.q.replace(NEG_RE, w=>w.toUpperCase()); }); saveBank(); renderQC(); });
-  const dd = $('#qcDedupe'); if(dd) dd.addEventListener('click', ()=>{ const before=bank.rows.length; bank.rows = bank.rows.filter(r=>!QC.dupLater.has(r)); saveBank(); renderBank(); renderNeeds(); renderChips(); const m=$('#bankMsgs'); m.insertAdjacentHTML('afterbegin', `<div class="msg ok">Removed ${before-bank.rows.length} extra cop${before-bank.rows.length>1?'ies':'y'} from the loaded bank. Your file on disk is unchanged.</div>`); });
+  const caps = $('#qcCaps'); if(caps) caps.addEventListener('click', ()=>{ bank.rows.forEach(r=>{ if(r.type==='mc') r.q = r.q.replace(NEG_RE, w=>w.toUpperCase()); }); saveBank(); renderQC(); });
+  const dd = $('#qcDedupe'); if(dd) dd.addEventListener('click', ()=>{ const before=bank.rows.length; bank.rows = bank.rows.filter(r=>!QC.dupLater.has(r)); saveBank(); renderBank(); renderNeeds(); renderChips(); const m=$('#bankMsgs'); m.insertAdjacentHTML('afterbegin', `<div class="msg ok">Removed ${before-bank.rows.length} extra cop${before-bank.rows.length>1?'ies':'y'} from the saved bank “${esc(bank.name)}”. Your original file is unchanged.</div>`); });
   $('#preferClean').addEventListener('change', e=>{ state.preferClean = e.target.checked; save(); });
 }
 
@@ -1612,15 +2319,23 @@ function init(){
   $$('[data-theme-set]').forEach(b=> b.addEventListener('click', ()=> setTheme(b.dataset.themeSet)));
   buildStepNav();
   $('#installBtn').addEventListener('click', async ()=>{ if(!installEvt) return; installEvt.prompt(); try{ await installEvt.userChoice; }catch(e){} installEvt=null; $('#installBtn').hidden=true; });
-  bindFields(); renderProfile(); renderContents(); renderNeeds(); if(bank){ remapBank(); }
-  $('#addRow').addEventListener('click', ()=>{ state.contents.push({name:'',objectives:'',hours:1,skills:null}); reflowSkills(); save(); renderContents(); renderNeeds(); $$('#contentBody textarea')[ (state.contents.length-1)*2 ]?.focus(); });
+  bindFields(); renderParts(); renderProfile(); renderPick(); renderContents(); renderNeeds();
+  $('#moreBtn').addEventListener('click', ()=> $('#moreFile').click());
+  $('#moreFile').addEventListener('change', e=>{ const f=e.target.files[0]; if(f) addMoreQuestions(f); e.target.value=''; });
+  $('#addRow').addEventListener('click', ()=>{ state.contents.push({name:'',objectives:'',hours:3,skills:null,manual:true}); reflowSkills(); save(); renderPick(); renderContents(); renderNeeds(); const ta = $$('#contentBody textarea[data-f="name"]'); ta[ta.length-1]?.focus(); });
   $('#autoSkills').addEventListener('click', ()=>{ const {items}=allocation(); state.contents.forEach((c,i)=> c.skills=suggestSkills(items[i])); save(); renderContents(); renderNeeds(); if(bank) renderBankMsgs(); });
   const drop = $('#drop'), fi = $('#fileInput');
   fi.addEventListener('change', ()=>{ if(fi.files[0]) handleFile(fi.files[0]); fi.value=''; });
   ['dragenter','dragover'].forEach(ev=> drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.add('over'); }));
   ['dragleave','drop'].forEach(ev=> drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.remove('over'); }));
   drop.addEventListener('drop', e=>{ const f = e.dataTransfer.files[0]; if(f) handleFile(f); });
-  $('#clearBank').addEventListener('click', ()=>{ bank=null; saveBank(); renderBank(); renderNeeds(); renderChips(); });
+  $('#clearBank').addEventListener('click', ()=> useBank(null));
+  $('#bankSel').addEventListener('change', e=> useBank(e.target.value||null));
+  $('#goBanks').addEventListener('click', goBanks);
+  $('#navBanks').addEventListener('click', ()=>{ PAGE_UI.detail=null; goBanks(); });
+  $('#newBankFile').addEventListener('change', e=>{ const f=e.target.files[0]; if(f) newBankFromFile(f); e.target.value=''; });
+  $('#addFileInput').addEventListener('change', e=>{ const f=e.target.files[0]; if(f && PAGE_UI.addTarget) addFileToBank(f, PAGE_UI.addTarget); e.target.value=''; });
+  $('#addToSel').addEventListener('change', e=>{ $('#dropHint').textContent = e.target.checked && bank ? `CSV, TSV or Excel · added to “${bank.name}” · or click to choose a file` : 'CSV, TSV or Excel · it is saved as a new bank · or click to choose a file'; });
   $('#generate').addEventListener('click', ()=> onGenerate(false));
   $('#setsSel').value = String(state.sets||1);
   $('#setsSel').addEventListener('change', e=>{ state.sets = +e.target.value; save(); if(exam){ makeSets(exam, exam.seed); renderOutputs(); } });
@@ -1631,9 +2346,9 @@ function init(){
   $('#copyBrief').addEventListener('click', copyBrief);
   $('#dlBrief').addEventListener('click', ()=> saveFile(`QuestionRequest_${fileBase()}.txt`, new Blob([briefText()],{type:'text/plain'})));
   $('#dlTemplate').addEventListener('click', ()=> saveFile('question_bank_template.csv', templateCsv()));
-  $('#resetAll').addEventListener('click', ()=>{ state = JSON.parse(JSON.stringify(DEFAULTS)); ensureProfiles(false); exam=null; save(); goStep(1); bindFields(); renderProfile(); renderContents(); renderNeeds(); $('#summary').hidden=true; $('#exportTools').hidden=true; $('#genMsgs').innerHTML=''; ['tosPane','examPane','keyPane'].forEach(id=> $('#'+id).innerHTML='<div class="empty">Create the TOS and exam to preview them here.</div>'); renderChips(); window.scrollTo({top:0,behavior:'smooth'}); });
-  if(bank) renderBank();
-  renderChips();
+  $('#resetAll').addEventListener('click', ()=>{ const keepBank = state.bankId; state = JSON.parse(JSON.stringify(DEFAULTS)); ensureProfiles(false); state.parts = defaultParts(100); state.totalItems = partsTotal(); state.bankId = keepBank; exam=null; save(); goStep(1); bindFields(); renderParts(); renderProfile(); renderPick(); renderContents(); renderNeeds(); $('#summary').hidden=true; $('#exportTools').hidden=true; $('#genMsgs').innerHTML=''; ['tosPane','examPane','keyPane'].forEach(id=> $('#'+id).innerHTML='<div class="empty">Create the TOS and exam to preview them here.</div>'); renderChips(); window.scrollTo({top:0,behavior:'smooth'}); });
+  renderBankSel(); renderBank(); renderChips();
+  libLoad().then(()=>{ renderNavBanks(); if(state.bankId && LIB.banks.some(b=>b.id===state.bankId)) useBank(state.bankId); else { state.bankId=null; renderBankSel(); renderBank(); } updateRail(); });
   let s0=1; try{ s0 = +(localStorage.getItem('tosb.step')||1); }catch(e){}
   goStep(s0||1);
   window.addEventListener('beforeprint', ()=>{ document.documentElement.setAttribute('data-print','1'); });

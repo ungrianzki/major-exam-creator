@@ -1,17 +1,17 @@
 // Major Exam Creator offline support. Change VERSION when you upload new files.
-const VERSION = 'majorexam-v4';
+const VERSION = 'majorexam-v6';
 const FILES = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./fonts/fonts.css",
+  "./fonts/atkinson-hyperlegible-latin-400-italic.woff2",
+  "./fonts/atkinson-hyperlegible-latin-400-normal.woff2",
+  "./fonts/atkinson-hyperlegible-latin-700-normal.woff2",
   "./fonts/bricolage-grotesque-latin-500-normal.woff2",
   "./fonts/bricolage-grotesque-latin-600-normal.woff2",
   "./fonts/bricolage-grotesque-latin-700-normal.woff2",
   "./fonts/bricolage-grotesque-latin-800-normal.woff2",
-  "./fonts/atkinson-hyperlegible-latin-400-normal.woff2",
-  "./fonts/atkinson-hyperlegible-latin-700-normal.woff2",
-  "./fonts/atkinson-hyperlegible-latin-400-italic.woff2",
   "./fonts/ibm-plex-mono-latin-400-normal.woff2",
   "./fonts/ibm-plex-mono-latin-500-normal.woff2",
   "./fonts/ibm-plex-mono-latin-600-normal.woff2",
